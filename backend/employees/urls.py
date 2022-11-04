@@ -1,9 +1,9 @@
 from django.urls import path, include
-from cars import views
+from employees import views
 
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 urlpatterns = [
-    path('', views.user_cars),
-    path('all/', views.get_all_cars),
+    path('', views.user_employees),
+    path('all/', views.get_all_employees),
 ]

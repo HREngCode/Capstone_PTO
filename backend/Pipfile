@@ -7,9 +7,12 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+djangorestframework-jwt = "*"
 mysql-connector-python = "==8.0.26"
 django-cors-headers = "*"
 tzdata = "*"
+tz = "*"
+data = "*"
 
 [dev-packages]
 autopep8 = "*"

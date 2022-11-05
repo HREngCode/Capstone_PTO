@@ -128,4 +128,4 @@ dmypy.json
 .pyre/
 
 # Local Settings
-pto_request/local_settings.py
+pto_request_project/local_settings.py

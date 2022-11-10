@@ -9,5 +9,5 @@ from employees.models import Employee
 
 class PtoRequest(models.Model):
     employee_number = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    hours_requested = models.IntegerField()
+    hours_requested = models.DecimalField(max_digits=5, decimal_places=4)
     

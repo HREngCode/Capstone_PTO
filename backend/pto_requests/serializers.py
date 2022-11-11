@@ -9,3 +9,5 @@ class PtoRequestSerializer(serializers.ModelSerializer):
         model = PtoRequest
         fields = ['id', 'employee_number', 'hours_requested']
         depth = 1
+
+    employee_number = serializers.IntegerField(write_only=True)

@@ -12,9 +12,9 @@ from .serializers import EmployeeSerializer
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def employee_list(request):
-    employees = Employee.objects.all()
-    serializer = EmployeeSerializer(employees, many=True)
-    return Response(serializer.data)
+        employees = Employee.objects.all()
+        serializer = EmployeeSerializer(employees, many=True)
+        return Response(serializer.data)
 
     # return Response('ok')
 @api_view(['GET', 'PUT', 'DELETE'])

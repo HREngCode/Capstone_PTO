@@ -7,8 +7,7 @@ from .models import Employee
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = ['id', 'user_id', 'employee_number', 'employee_name', 'department', 'supervisor_id', 'hire_date', 'pto_balance', 'active']
+        fields = ['id', 'employee_number', 'employee_name', 'department', 'supervisor_id', 'hire_date', 'pto_balance', 'active']
         depth = 1
 
-    user_id = serializers.IntegerField(write_only=True)
     supervisor_id = serializers.IntegerField(write_only=True)

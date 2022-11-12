@@ -17,18 +17,24 @@ def employee_list(request):
         return Response(serializer.data)
 
     # return Response('ok')
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['POST', 'PUT'])
 @permission_classes([IsAuthenticated]) 
-def employee_detail(request, pk):
-    employee = get_object_or_404(Employee, pk=pk) #gets specific object
-    if request.method == 'GET':
-        serializer = EmployeeSerializer(employee)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = EmployeeSerializer(employee, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-    elif request.method == 'DELETE':
-        employee.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+def employee_detail(request):
+    # employee = get_object_or_404(Employee) #gets specific object
+    # if request.method == 'GET':
+    #     serializer = EmployeeSerializer(employee)
+    #     return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = EmployeeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # elif request.method == 'PUT':
+    #     serializer = EmployeeSerializer(employee, data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #     return Response(serializer.data)
+    # elif request.method == 'DELETE':
+    #     employee.delete()
+    #     return Response(status=status.HTTP_204_NO_CONTENT)

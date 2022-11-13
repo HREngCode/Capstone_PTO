@@ -8,7 +8,5 @@ from employees.models import Employee
 
 
 class PtoRequest(models.Model):
-    pto_request_id = models.IntegerField()
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     hours_requested = models.DecimalField(max_digits=7, decimal_places=4)
-    

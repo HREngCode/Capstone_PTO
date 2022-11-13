@@ -23,7 +23,7 @@ def get_all_pto_requests(request):
 def pto_request_create(request):
     serializer = PtoRequestSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save(user=request.user)
+        serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

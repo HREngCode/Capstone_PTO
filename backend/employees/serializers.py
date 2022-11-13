@@ -10,4 +10,4 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = ['id', 'employee_number', 'employee_name', 'department', 'supervisor_id', 'hire_date', 'pto_balance', 'active']
         depth = 1
 
-    supervisor_id = serializers.IntegerField(write_only=True)
+

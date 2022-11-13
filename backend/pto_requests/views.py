@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import PtoRequest
 from .serializers import PtoRequestSerializer
 
+
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 
@@ -16,20 +17,32 @@ def get_all_pto_requests(request):
         serializer = PtoRequestSerializer(ptorequests, many=True)
         return Response(serializer.data)
 
-    # return Response('ok')
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated]) 
+def pto_request_create(request):
+    serializer = PtoRequestSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated]) 
 def pto_request_detail(request, pk):
-    ptorequest = get_object_or_404(PtoRequest, pk=pk) #gets specific object
+    pto_request = PtoRequest.objects.get(pk=pk)
     if request.method == 'GET':
-        serializer = PtoRequestSerializer(ptorequest)
-        return Response(serializer.data)
+        try:
+            serializer = PtoRequestSerializer(pto_request)
+            return Response(serializer.data)
+        except PtoRequest.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
     elif request.method == 'PUT':
-        serializer = PtoRequestSerializer(ptorequest, data=request.data)
+        serializer = PtoRequestSerializer(pto_request, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
-        ptorequest.delete()
+        pto_request.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

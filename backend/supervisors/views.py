@@ -16,20 +16,32 @@ def get_all_supervisors(request):
         serializer = SupervisorSerializer(supervisors, many=True)
         return Response(serializer.data)
 
-    # return Response('ok')
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 @permission_classes([IsAuthenticated]) 
-def supervisor_employees(request):
-    print(
-        'User ', f"{request.user.id} {request.user.email} {request.user.username}")
-    if request.method == 'POST':
-        supervisors = Supervisor(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        supervisors = Supervisor.objects.filter(user_id=request.user.id)
-        serializer = SupervisorSerializer(supervisors, many=True)
+def supervisor_create(request):
+    serializer = SupervisorSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@permission_classes([IsAuthenticated]) 
+def supervisor_detail(request, pk):
+    supervisor = Supervisor.objects.get(pk=pk)
+    if request.method == 'GET':
+        try:
+            serializer = SupervisorSerializer(supervisor)
+            return Response(serializer.data)
+        except Supervisor.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    elif request.method == 'PUT':
+        serializer = SupervisorSerializer(supervisor, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data)
+    elif request.method == 'DELETE':
+        supervisor.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

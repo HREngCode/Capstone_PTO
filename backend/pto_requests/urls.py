@@ -4,6 +4,7 @@ from pto_requests import views
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 urlpatterns = [
-    path('', views.get_all_pto_requests),
     path('all/', views.get_all_pto_requests),
+    path('changes/', views.pto_request_create),
+    path('<int:pk>/', views.pto_request_detail),
 ]

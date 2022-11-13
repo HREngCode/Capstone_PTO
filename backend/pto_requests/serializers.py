@@ -7,7 +7,7 @@ from .models import PtoRequest
 class PtoRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PtoRequest
-        fields = ['id', 'employee_number', 'hours_requested']
+        fields = ['id', 'employee', 'hours_requested']
         depth = 1
 
-    employee_number = serializers.IntegerField(write_only=True)
+

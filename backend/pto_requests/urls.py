@@ -5,6 +5,7 @@ from pto_requests import views
 
 urlpatterns = [
     path('all/', views.get_all_pto_requests),
+    path('employees/', views.get_request_supervisor),
     path('changes/', views.pto_request_create),
     path('<int:pk>/', views.pto_request_detail),
 ]

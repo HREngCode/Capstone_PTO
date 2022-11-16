@@ -16,6 +16,19 @@ def get_all_supervisors(request):
         serializer = SupervisorSerializer(supervisors, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_by_supervisor_name(request):
+    supervisor_param = request.query_params.get('supervisor_name')
+    sort_param = request.query_params.get('sort')
+    supervisors = Supervisor.objects.all()
+    if supervisor_param:
+        supervisors = supervisors.filter(supervisor_name=supervisor_param)
+    if sort_param:
+        supervisors = supervisors.order_by(sort_param)
+    serializer = SupervisorSerializer(supervisors, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated]) 

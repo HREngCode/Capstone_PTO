@@ -7,4 +7,5 @@ urlpatterns = [
     path('all/', views.get_all_supervisors),
     path('changes/', views.supervisor_create),
     path('<int:pk>/', views.supervisor_detail),
+    path('name/', views.get_by_supervisor_name),
 ]

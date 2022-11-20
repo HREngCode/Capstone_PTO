@@ -10,27 +10,25 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const [employees, setEmployees] = useState([]);
   const [employeeName, setEmployeeName] = useState();
-
-
-
+  const [employeeId, setEmployeeId] = useState();
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/employees/all/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setEmployees(response.data);
-        console.log(response.data)
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-    fetchEmployees();
+    // const fetchEmployees = async () => {
+    //   try {
+    //     let response = await axios.get("http://127.0.0.1:8000/api/employees/all/", {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     setEmployees(response.data);
+    //     console.log(response.data)
+    //   } catch (error) {
+    //     console.log(error.response.data);
+    //   }
+    // };
+    // fetchEmployees();
     
-    const fetchEmployeeName = async () => {
+    const fetchEmployeeInfo = async () => {
       try {
         let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
           headers: {
@@ -38,11 +36,26 @@ const HomePage = () => {
           },
         });
         setEmployeeName(response.data.employee_name); 
+        setEmployeeId(response.data.id); 
       } catch (error) {
         console.log(error.response.data);
       }    
     };
-    fetchEmployeeName();
+    fetchEmployeeInfo();
+
+    const fetchPtoRequestByEmployee = async () => {
+      try {
+        let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${employeeId}/`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+      } catch (error) {
+        console.log(error.response.data);
+      }    
+    };
+    fetchPtoRequestByEmployee();
   }, [token, user]);
 
   // employees.map((employee) => {
@@ -63,12 +76,12 @@ const HomePage = () => {
     <div className="container">
       <h1>Home Page for {employeeName}!</h1>
       <div>
-        {employees &&
+        {/* {employees &&
         employees.map((employee) => (
           <p key={employee.id}>
           {employee.user} {employee.employee_number} {employee.employee_name} {employee.department}
           </p>
-        ))}
+        ))} */}
       </div>
 
 

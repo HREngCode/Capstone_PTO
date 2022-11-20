@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-
 import axios from "axios";
 
 const HomePage = () => {
@@ -10,6 +9,7 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const [employees, setEmployees] = useState([]);
+  const [employeeName, setEmployeeName] = useState();
 
 
 
@@ -29,7 +29,27 @@ const HomePage = () => {
       }
     };
     fetchEmployees();
-  }, [token]);
+    
+    const fetchEmployeeName = async () => {
+      try {
+        let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+        setEmployeeName(response.data.employee_name); 
+      } catch (error) {
+        console.log(error.response.data);
+      }    
+    };
+    fetchEmployeeName();
+  }, [token, user]);
+
+  // employees.map((employee) => {
+  //   if (employee.user===user.id) {
+  //     return true;
+  //   }          
+  // })
 
   // let foundNames = employees.filter((employee) => {
   //   if (employee.user===user.id) {
@@ -41,6 +61,7 @@ const HomePage = () => {
 
   return (
     <div className="container">
+      <h1>Home Page for {employeeName}!</h1>
       <div>
         {employees &&
         employees.map((employee) => (
@@ -49,7 +70,7 @@ const HomePage = () => {
           </p>
         ))}
       </div>
-      <h1>Home Page for {user.id}!</h1>
+
 
     </div>
   );

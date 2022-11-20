@@ -31,19 +31,6 @@ def get_by_employee_number(request):
     serializer = EmployeeSerializer(employees, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_by_user_id(request):
-    employee_param = request.query_params.get('employee_number')
-    sort_param = request.query_params.get('sort')
-    employees = Employee.objects.all()
-    if employee_param:
-        employees = employees.filter(employee_number=employee_param)
-    if sort_param:
-        employees = employees.order_by(sort_param)
-    serializer = EmployeeSerializer(employees, many=True)
-    return Response(serializer.data)
-
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated]) 
@@ -78,8 +65,19 @@ def employee_detail(request, pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) 
 def get_employee_by_supervisor(request, id):
-        employees = request.query_params.get(id)
-        queryset = Employee.objects.all()
-        queryset = queryset.filter(supervisor_id=id)
-        serializer = EmployeeSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    employees = request.query_params.get(id)
+    queryset = Employee.objects.all()
+    queryset = queryset.filter(supervisor_id=id)
+    serializer = EmployeeSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_name_by_user_id(request, user):
+    employees = request.query_params.get(user)
+    employees = Employee.objects.all()
+    employees = employees.get(user_id=user)
+    serializer = EmployeeSerializer(employees)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+    

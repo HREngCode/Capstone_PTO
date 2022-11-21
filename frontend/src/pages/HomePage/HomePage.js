@@ -8,25 +8,11 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [employees, setEmployees] = useState([]);
   const [employeeName, setEmployeeName] = useState();
   const [employeeId, setEmployeeId] = useState();
+  const [ptoRequests, setPtoRequests] = useState([]);
 
   useEffect(() => {
-    // const fetchEmployees = async () => {
-    //   try {
-    //     let response = await axios.get("http://127.0.0.1:8000/api/employees/all/", {
-    //       headers: {
-    //         Authorization: "Bearer " + token,
-    //       },
-    //     });
-    //     setEmployees(response.data);
-    //     console.log(response.data)
-    //   } catch (error) {
-    //     console.log(error.response.data);
-    //   }
-    // };
-    // fetchEmployees();
     
     const fetchEmployeeInfo = async () => {
       try {
@@ -45,46 +31,31 @@ const HomePage = () => {
 
     const fetchPtoRequestByEmployee = async () => {
       try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${employeeId}/`, {
+        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
-
+        setPtoRequests(response.data); 
+        console.log(response.data)
       } catch (error) {
         console.log(error.response.data);
       }    
     };
     fetchPtoRequestByEmployee();
-  }, [token, user]);
-
-  // employees.map((employee) => {
-  //   if (employee.user===user.id) {
-  //     return true;
-  //   }          
-  // })
-
-  // let foundNames = employees.filter((employee) => {
-  //   if (employee.user===user.id) {
-  //     return true;
-  //   }
-  // });
-  // return foundNames;  
-  // }
+  }, [token, user, employeeId]);
 
   return (
     <div className="container">
       <h1>Home Page for {employeeName}!</h1>
       <div>
-        {/* {employees &&
-        employees.map((employee) => (
-          <p key={employee.id}>
-          {employee.user} {employee.employee_number} {employee.employee_name} {employee.department}
+        {ptoRequests &&
+        ptoRequests.map((pto_request) => (
+          <p key={pto_request.id}>
+          {pto_request.id} {pto_request.hours_requested}
           </p>
-        ))} */}
+        ))}
       </div>
-
-
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
     <a href="#home">Home</a>
-    <a href="#news">News</a>
+    <a href="#newrequest">New Request</a>
     <div className="dropdown">
       <button className="dropbtn">Dropdown
         <i className="fa fa-caret-down"></i>
@@ -21,13 +21,13 @@ const Navbar = () => {
         <a href="#">Link 3</a>
       </div>
     </div>
-    <li>
+      <div>
         {user ? (
-          <button onClick={logoutUser}>Logout</button>
+          <a onClick={logoutUser}>Logout</a>
         ) : (
-          <button onClick={() => navigate("/login")}>Login</button>
+          <a onClick={() => navigate("/login")}>Login</a>
         )}
-      </li>
+      </div>
   </div>
   );
 };

@@ -1,0 +1,12 @@
+/* header container */
+.header {
+    height: 60px;
+    overflow: hidden;
+    background-color: rgb(28, 109, 149);
+    font-family: Arial;
+  }
+
+.header_image{
+    width: 30px;
+    height: 25px;
+}

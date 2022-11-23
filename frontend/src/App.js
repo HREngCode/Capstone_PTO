@@ -4,12 +4,14 @@ import "./App.css";
 import React, { useContext } from 'react';
 
 // Pages Imports
+import SupervisorPage from "./pages/SupervisorPage/SupervisorPage";
+import NewRequestPage from "./pages/NewRequestPage/NewRequestPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 // Component Imports
-import Navbar from "./components/NavBar/NavBar";
+// import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import { EmployeeContext } from "./context/EmployeeContext";
 
@@ -32,7 +34,6 @@ function App() {
   fetchEmployees();
   return (
     <div>
-      <Navbar />
       <Routes>
         <Route
           path="/"
@@ -44,6 +45,9 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/request" element={<NewRequestPage />} />
+        <Route path="/login" element={<SupervisorPage />} />
       </Routes>
       <Footer />
     </div>

@@ -5,7 +5,7 @@ import React, { useContext } from 'react';
 
 // Pages Imports
 import SupervisorPage from "./pages/SupervisorPage/SupervisorPage";
-import NewRequestPage from "./pages/NewRequestPage/NewRequestPage";
+import NewTimeOffRequestPage from "./pages/NewTimeOffRequestPage/NewTimeOffRequestPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
@@ -46,8 +46,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path="/request" element={<NewRequestPage />} />
-        <Route path="/login" element={<SupervisorPage />} />
+        <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage />} />
+        <Route path="/supervisor" element={<SupervisorPage />} />
       </Routes>
       <Footer />
     </div>

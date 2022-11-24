@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Navbar from "../../components/NavBar/NavBar";
+import {useNavigate} from 'react-router-dom';
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -12,6 +13,7 @@ const HomePage = () => {
   const [employeeName, setEmployeeName] = useState();
   const [employeeId, setEmployeeId] = useState();
   const [ptoRequests, setPtoRequests] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     
@@ -44,7 +46,22 @@ const HomePage = () => {
       }    
     };
     fetchPtoRequestByEmployee();
+
+    // const navigateToNewPtoRequest = () => {
+    //   // 👇️ navigate to /new pto request
+    //   navigate('/newtimeoffrequest');
+    //     return ( 
+    //       <div>
+    //         <button onClick={navigateToNewPtoRequest}>New Time Off Request</button>
+    //       </div>
+    //  );
+    // }
+    // navigateToNewPtoRequest();
+
+
   }, [token, user, employeeId]);
+
+
 
   return (
     <div><Navbar />
@@ -58,6 +75,9 @@ const HomePage = () => {
             </p>
           ))}
         </div>
+        {/* <div>
+          <button onClick={navigate('/newtimeoffrequest')}>New Time Off Request</button>
+        </div> */}
       </div>
     </div>
 

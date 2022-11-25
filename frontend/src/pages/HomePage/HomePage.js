@@ -47,20 +47,13 @@ const HomePage = () => {
     };
     fetchPtoRequestByEmployee();
 
-    // const navigateToNewPtoRequest = () => {
-    //   // 👇️ navigate to /new pto request
-    //   navigate('/newtimeoffrequest');
-    //     return ( 
-    //       <div>
-    //         <button onClick={navigateToNewPtoRequest}>New Time Off Request</button>
-    //       </div>
-    //  );
-    // }
-    // navigateToNewPtoRequest();
-
 
   }, [token, user, employeeId]);
 
+  const navigateToNewPtoRequest = () => {
+    // 👇️ navigate to /new pto request
+          navigate('/newtimeoffrequest');
+  };
 
 
   return (
@@ -75,9 +68,9 @@ const HomePage = () => {
             </p>
           ))}
         </div>
-        {/* <div>
-          <button onClick={navigate('/newtimeoffrequest')}>New Time Off Request</button>
-        </div> */}
+        <div>
+          <button onClick={navigateToNewPtoRequest}>New Time Off Request</button>
+        </div>
       </div>
     </div>
 

@@ -1,9 +1,12 @@
 import React from 'react';
+import Navbar from "../../components/NavBar/NavBar";
 
 
 const SupervisorPage = () => {
     return ( 
-        <div>This is the Supervisor Page</div>
+        <div><Navbar />
+            <div>This is the Supervisor Page</div>
+        </div>
      );
 }
  

@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import Navbar from "../../components/NavBar/NavBar";
-import axios from 'axios'
+import axios from 'axios';
+import useAuth from '../../hooks/useAuth';
+import {useNavigate} from "react-router-dom"
 
 const NewTimeOffRequestPage = () => {
+    const [user, token] = useAuth ()
+    const navigate = useNavigate ()
 
-    async function AddPtoRequest(newPtoRequest){
-        const response = await axios.post('http://127.0.0.1:8000/api/pto_requests/changes/', newPtoRequest);
-        console.log(response.data)
-        // props.getAllSongs()
+    async function AddTimeOffRequest(newTimeOffRequest){
+        try 
+        {
+            let response = await axios.post('http://127.0.0.1:8000/api/pto_requests/changes/', newTimeOffRequest, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            }) 
+            // navigate("/")
+        console.log(response.data)} 
+        catch (error) 
+        {
+            console.log(error.message)
+        }
     }
 
     // setting up hooks a good place to start
@@ -23,8 +37,8 @@ const NewTimeOffRequestPage = () => {
 
     function handleSubmit(event){
         event.preventDefault();
-        let newPtoRequest = {
-            employee_id: employee,
+        let newTimeOffRequest = {
+            employee__id: employee,
             // employee_number: employeeNumber,
             // department: department,
             // hire_date: hireDate,
@@ -34,29 +48,18 @@ const NewTimeOffRequestPage = () => {
             // supervisor: supervisor,
             // active: active,        
         };
-        AddPtoRequest(newPtoRequest)
-    }
+        AddTimeOffRequest(newTimeOffRequest)
+    } 
 
         return ( 
             <div><Navbar />
                 <div>
-                    <form className='addData' onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
+                    {/* <form> */}
                         <div className='newEntry'>
                         <label>Employee: </label>
                         <input value={employee} onChange={(event) => setEmployee(event.target.value)}/>
                         </div>
-                        {/* <div className='newEntry'>
-                        <label>Employee Number: </label>
-                        <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>
-                        </div>
-                        <div className='newEntry'>
-                        <label>Department: </label>
-                        <input value={department} onChange={(event) => setDepartment(event.target.value)}/>
-                        </div>
-                        <div className='newEntry'>
-                        <label>Hire Date: </label>
-                        <input type="date" value={hireDate} onChange={(event) => setHireDate(event.target.value)}/>
-                        </div> */}
                         <div className='newEntry'>
                         <label>Date Requested Off: </label>
                         <input type="date" value={dateRequested} onChange={(event) => setDateRequested(event.target.value)}/>
@@ -65,18 +68,6 @@ const NewTimeOffRequestPage = () => {
                         <label>Hours Requested: </label>
                         <input type="number" value={hoursRequested} onChange={(event) => setHoursRequested(event.target.value)}/>
                         </div>
-                        {/* <div className='newEntry'>
-                        <label>PTO Balance: </label>
-                        <input type="number" value={ptoBalance} onChange={(event) => setPtoBalance(event.target.value)}/>
-                        </div>
-                        <div className='newEntry'>
-                        <label>Supervisor: </label>
-                        <input value={supervisor} onChange={(event) => setSupervisor(event.target.value)}/>
-                        </div>
-                        <div className='newEntry'>
-                        <label>Active: </label>
-                        <input type="boolean" value={active} onChange={(event) => setActive(event.target.value)}/>
-                        </div> */}
                         <div>
                         <button type='submit'>Submit</button>
                         </div>

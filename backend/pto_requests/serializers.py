@@ -8,6 +8,6 @@ class PtoRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PtoRequest
         fields = ['id', 'employee_id', 'employee', 'date_requested', 'hours_requested']
-        depth = 1
+        depth = 2
 
     employee_id = serializers.IntegerField(write_only=True)

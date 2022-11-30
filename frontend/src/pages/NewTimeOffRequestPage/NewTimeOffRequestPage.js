@@ -8,15 +8,15 @@ const NewTimeOffRequestPage = () => {
     // setting up hooks a good place to start
     const [user, token] = useAuth ()
     const navigate = useNavigate ()
-    // const [employeeName, setEmployeeName] = useState();
+    const [employeeName, setEmployeeName] = useState();
     const [employeeId, setEmployeeId] = useState();
-    // const [employeeNumber, setEmployeeNumber] = useState('')
-    // const [department, setDepartment] = useState('')
-    // const [hireDate, setHireDate] = useState('')
+    const [employeeNumber, setEmployeeNumber] = useState('')
+    const [department, setDepartment] = useState('')
+    const [hireDate, setHireDate] = useState('')
     const [dateRequested, setDateRequested] = useState('')
     const [hoursRequested, setHoursRequested] = useState('')
-    // const [ptoBalance, setPtoBalance] = useState('')
-    // const [supervisorName, setSupervisorName] = useState('')
+    const [ptoBalance, setPtoBalance] = useState('')
+    const [supervisorName, setSupervisorName] = useState('')
     // const [active, setActive] = useState('')
 
     useEffect(() => {
@@ -28,12 +28,12 @@ const NewTimeOffRequestPage = () => {
                 },
             });
             setEmployeeId(response.data.id); 
-            // setEmployeeNumber(response.data.employee_number);             
-            // setEmployeeName(response.data.employee_name); 
-            // setDepartment(response.data.department); 
-            // setHireDate(response.data.hire_date); 
-            // setPtoBalance(response.data.pto_balance); 
-            // setSupervisorName(response.data.supervisor.supervisor_name); 
+            setEmployeeNumber(response.data.employee_number);             
+            setEmployeeName(response.data.employee_name); 
+            setDepartment(response.data.department); 
+            setHireDate(response.data.hire_date); 
+            setPtoBalance(response.data.pto_balance); 
+            setSupervisorName(response.data.supervisor.supervisor_name); 
             console.log(employeeId);
             } catch (error) {
             console.log(error.response.data);
@@ -61,7 +61,7 @@ const NewTimeOffRequestPage = () => {
     function handleSubmit(event){
         event.preventDefault();
         let newTimeOffRequest = {
-            employeeId: employeeId,
+            employee_id: employeeId,
             // employeeNumber: employeeNumber,
             // department: department,
             // hireDate: hireDate,
@@ -83,7 +83,7 @@ const NewTimeOffRequestPage = () => {
                         <label>Employee Id: </label>
                         <input type="number" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)}/>
                         </div>
-                        {/* <div className='newEntry'>
+                        <div className='newEntry'>
                         <label>Employee Number: </label>
                         <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>
                         </div>
@@ -106,7 +106,7 @@ const NewTimeOffRequestPage = () => {
                         <div className='newEntry'>
                         <label>Supervisor Name: </label>
                         <input value={supervisorName} onChange={(event) => setSupervisorName(event.target.value)}/>
-                        </div> */}
+                        </div>
                         <div className='newEntry'>
                         <label>Date Requested Off: </label>
                         <input type="date" value={dateRequested} onChange={(event) => setDateRequested(event.target.value)}/>

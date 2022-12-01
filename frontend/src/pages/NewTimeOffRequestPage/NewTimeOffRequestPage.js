@@ -17,7 +17,7 @@ const NewTimeOffRequestPage = () => {
     const [hoursRequested, setHoursRequested] = useState('')
     const [ptoBalance, setPtoBalance] = useState('')
     const [supervisorName, setSupervisorName] = useState('')
-    // const [active, setActive] = useState('')
+    const [approved, setApproved] = useState('')
 
     useEffect(() => {
         const fetchEmployeeInfo = async () => {
@@ -33,8 +33,8 @@ const NewTimeOffRequestPage = () => {
             setDepartment(response.data.department); 
             setHireDate(response.data.hire_date); 
             setPtoBalance(response.data.pto_balance); 
-            setSupervisorName(response.data.supervisor.supervisor_name); 
-            console.log(employeeId);
+            setSupervisorName(response.data.supervisor.supervisor_name);
+            setApproved("No"); 
             } catch (error) {
             console.log(error.response.data);
             }    
@@ -42,7 +42,7 @@ const NewTimeOffRequestPage = () => {
         fetchEmployeeInfo();
     }, [token, user, employeeId]);        
 
-    async function AddTimeOffRequest(newTimeOffRequest){
+    const addTimeOffRequest = async (newTimeOffRequest) => {
         try 
         {
             let response = await axios.post('http://127.0.0.1:8000/api/pto_requests/changes/', newTimeOffRequest, {
@@ -62,16 +62,11 @@ const NewTimeOffRequestPage = () => {
         event.preventDefault();
         let newTimeOffRequest = {
             employee_id: employeeId,
-            // employeeNumber: employeeNumber,
-            // department: department,
-            // hireDate: hireDate,
             date_requested: dateRequested,
             hours_requested: hoursRequested,
-            // pto_balance: ptoBalance,
-            // supervisor_name: supervisorName,
-            // active: active,        
+            approved: approved,        
         };
-        AddTimeOffRequest(newTimeOffRequest)
+        addTimeOffRequest(newTimeOffRequest)
     } 
 
         return ( 
@@ -79,10 +74,10 @@ const NewTimeOffRequestPage = () => {
                 <div>
                     <form onSubmit={handleSubmit}>
                     {/* <form> */}
-                        <div className='newEntry'>
+                        {/* <div className='newEntry'>
                         <label>Employee Id: </label>
                         <input type="number" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)}/>
-                        </div>
+                        </div> */}
                         <div className='newEntry'>
                         <label>Employee Number: </label>
                         <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>
@@ -114,6 +109,10 @@ const NewTimeOffRequestPage = () => {
                         <div className='newEntry'>
                         <label>Hours Requested: </label>
                         <input type="number" value={hoursRequested} onChange={(event) => setHoursRequested(event.target.value)}/>
+                        </div>
+                        <div className='newEntry'>
+                        <label> Approved: </label>
+                        <input type="boolean" value={approved} onChange={(event) => setApproved(event.target.value)}/>
                         </div>
                         <div>
                         <button type='submit'>Submit</button>

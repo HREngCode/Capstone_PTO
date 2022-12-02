@@ -8,7 +8,7 @@ from employees.models import Employee
 
 
 class PtoRequest(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    date_requested = models.DateField()
-    hours_requested = models.DecimalField(max_digits=7, decimal_places=4)
-    approved = models.BooleanField(default=False)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
+    date_requested = models.DateField(null=True)
+    hours_requested = models.DecimalField(max_digits=7, decimal_places=4, null=True)
+    approved = models.BooleanField(default=False, null=True)

@@ -1,19 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 import Navbar from "../../components/NavBar/NavBar";
-import useAuth from '../../hooks/useAuth';
+import {useNavigate} from 'react-router-dom';
 
 
 const SupervisorPage = () => {
 
+    const [timeOffRequests, setTimeOffRequests] = useState('')
     const [user, token] = useAuth ()
-    const [employeeName, setEmployeeName] = useState();
-    const [employeeNumber, setEmployeeNumber] = useState('')
-    const [department, setDepartment] = useState('')
-    const [dateRequested, setDateRequested] = useState('')
-    const [hoursRequested, setHoursRequested] = useState('')
-    const [ptoBalance, setPtoBalance] = useState('')
-    const [approved, setApproved] = useState('')
 
     useEffect(() => {
         const fetchRequestInfo = async () => {
@@ -23,13 +18,8 @@ const SupervisorPage = () => {
                 Authorization: "Bearer " + token,
                 },
             });
-            setEmployeeNumber(response.data.employee_number);             
-            setEmployeeName(response.data.employee_name); 
-            setDepartment(response.data.department); 
-            setDateRequested(response.data.date_requested);
-            setHoursRequested(response.data.hours_requested);
-            setPtoBalance(response.data.pto_balance); 
-            setApproved("No"); 
+            setTimeOffRequests(response.data); 
+            console.log(response.data)
             } catch (error) {
             console.log(error.response.data);
             }    
@@ -40,7 +30,15 @@ const SupervisorPage = () => {
     return ( 
         <div><Navbar />
             <div>
-            <div className='newEntry'>
+            <div>
+                {timeOffRequests &&
+                timeOffRequests.map((time_off_request) => (
+                    <p key={time_off_request.id}>
+                    {time_off_request.employee_number} {time_off_request.employee_name} {time_off_request.date_requested} {time_off_request.hours_requested}
+                    </p>
+                ))}
+            </div>
+            {/* <div className='newEntry'>
                 <label>Employee Number: </label>
                 <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>
                 </div>
@@ -67,7 +65,7 @@ const SupervisorPage = () => {
                 <div className='newEntry'>
                 <label> Approved: </label>
                 <input type="boolean" value={approved} onChange={(event) => setApproved(event.target.value)}/>
-                </div>
+                </div> */}
             </div>
         </div>
      );

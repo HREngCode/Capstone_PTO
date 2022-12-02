@@ -7,5 +7,7 @@ from .models import Supervisor
 class SupervisorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supervisor
-        fields = ['id', 'supervisor_id', 'supervisor_name', 'department']
+        fields = ['id', 'supervisor_id', 'supervisor_name', 'department' 'user', 'user_id',]
         depth = 1
+
+    user_id = serializers.IntegerField(write_only=True)

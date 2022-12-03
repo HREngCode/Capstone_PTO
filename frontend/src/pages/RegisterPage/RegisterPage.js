@@ -1,5 +1,7 @@
+
 import React, { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {
@@ -11,10 +13,17 @@ const RegisterPage = () => {
     firstName: "",
     lastName: "",
   };
+
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
-    registerUser
+    registerUser,
+    RegisterEmployee,
   );
+
+  function RegisterEmployee(employee) {
+      const { registerEmployee } = useContext(EmployeeContext);
+        employee = registerEmployee
+  }
 
   return (
     <div className="container">

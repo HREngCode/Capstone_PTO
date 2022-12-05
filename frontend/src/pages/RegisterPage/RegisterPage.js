@@ -13,17 +13,19 @@ const RegisterPage = () => {
     firstName: "",
     lastName: "",
   };
-
+  
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     registerUser,
-    RegisterEmployee,
+    (RegisterEmployeeData()),
+    console.log(registerUser),
+    console.log(RegisterEmployeeData()),
   );
 
-  function RegisterEmployee(employee) {
-      const { registerEmployee } = useContext(EmployeeContext);
-        employee = registerEmployee
-  }
+  function RegisterEmployeeData() {
+    // const { registerEmployee } = useContext(EmployeeContext);
+    // console.log(registerEmployee)
+  };
 
   return (
     <div className="container">

@@ -2,13 +2,14 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 
 const EmployeeContext = createContext();
 
 export default EmployeeContext;
 
-function setUserObject(employee) {
+function setEmployeeObject(employee) {
     if (!employee) {
       return null;
     }
@@ -19,9 +20,12 @@ function setUserObject(employee) {
     };
   }
   
-  export const AuthProvider = ({ children }) => {
+  export const EmployeeProvider = ({ children }) => {
     const BASE_URL = "http://127.0.0.1:8000/api/auth";
-    const [user] = useState(setUserObject());
+    const userToken = JSON.parse(localStorage.getItem("token"));
+    const decodedUser = userToken ? jwtDecode(userToken) : null;
+    const [token] = useState(userToken);
+    const [user] = useState(setEmployeeObject(decodedUser));
     const [isServerError, setIsServerError] = useState(false);
     const navigate = useNavigate();
   
@@ -49,8 +53,9 @@ function setUserObject(employee) {
 
   
     const contextData = {
-      registerEmployee,
       user,
+      token,
+      registerEmployee,
       isServerError,
     };
   

@@ -6,25 +6,32 @@ import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {
   const { registerUser } = useContext(AuthContext);
+  const { registerEmployee } = useContext(EmployeeContext);
   const defaultValues = {
     username: "",
     email: "",
     password: "",
     firstName: "",
     lastName: "",
+    employeeNumber: "",
+    department: "",
+    supervisorId: "",
+    hireDate: "",
+    ptoBalance: "",
+    active: "",
   };
   
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     registerUser,
     (RegisterEmployeeData()),
-    console.log(registerUser),
-    console.log(RegisterEmployeeData()),
   );
 
-  function RegisterEmployeeData() {
-    const { registerEmployee } = useContext(EmployeeContext);
-    console.log(registerEmployee)
+  function RegisterEmployeeData(data) {
+    return(
+      registerEmployee,
+      (console.log(registerEmployee))
+    )
   };
 
   return (

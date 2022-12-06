@@ -38,7 +38,6 @@ function setEmployeeObject(employee) {
     const registerEmployee = async (registerData) => {
       try {
         let finalData = {
-          user_id: registerData.userId,
           employee_number: registerData.employeeNumber,
           employee_first_name: registerData.firstName,
           employee_last_name: registerData.lastName,

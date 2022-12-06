@@ -14,14 +14,20 @@ function setEmployeeObject(employee) {
       return null;
     }
     return {
-      username: employee.username,
-      id: employee.user_id,
-      first_name: employee.first_name,
+      user_id: employee.userId,
+      employee_number: employee.employeeNumber,
+      employee_first_name: employee.firstName,
+      employee_last_name: employee.lastName,
+      department: employee.department,
+      supervisor_id: employee.supervisorId,
+      hire_date: employee.hireDate,
+      pto_balance: employee.ptoBalance,
+      active: employee.active
     };
   }
   
   export const EmployeeProvider = ({ children }) => {
-    const BASE_URL = "http://127.0.0.1:8000/api/auth";
+    const BASE_URL = "http://127.0.0.1:8000/api/employees";
     const userToken = JSON.parse(localStorage.getItem("token"));
     const decodedUser = userToken ? jwtDecode(userToken) : null;
     const [token] = useState(userToken);
@@ -32,13 +38,21 @@ function setEmployeeObject(employee) {
     const registerEmployee = async (registerData) => {
       try {
         let finalData = {
-          username: registerData.username,
-          password: registerData.password,
-          email: registerData.email,
-          first_name: registerData.firstName,
-          last_name: registerData.lastName,
+          user_id: registerData.userId,
+          employee_number: registerData.employeeNumber,
+          employee_first_name: registerData.firstName,
+          employee_last_name: registerData.lastName,
+          department: registerData.department,
+          supervisor_id: registerData.supervisorId,
+          hire_date: registerData.hireDate,
+          pto_balance: registerData.ptoBalance,
+          active: registerData.active,
         };
-        let response = await axios.post(`${BASE_URL}/employee/user/`, finalData);
+        let response = await axios.post(`${BASE_URL}/changes/`, finalData, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
         if (response.status === 201) {
           console.log("Successful registration! Log in to access token");
           setIsServerError(false);

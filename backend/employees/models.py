@@ -10,7 +10,8 @@ from supervisors.models import Supervisor
 class Employee(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     employee_number = models.IntegerField(null=True)
-    employee_name = models.CharField(max_length=30, null=True)
+    employee_first_name = models.CharField(max_length=30, null=True)
+    employee_last_name = models.CharField(max_length=30, null=True)
     department = models.CharField(max_length=100, null=True)
     supervisor = models.ForeignKey(Supervisor, on_delete=models.PROTECT, null=True)
     hire_date = models.DateField(null=True)

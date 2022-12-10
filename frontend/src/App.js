@@ -9,6 +9,7 @@ import NewTimeOffRequestPage from "./pages/NewTimeOffRequestPage/NewTimeOffReque
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import RegisterEePage from "./pages/RegisterEePage/RegisterEePage";
 
 // Component Imports
 // import Navbar from "./components/NavBar/NavBar";
@@ -27,9 +28,11 @@ function App() {
           element={
             <PrivateRoute>
               <HomePage />
+              {/* {employee ? <HomePage /> : <Route path="/registerEe" element={<RegisterEePage />} /> } */}
             </PrivateRoute>
           }
         />
+        <Route path="/registerEe" element={<RegisterEePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/home" element={<HomePage />} />

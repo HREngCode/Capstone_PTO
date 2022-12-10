@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
+
   const registerUser = async (registerData) => {
     try {
       let finalData = {
@@ -41,10 +42,11 @@ export const AuthProvider = ({ children }) => {
       let response = await axios.post(`${BASE_URL}/register/`, finalData);
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
+        console.log(response.data)
         setIsServerError(false);
-        navigate("/login");
+        navigate("/registerEe");
       } else {
-        navigate("/register");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.response.data);

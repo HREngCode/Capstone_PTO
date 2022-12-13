@@ -21,8 +21,8 @@ const HomePage = () => {
         let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
           headers: {
             Authorization: "Bearer " + token,
-          },
-        });
+          }, 
+        });console.log(response.data)
         setEmployeeName(response.data.employee_name); 
         setEmployeeId(response.data.id); 
       } catch (error) {
@@ -31,20 +31,20 @@ const HomePage = () => {
     };
     fetchEmployeeInfo();
 
-    const fetchPtoRequestByEmployee = async () => {
-      try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setPtoRequests(response.data); 
-        console.log(response.data)
-      } catch (error) {
-        console.log(error.response.data);
-      }    
-    };
-    fetchPtoRequestByEmployee();
+    // const fetchPtoRequestByEmployee = async () => {
+    //   try {
+    //     let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     setPtoRequests(response.data); 
+    //     console.log(response.data)
+    //   } catch (error) {
+    //     console.log(error.response.data);
+    //   }    
+    // };
+    // fetchPtoRequestByEmployee();
 
 
   }, [token, user, employeeId]);

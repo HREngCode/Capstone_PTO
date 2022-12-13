@@ -1,4 +1,3 @@
-
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,7 +16,7 @@ function setUserObject(user) {
     username: user.username,
     id: user.user_id,
     first_name: user.first_name,
-  };
+  }; 
 }
 
 export const AuthProvider = ({ children }) => {
@@ -28,7 +27,6 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
-
 
   const registerUser = async (registerData) => {
     try {

@@ -1,13 +1,11 @@
 
 import React, { useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {
   const { registerUser, userToken } = useContext(AuthContext);
-  const [ regUserToken, setRegUserToken ] = useState();
-
+  
   const defaultValues = {
     username: "",
     password: "",
@@ -21,10 +19,10 @@ const RegisterPage = () => {
     registerUser,
   );
 
-  // function RegisterEmployeeData() {
-  //   return(registerEmployee);
+  // function RegisterUserId(registerData) {
+  //   return(registerData.user_id);
   // };
-
+  
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>

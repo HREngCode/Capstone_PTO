@@ -35,7 +35,6 @@ function App() {
         <Route path="/registerEe" element={<RegisterEePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
         <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage />} />
         <Route path="/supervisor" element={<SupervisorPage />} />
       </Routes>

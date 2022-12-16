@@ -4,10 +4,8 @@ import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterEePage = () => {
-  const { contextData, token } = useContext(AuthContext);
-  const { registerEmployee } = useContext(EmployeeContext);
-  const user = contextData.user.id;
-  console.log(user)
+  const { registerEmployee, user } = useContext(AuthContext, EmployeeContext);
+  // console.log(user.id, user.supervisor)
 
   const defaultValues = {
     userId: "",
@@ -17,31 +15,27 @@ const RegisterEePage = () => {
     department: "",
     supervisorId: "",
     hireDate: " ",
-    ptoBalance: " ",
+    ptoBalance: "",
     active: "",
   };
   console.log(defaultValues);
 
-  const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
+  const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
-    registerEmployee
+    registerEmployee,
   );
-
-  // function RegisterEmployeeData() {
-  //   return(registerEmployee);
-  // };
 
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-        <label>
-          {/* User Id:{userId}
+      <label>
+          User Id:{" "}
           <input
             type="number"
             name="userId"
             value={formData.userId}
             onChange={handleInputChange}
-          /> */}
+          />
         </label>
         <label>
           Employee Number:{" "}

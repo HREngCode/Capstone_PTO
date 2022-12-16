@@ -4,7 +4,7 @@ import EmployeeContext from "../context/EmployeeContext";
 
 const useAuth = () => {
   const { user, token, employee } = useContext(AuthContext, EmployeeContext);
-  return [user, token, employee];
+  return [ user, token, employee ];
 };
 
 export default useAuth;

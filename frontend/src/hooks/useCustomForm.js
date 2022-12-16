@@ -3,17 +3,18 @@ import { useState } from "react";
 const useCustomForm = (initialValues = {}, onSubmit) => {
   const [formData, setFormValues] = useState(initialValues);
 
-  const handleInputChange = (e) => {
-    e.persist();
-    if (e.target.type === 'number') {
-      setFormValues({ ...formData, [e.target.name]: parseInt(e.target.value)});
+  const handleInputChange = (event) => {
+    event.persist();
+    if (event.target.type === 'student') {
+      setFormValues({ ...formData, [event.target.name]: parseInt(event.target.value)});
     } else {
-      setFormValues({ ...formData, [e.target.name]: e.target.value });
+    setFormValues({ ...formData, [event.target.name]: event.target.value });
     }
   };
+  console.log(initialValues);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     onSubmit(formData);
   };
 

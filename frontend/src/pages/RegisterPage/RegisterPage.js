@@ -1,10 +1,9 @@
-
 import React, { useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {
-  const { registerUser, userToken } = useContext(AuthContext);
+  const { registerUser } = useContext(AuthContext);
   
   const defaultValues = {
     username: "",
@@ -18,10 +17,6 @@ const RegisterPage = () => {
     defaultValues,
     registerUser,
   );
-
-  // function RegisterUserId(registerData) {
-  //   return(registerData.user_id);
-  // };
   
   return (
     <div className="container">

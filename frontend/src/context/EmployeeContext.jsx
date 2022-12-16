@@ -2,35 +2,35 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
 
 const EmployeeContext = createContext();
 
 export default EmployeeContext;
 
-function setEmployeeObject(employee) {
-  if (!employee) {
-    return null;
-  }
-  return {
-    user_id: employee.userId,
+// function setEmployeeObject(employee) {
+//   if (!employee) {
+//     return null;
+//   }
+//   return {
+//     user_id: employee.userId,
 //     employee_number: employee.employeeNumber,
 //     employee_first_name: employee.firstName,
 //     employee_last_name: employee.lastName,
 //     department: employee.department,
-    supervisor_id: employee.supervisorId,
+//     supervisor_id: employee.supervisorId,
 //     hire_date: employee.hireDate,
 //     pto_balance: employee.ptoBalance,
 //     active: employee.active,
-  }; 
-}
+//   }; 
+// }
 
 export const EmployeeProvider = ({ children }) => {
   const BASE_URL = "http://127.0.0.1:8000/api/employees";
-  const userToken = JSON.parse(localStorage.getItem("token"));
-  const decodedUser = userToken ? jwtDecode(userToken) : null;
-  const [token, setToken] = useState(userToken);
-  const [employee, setEmployee] = useState(setEmployeeObject);
+  // const userToken = JSON.parse(localStorage.getItem("token"));
+  // const decodedUser = userToken ? jwtDecode(userToken) : null;
+  // const [token, setToken] = useState(userToken);
+  const [employee, setEmployee] = useState( );
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export const EmployeeProvider = ({ children }) => {
 
       let response = await axios.post(`${BASE_URL}/changes/`, finalData, {
         headers: {
-          Authorization: "Bearer " + token,
+          // Authorization: "Bearer " + token,
         },
       }
       )
@@ -73,9 +73,6 @@ export const EmployeeProvider = ({ children }) => {
   };
 
   return (
-    <EmployeeContext.Provider value={contextData}>
-      {children}
-    </EmployeeContext.Provider>
+    <EmployeeContext.Provider value={contextData}>{children}</EmployeeContext.Provider>
   );
 };
-

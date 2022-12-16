@@ -48,12 +48,13 @@ export const EmployeeProvider = ({ children }) => {
         active: registerData.active,
       };
 
-      let response = await axios.post(`${BASE_URL}/changes/`, finalData, {
-        headers: {
-          // Authorization: "Bearer " + token,
-        },
-      }
-      )
+      let response = await axios.post(`${BASE_URL}/changes/`, finalData);
+      // , {
+      //   headers: {
+      //     // Authorization: "Bearer " + token,
+      //   },
+      // }
+      // )
       if (response.status === 201) {
         console.log("Successful registration as employee! Log in to access token");
         setIsServerError(false);

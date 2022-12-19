@@ -13,8 +13,8 @@ class Employee(models.Model):
     employee_first_name = models.CharField(max_length=30)
     employee_last_name = models.CharField(max_length=30)
     department = models.CharField(max_length=100)
-    supervisor = models.ForeignKey(Supervisor, on_delete=models.PROTECT)
+    supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE)
     hire_date = models.DateField( )
     pto_balance = models.DecimalField(max_digits=7, decimal_places=4)
-    active = models.BooleanField()
+    active = models.BooleanField(blank=True)
 

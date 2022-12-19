@@ -26,7 +26,7 @@ const HomePage = () => {
         setEmployeeName(response.data.employee_name); 
         setEmployeeId(response.data.id); 
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error.message);
       }    
     };
     fetchEmployeeInfo();

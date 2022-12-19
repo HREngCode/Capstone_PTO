@@ -5,13 +5,13 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
 
   const handleInputChange = (event) => {
     event.persist();
-    if (event.target.type === 'student') {
+    if (event.target.type === 'number') {
       setFormValues({ ...formData, [event.target.name]: parseInt(event.target.value)});
     } else {
     setFormValues({ ...formData, [event.target.name]: event.target.value });
     }
   };
-  console.log(initialValues);
+  console.log(formData);
 
   const handleSubmit = (event) => {
     event.preventDefault();

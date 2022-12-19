@@ -1,34 +1,34 @@
-import React, { useState, useContext } from "react";
+import React, { useRef,useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterEePage = () => {
-  const { registerEmployee, user } = useContext(AuthContext, EmployeeContext);
-  // console.log(user.id, user.supervisor)
+  const { registerEmployee } = useContext(EmployeeContext);
+  const { user } = useContext(AuthContext);
 
   const defaultValues = {
-    userId: "",
+    userId:user.id,
     employeeNumber: "",
     firstName: "",
     lastName: "",
     department: "",
     supervisorId: "",
-    hireDate: " ",
+    hireDate: "",
     ptoBalance: "",
     active: "",
   };
-  console.log(defaultValues);
 
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     registerEmployee,
   );
 
+
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-      <label>
+        {/* <label>
           User Id:{" "}
           <input
             type="number"
@@ -36,7 +36,7 @@ const RegisterEePage = () => {
             value={formData.userId}
             onChange={handleInputChange}
           />
-        </label>
+        </label> */}
         <label>
           Employee Number:{" "}
           <input
@@ -105,6 +105,7 @@ const RegisterEePage = () => {
           <input
             type="checkbox"
             name="active"
+            id="checkbox"
             value={formData.active}
             onChange={handleInputChange}
           />

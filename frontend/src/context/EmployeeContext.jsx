@@ -12,17 +12,17 @@ export default EmployeeContext;
 //   if (!employee) {
 //     return null;
 //   }
-//   return {
-//     user_id: employee.userId,
-//     employee_number: employee.employeeNumber,
-//     employee_first_name: employee.firstName,
-//     employee_last_name: employee.lastName,
-//     department: employee.department,
-//     supervisor_id: employee.supervisorId,
-//     hire_date: employee.hireDate,
-//     pto_balance: employee.ptoBalance,
-//     active: employee.active,
-//   }; 
+  // return {
+  //   user_id: employee.userId,
+  //   employee_number: employee.employeeNumber,
+  //   employee_first_name: employee.firstName,
+  //   employee_last_name: employee.lastName,
+  //   department: employee.department,
+  //   supervisor_id: employee.supervisorId,
+  //   hire_date: employee.hireDate,
+  //   pto_balance: employee.ptoBalance,
+  //   active: employee.active,
+  // }; 
 // }
 
 export const EmployeeProvider = ({ children }) => {
@@ -45,8 +45,9 @@ export const EmployeeProvider = ({ children }) => {
         supervisor_id: registerData.supervisorId,
         hire_date: registerData.hireDate,
         pto_balance: registerData.ptoBalance,
-        active: registerData.active,
+        active: registerData.active
       };
+      console.log(finalData);
 
       let response = await axios.post(`${BASE_URL}/changes/`, finalData);
       // , {
@@ -55,6 +56,7 @@ export const EmployeeProvider = ({ children }) => {
       //   },
       // }
       // )
+      console.log(response.data)
       if (response.status === 201) {
         console.log("Successful registration as employee! Log in to access token");
         setIsServerError(false);
@@ -63,7 +65,7 @@ export const EmployeeProvider = ({ children }) => {
         navigate("/login"); //diff page than user reg
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.message);
     }
   };
 

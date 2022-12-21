@@ -30,7 +30,7 @@ export const EmployeeProvider = ({ children }) => {
   // const userToken = JSON.parse(localStorage.getItem("token"));
   // const decodedUser = userToken ? jwtDecode(userToken) : null;
   // const [token, setToken] = useState(userToken);
-  const [employee, setEmployee] = useState( );
+  // const [employee, setEmployee] = useState( );
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
@@ -70,7 +70,7 @@ export const EmployeeProvider = ({ children }) => {
   };
 
   const contextData = {
-    employee,
+    // employee,
     registerEmployee,
     isServerError,
   };

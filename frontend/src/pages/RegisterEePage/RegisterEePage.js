@@ -1,9 +1,10 @@
-import React, { useRef,useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterEePage = () => {
+  const [ active, setActive ] = useState(true)
   const { registerEmployee } = useContext(EmployeeContext);
   const { user } = useContext(AuthContext);
 
@@ -17,6 +18,10 @@ const RegisterEePage = () => {
     hireDate: "",
     ptoBalance: "",
     active: "",
+  };
+
+  const handleChange = () => {
+    setActive(current => !current);
   };
 
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
@@ -105,9 +110,8 @@ const RegisterEePage = () => {
           <input
             type="checkbox"
             name="active"
-            id="checkbox"
-            value={formData.active}
-            onChange={handleInputChange}
+            value={active}
+            onChange={handleChange}
           />
         </label>
         <p style={{ fontSize: "12px" }}>

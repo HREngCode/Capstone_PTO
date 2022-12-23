@@ -16,5 +16,5 @@ class Employee(models.Model):
     supervisor = models.ForeignKey(Supervisor, on_delete=models.CASCADE)
     hire_date = models.DateField( )
     pto_balance = models.DecimalField(max_digits=7, decimal_places=4)
-    active = models.BooleanField(null=True)
+    active = models.BooleanField()
 

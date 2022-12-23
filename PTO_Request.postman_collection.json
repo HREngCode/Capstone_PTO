@@ -1,0 +1,975 @@
+{
+	"info": {
+		"_postman_id": "3e63f437-01ec-4b22-9feb-0dee393839fc",
+		"name": "PTO_Request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22003451"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"emp1\",\r\n    \"password\": \"emp@emp1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register_User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"dantheman\",\r\n    \"password\": \"password1@\",\r\n    \"email\": \"dan@devcodecamp.com\",\r\n    \"first_name\": \"Daniel\",\r\n    \"last_name\": \"Tulpa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh_Access",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh\": \"PASTE REFRESH TOKEN FROM LOGIN HERE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/refresh/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PtoRequests",
+			"item": [
+				{
+					"name": "Create_PtoRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyMDE4ODQ0LCJpYXQiOjE2NzExNTQ4NDQsImp0aSI6ImVmNzBmNWE2YmE4MjQ2MTc4ZGQ2ZmUwZGYxNDQyNTk4IiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.Gcayy3ozAZdM6fj-4uiX8FmKsokB-yw0fveOgiJAAiQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee_id\": 3,\r\n    \"date_requested\": \"2023-3-18\",\r\n    \"hours_requested\": 8.0000\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/changes/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"changes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_PtoRequests",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTA2NTk2LCJpYXQiOjE2NjkyNDI1OTYsImp0aSI6IjQzNjNiNjYxNjJkNjQ5NWI5MzdiNDlhMmM4Yzg1NmM3IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.xXkCwvD4Yz-84Ys5SIiNXM2wgZ1xjCMdCZAl18Xyf9g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee_id\": \"3\",\r\n    \"date_requested\": \"2022-12-16\",\r\n    \"hours_requested\": 8.0000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/all/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_PtoRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee_id\": \"2\",\r\n    \"hours_requested\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/12/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"12",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_PtoRequest_By_Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTA2NTk2LCJpYXQiOjE2NjkyNDI1OTYsImp0aSI6IjQzNjNiNjYxNjJkNjQ5NWI5MzdiNDlhMmM4Yzg1NmM3IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.xXkCwvD4Yz-84Ys5SIiNXM2wgZ1xjCMdCZAl18Xyf9g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_PtoRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/15/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"15",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_PtoRequest_For_Supervisors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/supervisor?supervisor=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"supervisor"
+							],
+							"query": [
+								{
+									"key": "supervisor",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_PtoRequest_For_Employee_Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/employee?employee=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"employee"
+							],
+							"query": [
+								{
+									"key": "employee",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_PtoRequest_By_Employee_Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/pto_requests/employee_number?employee=1002",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"pto_requests",
+								"employee_number"
+							],
+							"query": [
+								{
+									"key": "employee",
+									"value": "1002"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employees",
+			"item": [
+				{
+					"name": "Create_Employee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyMDE4ODQ0LCJpYXQiOjE2NzExNTQ4NDQsImp0aSI6ImVmNzBmNWE2YmE4MjQ2MTc4ZGQ2ZmUwZGYxNDQyNTk4IiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.Gcayy3ozAZdM6fj-4uiX8FmKsokB-yw0fveOgiJAAiQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 55,\r\n    \"employee_number\": 5,\r\n    \"employee_first_name\": \"cust\",\r\n    \"employee_last_name\": \"omer4\",\r\n    \"department\": \"Welding\",\r\n    \"supervisor_id\": \"1\",\r\n    \"hire_date\": \"2011-07-13\",\r\n    \"pto_balance\": \"45.0000\",\r\n    \"active\": \"True\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/changes/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"changes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_Employees",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employee_number\": 1001,\r\n    \"employee_first_name\": \"George\",\r\n    \"employee_last_name\": \"Kristofferson\",\r\n    \"department\": \"Assembly\",\r\n    \"supervisor_id\": \"2\",\r\n    \"hire_date\": \"2016-05-17\",\r\n    \"pto_balance\": 0,\r\n    \"user_id\": 6,\r\n    \"active\": \"True\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/all/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Employee_By_Employee_Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Employee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"employee_number\": 1005,\r\n    \"employee_name\": \"Stephen Strange\",\r\n    \"department\": \"Welding\",\r\n    \"supervisor\": 1,\r\n    \"supervisor_id\": 1,\r\n    \"user\": 4,\r\n    \"user_id\": 4,\r\n    \"hire_date\": \"2019-10-02\",\r\n    \"pto_balance\": \"40.0000\",\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/3/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Employee",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/13/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"13",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Employee_By_SupervisorId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/supervisor/4/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"supervisor",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_By_Employee_Number",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/employee_number?employee_number=1004",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"employee_number"
+							],
+							"query": [
+								{
+									"key": "employee_number",
+									"value": "1004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_By_Employee_UserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/employees/user?user=Danny Spivey",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"employees",
+								"user"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "Danny Spivey"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supervisors",
+			"item": [
+				{
+					"name": "Create_Supervisors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supervisor_id\": \"5\",\r\n    \"supervisor_name\": \"Fred Flintstone\",\r\n    \"department\": \"Saw\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/supervisors/changes/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"supervisors",
+								"changes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_Supervisors",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supervisor_id\": \"1\",\r\n    \"supervisor_name\": \"Eric Leonard\",\r\n    \"department\": \"Assembly\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/supervisors/all/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"supervisors",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_Supervisor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supervisor_id\": \"2\",\r\n    \"supervisor_name\": \"Jason Jordan\",\r\n    \"department\": \"Assembly\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/supervisors/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"supervisors",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Supervisor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/supervisors/2/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"supervisors",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_By_Supervisor_Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/supervisors/name?supervisor_name=Jason Jordan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"supervisors",
+								"name"
+							],
+							"query": [
+								{
+									"key": "supervisor_name",
+									"value": "Jason Jordan"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

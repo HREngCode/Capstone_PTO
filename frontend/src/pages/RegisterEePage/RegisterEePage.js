@@ -4,12 +4,13 @@ import EmployeeContext from "../../context/EmployeeContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterEePage = () => {
-  const [ active, setActive ] = useState(true)
+  const [ active, setActive ] = useState(false)
   const { registerEmployee } = useContext(EmployeeContext);
   const { user } = useContext(AuthContext);
 
   const defaultValues = {
-    userId:user.id,
+    //Changed value to User
+    user_id:user.id,
     employeeNumber: "",
     firstName: "",
     lastName: "",
@@ -17,7 +18,8 @@ const RegisterEePage = () => {
     supervisorId: "",
     hireDate: "",
     ptoBalance: "",
-    active: "",
+    //changed to State Variable
+    active: active,
   };
 
   const handleChange = () => {
@@ -33,15 +35,15 @@ const RegisterEePage = () => {
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-        {/* <label>
+        <label>
           User Id:{" "}
           <input
             type="number"
             name="userId"
-            value={formData.userId}
+            value={formData.user_id}
             onChange={handleInputChange}
           />
-        </label> */}
+        </label>
         <label>
           Employee Number:{" "}
           <input
@@ -99,7 +101,8 @@ const RegisterEePage = () => {
         <label>
           PTO Balance:{" "}
           <input
-            type="decimal"
+          //Changed to type Number
+          type="number"
             name="ptoBalance"
             value={formData.ptoBalance}
             onChange={handleInputChange}
@@ -110,8 +113,9 @@ const RegisterEePage = () => {
           <input
             type="checkbox"
             name="active"
-            value={active}
-            onChange={handleChange}
+            //handle change of input
+            value={formData.active}
+            onChange={handleInputChange}
           />
         </label>
         <p style={{ fontSize: "12px" }}>

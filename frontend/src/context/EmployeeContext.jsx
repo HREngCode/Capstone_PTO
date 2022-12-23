@@ -37,7 +37,7 @@ export const EmployeeProvider = ({ children }) => {
   const registerEmployee = async (registerData) => {
     try {
       let finalData = {
-        user_id: registerData.userId,
+        user_id: registerData.user_id,
         employee_number: registerData.employeeNumber,
         employee_first_name: registerData.firstName,
         employee_last_name: registerData.lastName,

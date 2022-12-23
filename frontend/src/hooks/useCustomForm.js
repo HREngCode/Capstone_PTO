@@ -7,7 +7,13 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
     event.persist();
     if (event.target.type === 'number') {
       setFormValues({ ...formData, [event.target.name]: parseInt(event.target.value)});
-    } else {
+    } 
+    //Added handler to the boolean
+    else if (event.target.value === "true" || event.target.value === "false"){
+      setFormValues({ ...formData, [event.target.name]: Boolean(event.target.value) });
+    }
+    
+    else{
     setFormValues({ ...formData, [event.target.name]: event.target.value });
     }
   };

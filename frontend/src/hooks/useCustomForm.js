@@ -12,7 +12,6 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
     else if (event.target.value === "true" || event.target.value === "false"){
       setFormValues({ ...formData, [event.target.name]: Boolean(event.target.value) });
     }
-    
     else{
     setFormValues({ ...formData, [event.target.name]: event.target.value });
     }

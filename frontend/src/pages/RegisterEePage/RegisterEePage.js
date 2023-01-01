@@ -10,17 +10,18 @@ const RegisterEePage = () => {
 
   const defaultValues = {
     //Changed value to User
-    user_id:user.id,
-    employeeNumber: "",
-    firstName: "",
-    lastName: "",
+    user_id: user.id,
+    employee_number: "",
+    employee_first_name: "",
+    employee_last_name: "",
     department: "",
-    supervisorId: "",
-    hireDate: "",
-    ptoBalance: "",
+    supervisor_id: "",
+    hire_date: "",
+    pto_balance: "",
     //changed to State Variable
     active: active,
   };
+  console.log(defaultValues)
 
   const handleChange = () => {
     setActive(current => !current);
@@ -35,11 +36,11 @@ const RegisterEePage = () => {
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
-        <label>
+      <label>
           User Id:{" "}
           <input
             type="number"
-            name="userId"
+            name="user_id"
             value={formData.user_id}
             onChange={handleInputChange}
           />
@@ -48,8 +49,8 @@ const RegisterEePage = () => {
           Employee Number:{" "}
           <input
             type="number"
-            name="employeeNumber"
-            value={formData.employeeNumber}
+            name="employee_number"
+            value={formData.employee_number}
             onChange={handleInputChange}
           />
         </label>
@@ -57,8 +58,8 @@ const RegisterEePage = () => {
           First Name:{" "}
           <input
             type="text"
-            name="firstName"
-            value={formData.firstName}
+            name="employee_first_name"
+            value={formData.employee_first_name}
             onChange={handleInputChange}
           />
         </label>
@@ -66,8 +67,8 @@ const RegisterEePage = () => {
           Last Name:{" "}
           <input
             type="text"
-            name="lastName"
-            value={formData.lastName}
+            name="employee_last_name"
+            value={formData.employee_last_name}
             onChange={handleInputChange}
           />
         </label>
@@ -84,8 +85,8 @@ const RegisterEePage = () => {
           Supervisor Id:{" "}
           <input
             type="number"
-            name="supervisorId"
-            value={formData.supervisorId}
+            name="supervisor_id"
+            value={formData.supervisor_id}
             onChange={handleInputChange}
           />
         </label>
@@ -93,8 +94,8 @@ const RegisterEePage = () => {
           Hire Date:{" "}
           <input
             type="date"
-            name="hireDate"
-            value={formData.hireDate}
+            name="hire_date"
+            value={formData.hire_date}
             onChange={handleInputChange}
           />
         </label>
@@ -103,8 +104,8 @@ const RegisterEePage = () => {
           <input
           //Changed to type Number
           type="number"
-            name="ptoBalance"
-            value={formData.ptoBalance}
+            name="pto_balance"
+            value={formData.pto_balance}
             onChange={handleInputChange}
           />
         </label>

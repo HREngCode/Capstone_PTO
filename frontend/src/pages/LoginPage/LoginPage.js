@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
 import { Link } from "react-router-dom";
@@ -7,7 +7,13 @@ import Header from "../../components/Header/Header";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: "", password: "" };
+  const [ supervisor, setSupervisor ] = useState(false)
+  const defaultValues = { username: "", password: "", supervisor:supervisor };
+
+  const handleChange = () => {
+    setSupervisor(current => !current);
+  };
+
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,
     loginUser
@@ -42,10 +48,20 @@ const LoginPage = () => {
                 onChange={handleInputChange}
               />
             </label>
+            <label>
+              Supervisor:{" "}
+              <input
+                type="checkbox"
+                name="supervisor"
+                //handle change of input
+                value={formData.supervisor}
+                onChange={handleInputChange}
+              />
+            </label>
             {isServerError ? (
               <p className="error">Login failed, incorrect credentials!</p>
             ) : null}
-            <Link to="/register">Click to register!</Link>
+            <Link to="/registerEe">Click to register!</Link>
             <button>Login!</button>
           </form>
         </div>

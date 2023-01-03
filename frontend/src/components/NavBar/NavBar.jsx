@@ -9,8 +9,8 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className="navbar">
-    <a href="/home">Home</a>
-    <a href="/request">New Request</a>
+    <a href="/">Home</a>
+    <a href="/newtimeoffrequest">New Request</a>
     <div className="dropdown">
       <button className="dropbtn">Dropdown
         <i className="fa fa-caret-down"></i>

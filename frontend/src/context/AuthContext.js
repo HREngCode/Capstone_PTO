@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(userToken);
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
+  const [isSupervisor, setIsSupervisor] = useState(false);
   const navigate = useNavigate();
 
   const registerUser = async (registerData) => {
@@ -41,9 +42,9 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);
-        navigate("/registerEe");
-      } else {
         navigate("/");
+      } else {
+        navigate("/login");
       }
     } catch (error) {
       console.log(error.message);
@@ -51,22 +52,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async (loginData) => {
-    try {
-      let response = await axios.post(`${BASE_URL}/login/`, loginData);
-      if (response.status === 200) {
-        localStorage.setItem("token", JSON.stringify(response.data.access));
-        setToken(JSON.parse(localStorage.getItem("token")));
-        let loggedInUser = jwtDecode(response.data.access);
-        setUser(setUserObject(loggedInUser));
-        setIsServerError(false);
-        navigate("/");
-      } else {
-        navigate("/register");
+    if (isSupervisor) {
+      navigate("/supervisor")
+    }
+    else{
+      try {
+        let response = await axios.post(`${BASE_URL}/login/`, loginData);
+        if (response.status === 200) {
+          localStorage.setItem("token", JSON.stringify(response.data.access));
+          setToken(JSON.parse(localStorage.getItem("token")));
+          let loggedInUser = jwtDecode(response.data.access);
+          setUser(setUserObject(loggedInUser));
+          setIsServerError(false);
+          navigate("/");
+        } else {
+          navigate("/registerEe");
+          }
+        } 
+      catch (error) {
+        console.log(error.response.data);
+        setIsServerError(true);
+        navigate("/login");
       }
-    } catch (error) {
-      console.log(error.response.data);
-      setIsServerError(true);
-      navigate("/register");
     }
   };
 

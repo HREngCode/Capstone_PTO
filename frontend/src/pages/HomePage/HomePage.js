@@ -12,7 +12,7 @@ const HomePage = () => {
   const [employeeName, setEmployeeName] = useState();
   const [employeeId, setEmployeeId] = useState();
   const [ptoRequests, setPtoRequests] = useState([]);
-  const [userId, setUserId] = useState();
+  const [employeeUserId, setEmployeeUserId] = useState();
   const [userName, setUserName] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -30,7 +30,7 @@ const HomePage = () => {
         setEmployeeName(response.data.employee_first_name); 
         setEmployeeId(response.data.id);
         setUserName(response.data.user_name);
-        setUserId(response.data.user); 
+        setEmployeeUserId(response.data.user.id); 
         setFirstName(response.data.employee_first_name);
         setLastName(response.data.employee_last_name);
       } catch (error) {
@@ -41,13 +41,13 @@ const HomePage = () => {
 
     const fetchPtoRequestByEmployee = async () => {
       try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/${employeeId}/`, {
+        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
-        setPtoRequests(response.data); 
-        console.log(response.data)
+        setPtoRequests(response.data);
+        console.log(employeeId)
       } catch (error) {
         console.log(error.response.data);
       }    
@@ -65,7 +65,7 @@ const HomePage = () => {
   return (
     <div><Navbar />
       <div className="container">
-        <h1>Home Page for {userId}!</h1>
+        <h1>Home Page for {employeeUserId}!</h1>
         <div>
           {ptoRequests &&
           ptoRequests.map((pto_request) => (

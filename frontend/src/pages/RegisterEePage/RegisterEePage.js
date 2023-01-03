@@ -10,7 +10,7 @@ const RegisterEePage = () => {
 
   const defaultValues = {
     //Changed value to User
-    user_id: user.id,
+    user_id: "",
     employee_number: "",
     employee_first_name: "",
     employee_last_name: "",
@@ -31,7 +31,6 @@ const RegisterEePage = () => {
     defaultValues,
     registerEmployee,
   );
-
 
   return (
     <div className="container">

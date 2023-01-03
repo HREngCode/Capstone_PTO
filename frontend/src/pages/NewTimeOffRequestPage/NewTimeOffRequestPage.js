@@ -27,9 +27,10 @@ const NewTimeOffRequestPage = () => {
                 Authorization: "Bearer " + token,
                 },
             });
+            console.log(response.data)
             setEmployeeId(response.data.id); 
             setEmployeeNumber(response.data.employee_number);             
-            setEmployeeName(response.data.employee_name); 
+            setEmployeeName(response.data.employee_first_name); 
             setDepartment(response.data.department); 
             setHireDate(response.data.hire_date); 
             setPtoBalance(response.data.pto_balance); 

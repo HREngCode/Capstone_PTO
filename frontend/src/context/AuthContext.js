@@ -52,29 +52,33 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async (loginData) => {
-    if (isSupervisor) {
-      navigate("/supervisor")
-    }
-    else{
+    setIsSupervisor(loginData.supervisor)
+    console.log(isSupervisor)
       try {
+        if (isSupervisor) {
+          navigate("/supervisor")
+        }
+        else {
         let response = await axios.post(`${BASE_URL}/login/`, loginData);
-        if (response.status === 200) {
-          localStorage.setItem("token", JSON.stringify(response.data.access));
-          setToken(JSON.parse(localStorage.getItem("token")));
-          let loggedInUser = jwtDecode(response.data.access);
-          setUser(setUserObject(loggedInUser));
-          setIsServerError(false);
-          navigate("/");
-        } else {
-          navigate("/registerEe");
-          }
+          if (response.status === 200) {
+            localStorage.setItem("token", JSON.stringify(response.data.access));
+            setToken(JSON.parse(localStorage.getItem("token")));
+            let loggedInUser = jwtDecode(response.data.access);
+            setUser(setUserObject(loggedInUser));
+            setIsServerError(false);
+            navigate("/");
+            } 
+          else {
+            navigate("/registerEe");
+            }
+        }
+
         } 
       catch (error) {
         console.log(error.response.data);
         setIsServerError(true);
         navigate("/login");
       }
-    }
   };
 
   const logoutUser = () => {

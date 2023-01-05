@@ -125,7 +125,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyMDE4ODQ0LCJpYXQiOjE2NzExNTQ4NDQsImp0aSI6ImVmNzBmNWE2YmE4MjQ2MTc4ZGQ2ZmUwZGYxNDQyNTk4IiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.Gcayy3ozAZdM6fj-4uiX8FmKsokB-yw0fveOgiJAAiQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMDI0MDgyLCJpYXQiOjE2NzIxNjAwODIsImp0aSI6ImZiNzA0ZjI3ODE0ZTQyNjdhMGRhNzA2YTc1YTYxZGFmIiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.jpDevntKB-y58X_UcKoB21h5UOX8RoV1JOtishjTWS4",
 									"type": "string"
 								}
 							]
@@ -134,7 +134,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee_id\": 3,\r\n    \"date_requested\": \"2023-3-18\",\r\n    \"hours_requested\": 8.0000\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"employee_id\": 3,\r\n    \"date_requested\": \"2023-3-18\",\r\n    \"hours_requested\": 8.0000,\r\n    \"approved\": \"False\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,7 +263,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcwMTA2NTk2LCJpYXQiOjE2NjkyNDI1OTYsImp0aSI6IjQzNjNiNjYxNjJkNjQ5NWI5MzdiNDlhMmM4Yzg1NmM3IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.xXkCwvD4Yz-84Ys5SIiNXM2wgZ1xjCMdCZAl18Xyf9g",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjkzMDM5LCJpYXQiOjE2NzI0MjkwMzksImp0aSI6ImQxOWQ2MTk2NDRjNDQ5MzRiNDc3MjI5MWI4OGUwZTA0IiwidXNlcl9pZCI6NTQsInVzZXJuYW1lIjoiY3VzdDIiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.l3_3vbDZFLaE1BOyF6muSNHan7DL6dYvv1f8p2yvj-8",
 									"type": "string"
 								}
 							]
@@ -428,20 +428,13 @@
 					"name": "Create_Employee",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyMDE4ODQ0LCJpYXQiOjE2NzExNTQ4NDQsImp0aSI6ImVmNzBmNWE2YmE4MjQ2MTc4ZGQ2ZmUwZGYxNDQyNTk4IiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.Gcayy3ozAZdM6fj-4uiX8FmKsokB-yw0fveOgiJAAiQ",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": 55,\r\n    \"employee_number\": 5,\r\n    \"employee_first_name\": \"cust\",\r\n    \"employee_last_name\": \"omer4\",\r\n    \"department\": \"Welding\",\r\n    \"supervisor_id\": \"1\",\r\n    \"hire_date\": \"2011-07-13\",\r\n    \"pto_balance\": \"45.0000\",\r\n    \"active\": \"True\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"employee_first_name\": \"cust\",\r\n    \"employee_last_name\": \"omer2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -474,6 +467,16 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjkzMDM5LCJpYXQiOjE2NzI0MjkwMzksImp0aSI6ImQxOWQ2MTk2NDRjNDQ5MzRiNDc3MjI5MWI4OGUwZTA0IiwidXNlcl9pZCI6NTQsInVzZXJuYW1lIjoiY3VzdDIiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.l3_3vbDZFLaE1BOyF6muSNHan7DL6dYvv1f8p2yvj-8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -516,7 +519,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMjkzMDM5LCJpYXQiOjE2NzI0MjkwMzksImp0aSI6ImQxOWQ2MTk2NDRjNDQ5MzRiNDc3MjI5MWI4OGUwZTA0IiwidXNlcl9pZCI6NTQsInVzZXJuYW1lIjoiY3VzdDIiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.l3_3vbDZFLaE1BOyF6muSNHan7DL6dYvv1f8p2yvj-8",
 									"type": "string"
 								}
 							]
@@ -780,7 +783,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY5MTM1NzM4LCJpYXQiOjE2NjgyNzE3MzgsImp0aSI6IjcxNjY5NWE2ZWY4YjQ2MjRiZDViYWI3YjZhODY1NjY1IiwidXNlcl9pZCI6NiwidXNlcm5hbWUiOiJlbXAxIiwiZmlyc3RfbmFtZSI6IiJ9.hYGHHC2ESpK67zv7tskDFHE2fiasm_y0uaCu9Cty5Aw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjczMDI0MDgyLCJpYXQiOjE2NzIxNjAwODIsImp0aSI6ImZiNzA0ZjI3ODE0ZTQyNjdhMGRhNzA2YTc1YTYxZGFmIiwidXNlcl9pZCI6NTcsInVzZXJuYW1lIjoiY3VzdDUiLCJmaXJzdF9uYW1lIjoiY3VzdCJ9.jpDevntKB-y58X_UcKoB21h5UOX8RoV1JOtishjTWS4",
 									"type": "string"
 								}
 							]
@@ -789,7 +792,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"supervisor_id\": \"5\",\r\n    \"supervisor_name\": \"Fred Flintstone\",\r\n    \"department\": \"Saw\"\r\n}\r\n\r\n",
+							"raw": "{\r\n    \"supervisor_name\": \"Sam Shields\",\r\n    \"department\": \"Laser\"\r\n}\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"

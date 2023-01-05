@@ -4,6 +4,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import { Link } from "react-router-dom";
 import "./LoginPage.css";
 import Header from "../../components/Header/Header";
+import Navbar from "../../components/NavBar/NavBar";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,
-    loginUser
+    loginUser,
   );
 
   useEffect(() => {
@@ -27,8 +28,10 @@ const LoginPage = () => {
 
   return (
     <div><Header />
+      <div><Navbar />
       <div className="body">
         <div className="container">
+          <h1>Login</h1>
           <form className="form" onSubmit={handleSubmit}>
             <label>
               Username:{" "}
@@ -67,6 +70,8 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
+    </div>
+    
   );
 };
 

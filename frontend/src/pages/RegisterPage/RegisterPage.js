@@ -18,6 +18,7 @@ const RegisterPage = () => {
     registerUser,
   );
   
+  
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>

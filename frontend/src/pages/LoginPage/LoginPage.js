@@ -51,20 +51,10 @@ const LoginPage = () => {
                 onChange={handleInputChange}
               />
             </label>
-            <label>
-              Supervisor:{" "}
-              <input
-                type="checkbox"
-                name="supervisor"
-                //handle change of input
-                value={formData.supervisor}
-                onChange={handleInputChange}
-              />
-            </label>
             {isServerError ? (
               <p className="error">Login failed, incorrect credentials!</p>
             ) : null}
-            <Link to="/registerEe">Click to register!</Link>
+            <Link to="/register">Click to register!</Link>
             <button>Login!</button>
           </form>
         </div>

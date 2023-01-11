@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(userToken);
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
-  const [isSupervisor, setIsSupervisor] = useState(false);
   const navigate = useNavigate();
 
   const registerUser = async (registerData) => {
@@ -42,9 +41,10 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);
-        navigate("/");
+        console.log(isServerError)
+        navigate("/registerEe");
       } else {
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
@@ -52,13 +52,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const loginUser = async (loginData) => {
-    setIsSupervisor(loginData.supervisor)
-    console.log(isSupervisor)
       try {
-        if (isSupervisor) {
-          navigate("/supervisor")
-        }
-        else {
         let response = await axios.post(`${BASE_URL}/login/`, loginData);
           if (response.status === 200) {
             localStorage.setItem("token", JSON.stringify(response.data.access));
@@ -71,7 +65,6 @@ export const AuthProvider = ({ children }) => {
           else {
             navigate("/registerEe");
             }
-        }
 
         } 
       catch (error) {

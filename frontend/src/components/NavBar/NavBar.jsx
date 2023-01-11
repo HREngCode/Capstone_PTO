@@ -12,12 +12,12 @@ const Navbar = () => {
     <a href="/">Home</a>
     <a href="/newtimeoffrequest">New Request</a>
     <div className="dropdown">
-      <button className="dropbtn">Dropdown
+      <button className="dropbtn">Tools
         <i className="fa fa-caret-down"></i>
       </button>
       <div className="dropdown-content">
         <a href="/supervisor">Supervisor</a>
-        <a href="#">Link 2</a>
+        <a href="#">Admin</a>
         <a href="#">Link 3</a>
       </div>
     </div>

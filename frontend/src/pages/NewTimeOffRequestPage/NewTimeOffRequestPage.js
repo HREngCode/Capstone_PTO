@@ -16,7 +16,7 @@ const NewTimeOffRequestPage = () => {
     const [dateRequested, setDateRequested] = useState('')
     const [hoursRequested, setHoursRequested] = useState('')
     const [ptoBalance, setPtoBalance] = useState('')
-    const [supervisorName, setSupervisorName] = useState('')
+    const [supervisorNumber, setSupervisorNumber] = useState('')
     const [approved, setApproved] = useState('')
 
     useEffect(() => {
@@ -34,13 +34,36 @@ const NewTimeOffRequestPage = () => {
             setDepartment(response.data.department); 
             setHireDate(response.data.hire_date); 
             setPtoBalance(response.data.pto_balance); 
-            setSupervisorName(response.data.supervisor.supervisor_name);
+            setSupervisorNumber(response.data.supervisor_number);
             setApproved("No"); 
             } catch (error) {
             console.log(error.response.data);
             }    
         };
         fetchEmployeeInfo();
+        
+        const fetchSupervisorInfo = async () => {
+            try {
+            let response = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number?${supervisorNumber}/`, {
+                headers: {
+                Authorization: "Bearer " + token,
+                },
+            });
+            console.log(response.data)
+            // setEmployeeId(response.data.id); 
+            // setEmployeeNumber(response.data.employee_number);             
+            // setEmployeeName(response.data.employee_first_name); 
+            // setDepartment(response.data.department); 
+            // setHireDate(response.data.hire_date); 
+            // setPtoBalance(response.data.pto_balance); 
+            // setSupervisorNumber(response.data.supervisor_number);
+            // setApproved("No"); 
+            } catch (error) {
+            console.log(error.response.data);
+            }    
+        };
+        fetchSupervisorInfo();
+        
     }, [token, user, employeeId]);        
 
     const addTimeOffRequest = async (newTimeOffRequest) => {
@@ -100,8 +123,8 @@ const NewTimeOffRequestPage = () => {
                         <input type="number" value={ptoBalance} onChange={(event) => setPtoBalance(event.target.value)}/>
                         </div>
                         <div className='newEntry'>
-                        <label>Supervisor Name: </label>
-                        <input value={supervisorName} onChange={(event) => setSupervisorName(event.target.value)}/>
+                        <label>Supervisor Number: </label>
+                        <input value={supervisorNumber} onChange={(event) => setSupervisorNumber(event.target.value)}/>
                         </div>
                         <div className='newEntry'>
                         <label>Date Requested Off: </label>

@@ -18,10 +18,12 @@ function setEmployeeObject(employee) {
     employee_first_name: employee.firstName,
     employee_last_name: employee.lastName,
     department: employee.department,
-    supervisor_id: employee.supervisorId,
+    supervisor_number: employee.supervisorNumber,
     hire_date: employee.hireDate,
     pto_balance: employee.ptoBalance,
     active: employee.active,
+    isSupervisor: employee.isSupervisor,
+    isAdmin: employee.isAdmin,
   }; 
 }
 
@@ -42,10 +44,12 @@ export const EmployeeProvider = ({ children }) => {
         employee_first_name: registerData.employee_first_name,
         employee_last_name: registerData.employee_last_name,
         department: registerData.department,
-        supervisor_id: registerData.supervisor_id,
+        supervisor_number: registerData.supervisor_number,
         hire_date: registerData.hire_date,
-        pto_balance: registerData.pto_Balance,
-        active: registerData.active
+        pto_balance: registerData.pto_balance,
+        active: registerData.active,
+        isSupervisor: registerData.isSupervisor,
+        isAdmin: registerData.isAdmin
       };
 
       let response = await axios.post(`${BASE_URL}/changes/`, finalData);

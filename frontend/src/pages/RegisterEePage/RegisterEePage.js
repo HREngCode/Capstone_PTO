@@ -5,6 +5,8 @@ import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterEePage = () => {
   const [ active, setActive ] = useState(false)
+  const [ supervisor, setSupervisor ] = useState(false)
+  const [ admin, setAdmin ] = useState(false)
   const { registerEmployee } = useContext(EmployeeContext);
   const { user } = useContext(AuthContext);
 
@@ -15,11 +17,13 @@ const RegisterEePage = () => {
     employee_first_name: "",
     employee_last_name: "",
     department: "",
-    supervisor_id: "",
+    supervisor_number: "",
     hire_date: "",
     pto_balance: "",
     //changed to State Variable
     active: active,
+    isSupervisor: supervisor,
+    isAdmin: admin,
   };
   console.log(defaultValues)
 
@@ -81,11 +85,11 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Supervisor Id:{" "}
+          Supervisor Number:{" "}
           <input
             type="number"
-            name="supervisor_id"
-            value={formData.supervisor_id}
+            name="supervisor_number"
+            value={formData.supervisor_number}
             onChange={handleInputChange}
           />
         </label>
@@ -115,6 +119,26 @@ const RegisterEePage = () => {
             name="active"
             //handle change of input
             value={formData.active}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Supervisor:{" "}
+          <input
+            type="checkbox"
+            name="isSupervisor"
+            //handle change of input
+            value={formData.isSupervisor}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label>
+          Admin:{" "}
+          <input
+            type="checkbox"
+            name="isAdmin"
+            //handle change of input
+            value={formData.isAdmin}
             onChange={handleInputChange}
           />
         </label>

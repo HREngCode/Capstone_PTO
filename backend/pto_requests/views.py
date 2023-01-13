@@ -45,6 +45,7 @@ def get_request_by_employee_number(request):
         pto_requests = pto_requests.order_by(sort_param)
     serializer = PtoRequestSerializer(pto_requests, many=True)
     return Response(serializer.data)
+    
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated]) 

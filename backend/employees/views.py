@@ -17,10 +17,39 @@ def employee_list(request):
         serializer = EmployeeSerializer(employees, many=True)
         return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_name_by_user_id(request, user):
+    employees = request.query_params.get(user)
+    employees = Employee.objects.all()
+    employees = employees.get(user_id=user)
+    serializer = EmployeeSerializer(employees)
+    print(employees)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_by_employee_number(request):
+def get_name_by_employee_number(request, user):
+    employees = request.query_params.get(user)
+    employees = Employee.objects.all()
+    employees = employees.get(employee_number=user)
+    serializer = EmployeeSerializer(employees)
+    print(employees)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_name_by_supervisor_number(request, user):
+    employees = request.query_params.get(user)
+    employees = Employee.objects.all()
+    employees = employees.get(supervisor_number=user)
+    serializer = EmployeeSerializer(employees)
+    print(employees)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_by_employee_param(request):
     employee_param = request.query_params.get('employee_number')
     sort_param = request.query_params.get('sort')
     employees = Employee.objects.all()
@@ -60,24 +89,4 @@ def employee_detail(request, pk):
     elif request.method == 'DELETE':
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-    
-@api_view(['GET'])
-@permission_classes([IsAuthenticated]) 
-def get_employee_by_supervisor(request, id):
-    employees = request.query_params.get(id)
-    queryset = Employee.objects.all()
-    queryset = queryset.filter(supervisor_id=id)
-    serializer = EmployeeSerializer(queryset, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_name_by_user_id(request, user):
-    employees = request.query_params.get(user)
-    employees = Employee.objects.all()
-    employees = employees.get(user_id=user)
-    serializer = EmployeeSerializer(employees)
-    return Response(serializer.data, status=status.HTTP_200_OK)
     

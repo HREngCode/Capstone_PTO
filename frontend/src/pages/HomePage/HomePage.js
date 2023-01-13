@@ -65,7 +65,7 @@ const HomePage = () => {
   return (
     <div><Navbar />
       <div className="container">
-        <h1>Home Page for {employeeUserId}!</h1>
+        <h1>Home Page for {employeeName}!</h1>
         <div>
           {ptoRequests &&
           ptoRequests.map((pto_request) => (

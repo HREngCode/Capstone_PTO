@@ -2,7 +2,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-// import jwtDecode from "jwt-decode";
 
 const EmployeeContext = createContext();
 
@@ -71,6 +70,10 @@ export const EmployeeProvider = ({ children }) => {
       console.log(error.message);
     }
   };
+
+  const getEmployeeInfo = async (registerData) => {
+    
+  }
 
   const contextData = {
     employee,

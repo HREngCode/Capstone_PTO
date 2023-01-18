@@ -28,7 +28,19 @@ const NewTimeOffRequestPage = () => {
                 headers: {
                 Authorization: "Bearer " + token,
                 },
-            });
+            })
+            
+                let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+                headers: {
+                Authorization: "Bearer " + token,
+                }, 
+                }
+            )
+            console.log("Frist call", response)
+            console.log("Second call", response2)
+            
+            
+            
             setEmployeeId(response.data.id); 
             setEmployeeNumber(response.data.employee_number);             
             setEmployeeName(response.data.employee_first_name); 
@@ -36,30 +48,14 @@ const NewTimeOffRequestPage = () => {
             setHireDate(response.data.hire_date); 
             setPtoBalance(response.data.pto_balance); 
             setSupervisorNumber(response.data.supervisor_number);
+            setSupervisorName(response2.data.employee_first_name); 
+            setSupervisorDepartment(response.data.department); 
             setApproved("No"); 
             } catch (error) {
             console.log(error.response.data);
             } 
         };
         fetchEmployeeInfo();
-       
-
-        const fetchSupervisorInfo = async () => {
-            try {
-            console.log(supervisorNumber) 
-            let response = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${supervisorNumber}/`, {
-                headers: {
-                Authorization: "Bearer " + token,
-                },
-            });   
-            setSupervisorName(response.data.employee_first_name); 
-            setSupervisorDepartment(response.data.department); 
-            setApproved("No"); 
-            } catch (error) {
-            console.log(error.response);
-            }    
-        };
-        fetchSupervisorInfo(supervisorNumber);   
     }, [token, user, employeeId]);        
 
     const addTimeOffRequest = async (newTimeOffRequest) => {

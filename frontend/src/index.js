@@ -5,15 +5,18 @@ import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import { EmployeeProvider } from "./context/EmployeeContext";
 import { EmployeeInfoProvider } from "./context/EmployeeInfoProvider";
+import { SupervisorInfoProvider} from "./context/SupervisorInfoProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
         <EmployeeProvider>
-          <EmployeeInfoProvider>
-            <App />
-          </EmployeeInfoProvider>
+          <SupervisorInfoProvider>
+            <EmployeeInfoProvider>
+              <App />
+            </EmployeeInfoProvider>
+          </SupervisorInfoProvider>
         </EmployeeProvider>
       </AuthProvider>
     </Router>

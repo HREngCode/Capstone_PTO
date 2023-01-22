@@ -21,7 +21,7 @@ import Footer from "./components/Footer/Footer";
 
 // Context Imports
 import { EmployeeInfoContext } from "./context/EmployeeInfoContext";
-import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
+// import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -29,27 +29,38 @@ import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   const [user, token] = useAuth();
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
-  // const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext)
+  const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
+  const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
+  // const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
   
   const fetchEmployeeInfo = async () => {
     try {
-      let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
+    let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
         headers: {
-          Authorization: "Bearer " + token,
+        Authorization: "Bearer " + token,
+        },
+    }
+    )
+    
+        let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+        headers: {
+        Authorization: "Bearer " + token,
         }, 
-      });console.log("Home Page Loaded",response.data)
-      setEmployeeInfo(response.data)
-      // setEmployeeName(response.data.employee_first_name); 
-      // setEmployeeId(response.data.id);
-      // setUserName(response.data.user_name);
-      // setEmployeeUserId(response.data.user.id); 
-      // setFirstName(response.data.employee_first_name);
-      // setLastName(response.data.employee_last_name);
+        }
+    );console.log("Home Page Loaded",response.data)
+    setEmployeeInfo(response.data);
+    setEmployeeId(response.data.id)
+    // setSupervisorInfo(response2.data)
+    setEmployeeName(response.data.employee_first_name); 
+    // setEmployeeId(response.data.id);
+    // setUserName(response.data.user_name);
+    // setEmployeeUserId(response.data.user.id); 
+    // setFirstName(response.data.employee_first_name);
+    // setLastName(response.data.employee_last_name);
     } catch (error) {
       console.log(error.message);
     }    
   };
-  console.log(employeeInfo)
 
   return (
     <div>
@@ -58,7 +69,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage fetchEmployeeInfo={fetchEmployeeInfo}/>
+              <HomePage fetchEmployeeInfo={fetchEmployeeInfo} />
               {/* {employee ? <HomePage /> : <Route path="/registerEe" element={<RegisterEePage />} /> } */}
             </PrivateRoute>
           }

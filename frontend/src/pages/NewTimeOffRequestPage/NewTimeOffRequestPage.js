@@ -28,7 +28,8 @@ const NewTimeOffRequestPage = () => {
                 headers: {
                 Authorization: "Bearer " + token,
                 },
-            })
+            }
+            )
             
                 let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
                 headers: {
@@ -36,7 +37,7 @@ const NewTimeOffRequestPage = () => {
                 }, 
                 }
             )
-            console.log("Frist call", response)
+            console.log("First call", response)
             console.log("Second call", response2)
             
             

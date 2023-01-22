@@ -10,10 +10,10 @@ const HomePage = (props) => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
-  const [employeeName, setEmployeeName] = useState();
-  const [employeeId, setEmployeeId] = useState();
+  const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
+  const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
   const [ptoRequests, setPtoRequests] = useState([]);
-  const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext)
+  const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const [employeeUserId, setEmployeeUserId] = useState();
   const [userName, setUserName] = useState();
   const [firstName, setFirstName] = useState();
@@ -24,8 +24,10 @@ const HomePage = (props) => {
 
    
     props.fetchEmployeeInfo();
+    // setFirstName(employeedetails.employee_first_name)
+    // console.log(firstName);
 
-    const fetchPtoRequestByEmployee = async () => {
+    const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
       try {
         let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
           headers: {
@@ -33,21 +35,21 @@ const HomePage = (props) => {
           },
         });
         setPtoRequests(response.data);
-        console.log(employeeId)
       } catch (error) {
         console.log(error.response);
       }    
     };
     fetchPtoRequestByEmployee();
 
-  }, [token, user, employeeId]);
+  }, [token, employeeId]);//optional array to make sure this only runs once
 
   const navigateToNewPtoRequest = () => {
     // 👇️ navigate to /new pto request
           navigate('/newtimeoffrequest');
   };
 
-
+  console.log(employeeInfo)
+  console.log(employeeId)
   return (
     <div><Navbar />
       <div className="container">

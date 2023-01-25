@@ -6,10 +6,12 @@ import useAuth from '../hooks/useAuth';
 import { EmployeeInfoContext } from "./EmployeeInfoContext";
 
 export const EmployeeInfoProvider = ({children}) => {
-    // const [user, token] = useAuth ()
+    const [user, token] = useAuth ()
     const [employeeInfo, setEmployeeInfo] = useState()
     const [employeeName, setEmployeeName] = useState()
     const [employeeId, setEmployeeId] = useState()
+    const [employeeNumber, setEmployeeNumber] = useState()
+    const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
 
     let value = {
         employeeInfo,
@@ -18,6 +20,10 @@ export const EmployeeInfoProvider = ({children}) => {
         setEmployeeId,
         employeeName,
         setEmployeeName,
+        employeeNumber, 
+        setEmployeeNumber,
+        employeeIsSupervisor, 
+        setEmployeeIsSupervisor
         // fetchEmployeeInfo,
     }
 

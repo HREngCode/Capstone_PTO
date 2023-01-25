@@ -3,7 +3,7 @@
 // General Imports
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import useAuth from "./hooks/useAuth";
 import axios from "axios";
 
@@ -21,47 +21,57 @@ import Footer from "./components/Footer/Footer";
 
 // Context Imports
 import { EmployeeInfoContext } from "./context/EmployeeInfoContext";
-// import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
+import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+// import SupervisorValid from "./components/SupervisorValid/SupervisorValid";
 
 function App() {
   const [user, token] = useAuth();
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
-  // const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
+  const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
+  const {employeeNumber, setEmployeeNumber} = useContext(EmployeeInfoContext);
+  const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
+  const {supervisorName, setSupervisorName} = useContext(SupervisorInfoContext);
+  const {supervisorNumber, setSupervisorNumber} = useContext(SupervisorInfoContext);
   
-  const fetchEmployeeInfo = async () => {
-    try {
-    let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
-        headers: {
-        Authorization: "Bearer " + token,
-        },
-    }
-    )
-    
-        let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
-        headers: {
-        Authorization: "Bearer " + token,
-        }, 
-        }
-    );console.log("Home Page Loaded",response.data)
-    setEmployeeInfo(response.data);
-    setEmployeeId(response.data.id)
-    // setSupervisorInfo(response2.data)
-    setEmployeeName(response.data.employee_first_name); 
-    // setEmployeeId(response.data.id);
-    // setUserName(response.data.user_name);
-    // setEmployeeUserId(response.data.user.id); 
-    // setFirstName(response.data.employee_first_name);
-    // setLastName(response.data.employee_last_name);
-    } catch (error) {
-      console.log(error.message);
-    }    
-  };
+  useEffect(() => {
+    const fetchEmployeeInfo = async () => {
+      try {
+      let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
+          headers: {
+          Authorization: "Bearer " + token,
+          },
+      })
+          let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+          headers: {
+          Authorization: "Bearer " + token,
+          }, 
+          }
+      );console.log("Home Page Loaded",response.data)
+      setEmployeeInfo(response.data);
+      setEmployeeId(response.data.id)
+      setEmployeeName(response.data.employee_first_name); 
+      setEmployeeNumber(response.data.employee_number);
+      setEmployeeIsSupervisor(response.data.isSupervisor);
+      // setUserName(response.data.user_name);
+      // setEmployeeUserId(response.data.user.id); 
+      // setFirstName(response.data.employee_first_name);
+      // setLastName(response.data.employee_last_name);
+      setSupervisorInfo(response2.data)
+      setSupervisorName(response2.data.employee_first_name)
+      setSupervisorNumber(response2.data.employee_number)
+      } catch (error) {
+        console.log(error.message);
+      }    
+    };
+    fetchEmployeeInfo();
+  }, [token, user]);
 
+  console.log(employeeIsSupervisor);
   return (
     <div>
       <Routes>
@@ -69,7 +79,7 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage fetchEmployeeInfo={fetchEmployeeInfo} />
+              <HomePage />
               {/* {employee ? <HomePage /> : <Route path="/registerEe" element={<RegisterEePage />} /> } */}
             </PrivateRoute>
           }
@@ -82,7 +92,7 @@ function App() {
       </Routes>
       <Footer />
     </div>
-  );
+  ); 
 }
 
 export default App;

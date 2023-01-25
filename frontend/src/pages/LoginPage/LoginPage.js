@@ -8,12 +8,7 @@ import Navbar from "../../components/NavBar/NavBar";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const [ supervisor, setSupervisor ] = useState(false)
-  const defaultValues = { username: "", password: "", supervisor:supervisor };
-
-  const handleChange = () => {
-    setSupervisor(current => !current);
-  };
+  const defaultValues = { username: "", password: "" };
 
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,

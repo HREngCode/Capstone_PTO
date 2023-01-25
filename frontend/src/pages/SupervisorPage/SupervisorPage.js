@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Navbar from "../../components/NavBar/NavBar";
-import {useNavigate} from 'react-router-dom';
-
+import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 
 const SupervisorPage = () => {
-
+    
     const [timeOffRequests, setTimeOffRequests] = useState('')
     const [user, token] = useAuth ()
+    // const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
 
     useEffect(() => {
         const fetchRequestInfo = async () => {
@@ -25,11 +25,14 @@ const SupervisorPage = () => {
             }    
         };
         fetchRequestInfo();
-    }, [token, user]);    
+    }, [token, user]); 
+    
+
 
     return ( 
         <div><Navbar />
             <div>
+                Supervisor Page
             <div>
                 {timeOffRequests &&
                 timeOffRequests.map((time_off_request) => (

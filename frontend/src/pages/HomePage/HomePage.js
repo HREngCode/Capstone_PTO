@@ -12,13 +12,13 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
-  const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
+  // const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
   const [ptoRequests, setPtoRequests] = useState([]);
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
-  const [employeeUserId, setEmployeeUserId] = useState();
-  const [userName, setUserName] = useState();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  // const [employeeUserId, setEmployeeUserId] = useState();
+  // const [userName, setUserName] = useState();
+  // const [firstName, setFirstName] = useState();
+  // const [lastName, setLastName] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {

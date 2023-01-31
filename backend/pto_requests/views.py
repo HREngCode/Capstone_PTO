@@ -33,18 +33,18 @@ def get_request_by_supervisor(request):
 
 
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_request_by_employee_number(request):
-    employee_param = request.query_params.get('employee')
-    sort_param = request.query_params.get('sort')
-    pto_requests = PtoRequest.objects.all()
-    if employee_param:
-        pto_requests = pto_requests.filter(employee__employee_number=employee_param)
-    if sort_param:
-        pto_requests = pto_requests.order_by(sort_param)
-    serializer = PtoRequestSerializer(pto_requests, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def get_request_by_employee_number(request):
+#     employee_param = request.query_params.get('employee')
+#     sort_param = request.query_params.get('sort')
+#     pto_requests = PtoRequest.objects.all()
+#     if employee_param:
+#         pto_requests = pto_requests.filter(employee__employee_number=employee_param)
+#     if sort_param:
+#         pto_requests = pto_requests.order_by(sort_param)
+#     serializer = PtoRequestSerializer(pto_requests, many=True)
+#     return Response(serializer.data)
     
 
 @api_view(['POST'])
@@ -97,3 +97,15 @@ def get_request_by_employee_id(request, id):
     pto_requests = pto_requests.filter(employee__id=id)
     serializer = PtoRequestSerializer(pto_requests, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_request_by_employee_number(request, id):
+    pto_requests = request.query_params.get(id)
+    pto_requests = PtoRequest.objects.all()
+    pto_requests = pto_requests.filter(employee__employee_number=id)
+    serializer = PtoRequestSerializer(pto_requests, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+

@@ -3,36 +3,61 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Navbar from "../../components/NavBar/NavBar";
 import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
+import { SupervisorInfoContext } from "../../context/SupervisorInfoContext";
 
-const SupervisorPage = () => {
+const SupervisorPage = (props) => {
     
     const [timeOffRequests, setTimeOffRequests] = useState('')
     const [user, token] = useAuth ()
     // const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
+    const [employees, setEmployees] = useState([]);
+    const [ reportNumber, setReportNumber] = useState('')
+    const {employeeNumber, setEmployeeNumber} = useContext(EmployeeInfoContext);
+    const {employeeSupervisorNumber, setEmployeeSupervisorNumber} = useContext(EmployeeInfoContext);
+    const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
+    const {supervisorName, setSupervisorName} = useContext(SupervisorInfoContext);
+    const {supervisorNumber, setSupervisorNumber} = useContext(SupervisorInfoContext);
 
-    useEffect(() => {
-        const fetchRequestInfo = async () => {
+    useEffect(() => { 
+        const fetchEmployeePtoRequestBySupervisor = async () => {
             try {
-            let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/supervisor?supervisor=2`, {
+            //calls current employee number. If it's a supervisor, the value returned will be the employees that 
+            //report to this number
+            let response = await axios.get(`http://127.0.0.1:8000/api/employees/supervisor/${employeeNumber}/`, { 
                 headers: {
                 Authorization: "Bearer " + token,
                 },
             });
-            setTimeOffRequests(response.data); 
+            let response2 = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee_number/1004/`, {
+                headers: {
+                Authorization: "Bearer " + token,
+                },
+            });
+            setEmployees(response.data);
+            setTimeOffRequests(response2.data) 
             console.log(response.data)
+            console.log(response2.data)
             } catch (error) {
-            console.log(error.response.data);
+            console.log(error.response);
             }    
         };
-        fetchRequestInfo();
-    }, [token, user]); 
-    
+        fetchEmployeePtoRequestBySupervisor() ;
 
+
+    }, [token, user, props]); 
 
     return ( 
         <div><Navbar />
             <div>
-                Supervisor Page
+                <h1>Supervisor Page!</h1>
+                <div>
+                {employees &&
+                employees.map((employee) => (
+                    <p key={employee.id}>
+                    {employee.employee_first_name} {employee.employee_number}
+                    </p>
+                ))}
+                </div>
             <div>
                 {timeOffRequests &&
                 timeOffRequests.map((time_off_request) => (

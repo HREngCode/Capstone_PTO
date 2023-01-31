@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import RegisterEePage from "./pages/RegisterEePage/RegisterEePage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 // Component Imports
 // import Navbar from "./components/NavBar/NavBar";
@@ -25,14 +26,15 @@ import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-// import SupervisorValid from "./components/SupervisorValid/SupervisorValid";
+import SupervisorValid from "./components/SupervisorValid/SupervisorValid";
 
 function App() {
   const [user, token] = useAuth();
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
-  const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
+  const {employeeSupervisorNumber, setEmployeeSupervisorNumber} = useContext(EmployeeInfoContext);
+  // const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
-  const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
+  // const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
   const {employeeNumber, setEmployeeNumber} = useContext(EmployeeInfoContext);
   const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
   const {supervisorName, setSupervisorName} = useContext(SupervisorInfoContext);
@@ -45,18 +47,20 @@ function App() {
           headers: {
           Authorization: "Bearer " + token,
           },
-      })
+      });
           let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
           headers: {
           Authorization: "Bearer " + token,
           }, 
           }
-      );console.log("Home Page Loaded",response.data)
+      );
+      console.log("Home Page Loaded",response.data)
       setEmployeeInfo(response.data);
+      setEmployeeSupervisorNumber(response.data.supervisor_number)
       setEmployeeId(response.data.id)
-      setEmployeeName(response.data.employee_first_name); 
+      // setEmployeeName(response.data.employee_first_name); 
       setEmployeeNumber(response.data.employee_number);
-      setEmployeeIsSupervisor(response.data.isSupervisor);
+      // setEmployeeIsSupervisor(response.data.isSupervisor);
       // setUserName(response.data.user_name);
       // setEmployeeUserId(response.data.user.id); 
       // setFirstName(response.data.employee_first_name);
@@ -71,7 +75,6 @@ function App() {
     fetchEmployeeInfo();
   }, [token, user]);
 
-  console.log(employeeIsSupervisor);
   return (
     <div>
       <Routes>
@@ -88,7 +91,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage />} />
-        <Route path="/supervisor" element={<SupervisorPage />} />
+        <Route path="/supervisor" element={<SupervisorPage SupervisorValid={SupervisorValid}/>} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
       <Footer />
     </div>

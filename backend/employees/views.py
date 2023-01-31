@@ -10,6 +10,7 @@ from .serializers import EmployeeSerializer
 # <<<<<<<<<<<<<<<<< EXAMPLE FOR STARTER CODE USE <<<<<<<<<<<<<<<<<
 
 
+# Get all employees
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def employee_list(request):
@@ -17,6 +18,8 @@ def employee_list(request):
         serializer = EmployeeSerializer(employees, many=True)
         return Response(serializer.data)
 
+
+# Get name by user id
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_name_by_user_id(request, user):
@@ -27,6 +30,8 @@ def get_name_by_user_id(request, user):
     print(employees)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+# Get name by employee number
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_name_by_employee_number(request, user):
@@ -37,16 +42,20 @@ def get_name_by_employee_number(request, user):
     print(employees)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+# Get by supervisor number
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_name_by_supervisor_number(request, user):
-    employees = request.query_params.get(user)
+def get_name_by_supervisor_number(request, id):
+    employees = request.query_params.get(id)
     employees = Employee.objects.all()
-    employees = employees.get(supervisor_number=user)
-    serializer = EmployeeSerializer(employees)
+    employees = employees.filter(supervisor_number=id)
+    serializer = EmployeeSerializer(employees, many=True)
     print(employees)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+# Get employee by parameters
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_by_employee_param(request):
@@ -61,6 +70,7 @@ def get_by_employee_param(request):
     return Response(serializer.data)
 
 
+# Create new Employee
 @api_view(['POST'])
 @permission_classes([AllowAny]) 
 def employee_create(request):
@@ -71,6 +81,7 @@ def employee_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+# Get, Update, or Delete Employee Detail
 @api_view(['GET', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticated]) 
 def employee_detail(request, pk):

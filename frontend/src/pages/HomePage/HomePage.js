@@ -1,9 +1,16 @@
+// General Imports
 import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import Navbar from "../../components/NavBar/NavBar";
-import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 import {useNavigate} from 'react-router-dom';
+
+// Component Imports
+import Navbar from "../../components/NavBar/NavBar";
+import DisplayRequests from "../../components/DisplayRequests/DisplayRequests";
+
+// Context Imports
+import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
+
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -12,7 +19,8 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
-  // const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
+  const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
+  const {employeeIsAdmin} = useContext(EmployeeInfoContext);
   const [ptoRequests, setPtoRequests] = useState([]);
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   // const [employeeUserId, setEmployeeUserId] = useState();
@@ -68,11 +76,10 @@ const HomePage = () => {
       <div className="container">
         <h1>Home Page for {employeeName}!</h1>
         <div>
+          {/* Javascript Map Function can generate multiple components from an array of data */}
           {ptoRequests &&
-          ptoRequests.map((pto_request) => (
-            <p key={pto_request.id}>
-            {pto_request.id} {pto_request.hours_requested}
-            </p>
+          ptoRequests.map((ptoRequest, index) => (
+          <DisplayRequests key={index} request={ptoRequest} />
           ))}
         </div>
         <div>

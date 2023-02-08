@@ -1,6 +1,9 @@
+//General Imports
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
+
+//Context Imports
 import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 
 const SupervisorValid = () => {

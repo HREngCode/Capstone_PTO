@@ -8,25 +8,28 @@ import { EmployeeInfoContext } from "./EmployeeInfoContext";
 export const EmployeeInfoProvider = ({children}) => {
     // const [user, token] = useAuth ()
     const [employeeInfo, setEmployeeInfo] = useState()
-    // const [employeeName, setEmployeeName] = useState()
+    const [employeeName, setEmployeeName] = useState()
     const [employeeId, setEmployeeId] = useState()
     const [employeeSupervisorNumber, setEmployeeSupervisorNumber] = useState()
     const [employeeNumber, setEmployeeNumber] = useState()
-    // const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
+    const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
+    const [employeeIsAdmin, setEmployeeIsAdmin] = useState()
 
     let value = {
         employeeInfo,
         setEmployeeInfo,
-        // employeeName,
-        // setEmployeeName,
+        employeeName,
+        setEmployeeName,
         employeeId,
         setEmployeeId,
         employeeSupervisorNumber,
         setEmployeeSupervisorNumber,
         employeeNumber, 
         setEmployeeNumber,
-        // employeeIsSupervisor, 
-        // setEmployeeIsSupervisor
+        employeeIsSupervisor, 
+        setEmployeeIsSupervisor,
+        employeeIsAdmin,
+        setEmployeeIsAdmin, 
         // fetchEmployeeInfo,
     }
 

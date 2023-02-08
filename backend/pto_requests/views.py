@@ -25,7 +25,7 @@ def get_request_by_supervisor(request):
     sort_param = request.query_params.get('sort')
     pto_requests = PtoRequest.objects.all()
     if supervisor_param:
-        pto_requests = pto_requests.filter(employee__supervisor=supervisor_param)
+        pto_requests = pto_requests.filter(employee__supervisor_number=supervisor_param)
     if sort_param:
         pto_requests = pto_requests.order_by(sort_param)
     serializer = PtoRequestSerializer(pto_requests, many=True)
@@ -58,7 +58,7 @@ def pto_request_create(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated]) 
+@permission_classes([AllowAny]) 
 def pto_request_detail(request, pk):
     pto_request = PtoRequest.objects.get(pk=pk)
     if request.method == 'GET':

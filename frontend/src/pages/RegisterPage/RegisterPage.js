@@ -3,6 +3,7 @@ import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {
+  
   const { registerUser } = useContext(AuthContext);
   
   const defaultValues = {
@@ -13,6 +14,7 @@ const RegisterPage = () => {
     lastName: "",
   };
   
+  //passing registerUser as a function and is considered the callback
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     defaultValues,
     registerUser,
@@ -21,7 +23,9 @@ const RegisterPage = () => {
   
   return (
     <div className="container">
-      <form className="form" onSubmit={handleSubmit}>
+
+      {/*handleSubmit is called from the hook up above*/}
+      <form className="form" onSubmit={handleSubmit}> 
         <label>
           Username:{" "}
           <input

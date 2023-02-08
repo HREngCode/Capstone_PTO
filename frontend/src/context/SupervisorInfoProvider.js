@@ -6,12 +6,15 @@ import { SupervisorInfoContext } from "./SupervisorInfoContext";
 
 export const SupervisorInfoProvider = ({children}) => {
     const [supervisorInfo, setSupervisorInfo] = useState()
+    const [employeeSupervisorInfo, setEmployeeSupervisorInfo] = useState()
     const [supervisorName, setSupervisorName] = useState()
     const [supervisorNumber, setSupervisorNumber] = useState()
 
     let value = {
         supervisorInfo,
         setSupervisorInfo,
+        employeeSupervisorInfo, 
+        setEmployeeSupervisorInfo,
         supervisorName,
         setSupervisorName,
         supervisorNumber,

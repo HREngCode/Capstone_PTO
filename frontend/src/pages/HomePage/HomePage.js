@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
 import DisplayRequests from "../../components/DisplayRequests/DisplayRequests";
+import DemoApp from "../../components/FullCalendar/DemoApp";
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
@@ -31,11 +32,6 @@ const HomePage = () => {
 
   useEffect(() => {
 
-   
-    // props.fetchEmployeeInfo();
-    // setFirstName(employeedetails.employee_first_name)
-    // console.log(firstName);
-
     const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
       try {
         let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
@@ -52,25 +48,6 @@ const HomePage = () => {
 
   }, [token, employeeId]);//optional array to make sure this only runs once
 
-  const navigateToNewPtoRequest = () => {
-    // 👇️ navigate to /new pto request
-          navigate('/newtimeoffrequest');
-  };
-
-//   const goToSupervisorPage = () => {
-
-//     if(employeeIsSupervisor){
-//         navigate("/supervisor")
-//     }
-//     else{
-//         // <Alert>You Do Not Have Access To This Screen</Alert>
-//         navigate("/")
-//     }
-//     return ( 
-//         console.log(employeeIsSupervisor)
-//      );
-// }
-
   return (
     <div><Navbar />
       <div className="container">
@@ -83,11 +60,8 @@ const HomePage = () => {
           ))}
         </div>
         <div>
-          <button onClick={navigateToNewPtoRequest}>New Time Off Request</button>
+            <DemoApp />
         </div>
-        {/* <div>
-          <button onClick={goToSupervisorPage}>Supervisor</button>
-        </div> */}
       </div>
     </div>
 

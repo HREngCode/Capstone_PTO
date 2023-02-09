@@ -32,19 +32,18 @@ def get_request_by_supervisor(request):
     return Response(serializer.data)
 
 
-
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def get_request_by_employee_number(request):
-#     employee_param = request.query_params.get('employee')
-#     sort_param = request.query_params.get('sort')
-#     pto_requests = PtoRequest.objects.all()
-#     if employee_param:
-#         pto_requests = pto_requests.filter(employee__employee_number=employee_param)
-#     if sort_param:
-#         pto_requests = pto_requests.order_by(sort_param)
-#     serializer = PtoRequestSerializer(pto_requests, many=True)
-#     return Response(serializer.data)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_request_by_employee_number(request):
+    employee_param = request.query_params.get('employee')
+    sort_param = request.query_params.get('sort')
+    pto_requests = PtoRequest.objects.all()
+    if employee_param:
+        pto_requests = pto_requests.filter(employee__employee_number=employee_param)
+    if sort_param:
+        pto_requests = pto_requests.order_by(sort_param)
+    serializer = PtoRequestSerializer(pto_requests, many=True)
+    return Response(serializer.data)
     
 
 @api_view(['POST'])
@@ -76,6 +75,7 @@ def pto_request_detail(request, pk):
         pto_request.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 # @api_view(['GET'])
 # @permission_classes([AllowAny])
 # def get_request_by_employee_id(request):
@@ -89,6 +89,7 @@ def pto_request_detail(request, pk):
 #     serializer = PtoRequestSerializer(pto_requests, many=True)
 #     return Response(serializer.data)
 
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_request_by_employee_id(request, id):
@@ -97,6 +98,17 @@ def get_request_by_employee_id(request, id):
     pto_requests = pto_requests.filter(employee__id=id)
     serializer = PtoRequestSerializer(pto_requests, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_request_by_id(request, id):
+    pto_requests = request.query_params.get(id)
+    pto_requests = PtoRequest.objects.all()
+    pto_requests = pto_requests.get(id=id)
+    serializer = PtoRequestSerializer(pto_requests)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])

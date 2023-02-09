@@ -1,13 +1,21 @@
+//General Imports
 import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import Navbar from "../../components/NavBar/NavBar";
-import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 import {useNavigate} from 'react-router-dom';
+
+//Component Imports
+import Navbar from "../../components/NavBar/NavBar";
+import DemoApp from "../../components/FullCalendar/DemoApp";
+
+//Context Imports
+import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
+
 
 const AdminPage = () => {
 
     const [user, token] = useAuth ()
+    const {employeeIsAdmin, setEmployeeIsAdmin} = useContext(EmployeeInfoContext);
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
@@ -30,15 +38,20 @@ const AdminPage = () => {
 
     return ( 
         <div><Navbar />
-            <h1>This is the Admin Page</h1>
-                <div>
-                {employees &&
-                employees.map((employee) => (
+            <div>{employeeIsAdmin? 
+                (<div>
+                    <h1>Admin Page!</h1>
+                    {employees &&
+                    employees.map((employee) => (
                     <p key={employee.id}>
                     {employee.employee_first_name} {employee.employee_number}
                     </p>
-                ))}
-                </div>
+                    ))}
+                    <div>
+                        <DemoApp />
+                    </div>
+                </div>) : (<div>You Do Not Have Admin Access</div>) }
+            </div>
         </div>
      );
 }

@@ -1,8 +1,15 @@
+//General Imports
 import React, { useState, useEffect } from 'react';
-import Navbar from "../../components/NavBar/NavBar";
 import axios from 'axios';
-import useAuth from '../../hooks/useAuth';
 import {useNavigate} from "react-router-dom"
+
+//Component Imports
+import Navbar from "../../components/NavBar/NavBar";
+import DemoApp from '../../components/FullCalendar/DemoApp';
+
+//Hooks Imports
+import useAuth from '../../hooks/useAuth';
+
 
 const NewTimeOffRequestPage = () => {
     // setting up hooks a good place to start
@@ -135,6 +142,9 @@ const NewTimeOffRequestPage = () => {
                         <button type='submit'>Submit</button>
                         </div>
                     </form>
+                </div>
+                <div>
+                    <DemoApp />
                 </div>
             </div>
         );

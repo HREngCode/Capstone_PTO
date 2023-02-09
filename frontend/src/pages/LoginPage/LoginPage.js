@@ -1,8 +1,17 @@
+//General Imports
 import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/AuthContext";
-import useCustomForm from "../../hooks/useCustomForm";
 import { Link } from "react-router-dom";
+
+//Context Imports
+import AuthContext from "../../context/AuthContext";
+
+//Hooks Imports
+import useCustomForm from "../../hooks/useCustomForm";
+
+//Pages Imports
 import "./LoginPage.css";
+
+//Components Imports
 import Header from "../../components/Header/Header";
 import Navbar from "../../components/NavBar/NavBar";
 

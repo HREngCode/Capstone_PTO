@@ -1,5 +1,10 @@
+//General Imports
 import React, { useState, useContext } from "react";
+
+//Context Imports
 import AuthContext from "../../context/AuthContext";
+
+//Hooks Imports
 import useCustomForm from "../../hooks/useCustomForm";
 
 const RegisterPage = () => {

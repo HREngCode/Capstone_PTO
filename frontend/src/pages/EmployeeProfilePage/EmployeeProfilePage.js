@@ -5,25 +5,19 @@ import axios from "axios";
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
-import DisplayEmployeeInfo from '../../components/DisplayEmployeeInfo/DisplayEmployeeInfo';
-// import { EmployeeInfoContext } from '../../context/EmployeeInfoContext';
 
 const EmployeeProfilePage = () => {
     // setting up hooks a good place to start
     const [user, token] = useAuth ()
     const [employeeInfo, setEmployeeInfo] = useState();
-    const [employeeName, setEmployeeName] = useState()
-    const [employeeId, setEmployeeId] = useState()
-    const [employeeSupervisorNumber, setEmployeeSupervisorNumber] = useState()
-    const [employeeNumber, setEmployeeNumber] = useState()
-    const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
-    const [employeeIsAdmin, setEmployeeIsAdmin] = useState()
 
     
     useEffect(() => {
         fetchEmployeeInfo();
+        //set up console.log in side of function or useEffect
+        console.log("EE Profile Page", employeeInfo)  
     }, []);  
-    console.log("EE Profile Page", employeeInfo)   
+ 
     
     async function fetchEmployeeInfo(){
         const response = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/1001/`, {
@@ -32,22 +26,21 @@ const EmployeeProfilePage = () => {
             },
         }
         )
-        setEmployeeInfo(response.data); 
-        setEmployeeId(response.data.id);
-        setEmployeeName(response.data.employee_first_name);
-        setEmployeeNumber(response.data.employee_number);
-        setEmployeeSupervisorNumber(response.data.supervisor_number)        
+        setEmployeeInfo(response.data);    
     };
     
     return (
         <div><Navbar />
-        <h1>This is the Employee Profile Page for !</h1>
-        <div>
-            <p>Id: {employeeId}</p>
-            <p>First Name: {employeeName}</p>
-            <p>Employee Number: {employeeNumber}</p>
-            <p>Supervisor: {employeeSupervisorNumber}</p> 
+        <div>{employeeInfo? 
+            (<div>
+            <h1>This is the Employee Profile Page for  {employeeInfo.employee_first_name} !</h1>
+            <p>Id: {employeeInfo.id}</p>
+            <p>First Name: {employeeInfo.employee_first_name}</p>
+            <p>Employee Number: {employeeInfo.employee_number}</p>
+            <p>Supervisor ID: {employeeInfo.supervisor_number}</p> 
             {/* <p>Admin: {admin}</p>  */}
+            </div>) : (<div>No Data Exists For This Employee</div>) }
+
         </div>
         </div> 
      );

@@ -43,39 +43,39 @@ function App() {
   // const {supervisorNumber, setSupervisorNumber} = useContext(SupervisorInfoContext);
   
   useEffect(() => {
-    // const fetchEmployeeInfo = async () => {
-    //   // try {
-    //   let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
-    //       headers: {
-    //       Authorization: "Bearer " + token,
-    //       },
-    //   });
-    //     let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
-    //       headers: {
-    //       Authorization: "Bearer " + token,
-    //       }, 
-    //       }
-    //   );
-    //   console.log("Home Page Loaded",response.data);
-    //   console.log("Supervisor Info Loaded",response2.data);
-    //   setEmployeeInfo(response.data);
-    //   setEmployeeSupervisorNumber(response.data.supervisor_number);
-    //   setEmployeeId(response.data.id);
-    //   setEmployeeName(response.data.employee_first_name); 
-    //   setEmployeeNumber(response.data.employee_number);
-    //   setEmployeeIsSupervisor(response.data.isSupervisor);
-    //   setEmployeeIsAdmin(response.data.isAdmin);
-    //   // setUserName(response.data.user_name);
-    //   // setEmployeeUserId(response.data.user.id); 
-    //   // setLastName(response.data.employee_last_name);
-    //   setEmployeeSupervisorInfo(response2.data);
-    //   // setSupervisorName(response2.data.employee_first_name);
-    //   // setSupervisorNumber(response2.data.employee_number);
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }    
-    // };
-    // fetchEmployeeInfo();
+    const fetchEmployeeInfo = async () => {
+      try {
+      let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
+          headers: {
+          Authorization: "Bearer " + token,
+          },
+      });
+        let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+          headers: {
+          Authorization: "Bearer " + token,
+          }, 
+          }
+      );
+      console.log("Home Page Loaded",response.data);
+      console.log("Supervisor Info Loaded",response2.data);
+      setEmployeeInfo(response.data);
+      setEmployeeSupervisorNumber(response.data.supervisor_number);
+      setEmployeeId(response.data.id);
+      setEmployeeName(response.data.employee_first_name); 
+      setEmployeeNumber(response.data.employee_number);
+      setEmployeeIsSupervisor(response.data.isSupervisor);
+      setEmployeeIsAdmin(response.data.isAdmin);
+      // setUserName(response.data.user_name);
+      // setEmployeeUserId(response.data.user.id); 
+      // setLastName(response.data.employee_last_name);
+      setEmployeeSupervisorInfo(response2.data);
+      // setSupervisorName(response2.data.employee_first_name);
+      // setSupervisorNumber(response2.data.employee_number);
+      } catch (error) {
+        console.log(error.message);
+      }    
+    };
+    fetchEmployeeInfo();
   }, [token, user]);
 
   return (

@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="dropdown-content">
         <a href="/supervisor">Supervisor</a>
         <a href="/admin">Admin</a>
-        <a href="#">Link 3</a>
+        {/* <a href="#">Link 3</a> */}
       </div>
     </div>
       <div>

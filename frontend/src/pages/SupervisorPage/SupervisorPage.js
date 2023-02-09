@@ -1,18 +1,25 @@
+//General Imports
 import React, { useEffect, useState, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+
+//Component Imports
 import Navbar from "../../components/NavBar/NavBar";
+import DemoApp from "../../components/FullCalendar/DemoApp";
 import DisplayRequests from "../../components/DisplayRequests/DisplayRequests";
 import DisplayEmployeeBySuper from "../../components/DisplayEmployeeBySuper/DisplayEmployeeBySuper";
+
+//Context Imports
 import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 import { SupervisorInfoContext } from "../../context/SupervisorInfoContext";
 import { RequestInfoContext } from "../../context/RequestInfoContext";
+
 
 const SupervisorPage = (props) => {
     
     const [ptoRequests, setPtoRequests] = useState(RequestInfoContext);
     const [user, token] = useAuth ()
-    // const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
+    const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
     const [employees, setEmployees] = useState([]);
     const [reportNumber, setReportNumber] = useState('')
     const {employeeNumber, setEmployeeNumber} = useContext(EmployeeInfoContext);
@@ -26,7 +33,7 @@ const SupervisorPage = (props) => {
             try {
             //calls current employee number. If it's a supervisor, the value returned will be the employees that 
             //report to this number
-            let response = await axios.get(`http://127.0.0.1:8000/api/employees/supervisor/${employeeNumber}/`, { 
+            let response = await axios.get(`http://127.0.0.1:8000/api/employees/supervisor/${employeeSupervisorNumber}/`, { 
                 headers: {
                 Authorization: "Bearer " + token,
                 },
@@ -52,12 +59,17 @@ const SupervisorPage = (props) => {
     return ( 
         <div><Navbar />
             <div>
-                <h1>Supervisor Page!</h1>
-                <div>
-                {employees &&
-                employees.map((employee, index) => (
-                <DisplayEmployeeBySuper key={index} employee={employee} />
-                ))}
+                <div>{employeeIsSupervisor? 
+                    (<div>
+                        <h1>Supervisor Page!</h1>
+                        {employees &&
+                        employees.map((employee, index) => (
+                        <DisplayEmployeeBySuper key={index} employee={employee} />
+                    ))}
+                        <div>
+                            <DemoApp />
+                        </div>
+                    </div>) : (<div>You Do Not Have Supervisor Access</div>) }
                 </div>
             {/* <div>
                 {ptoRequests &&

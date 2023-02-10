@@ -19,7 +19,6 @@ import RegisterEePage from "./pages/RegisterEePage/RegisterEePage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 
 // Component Imports
-// import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 
 // Context Imports
@@ -31,6 +30,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   const [user, token] = useAuth();
+  const {employeeUserId, setEmployeeUserId} = useContext(EmployeeInfoContext);
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const {employeeSupervisorNumber, setEmployeeSupervisorNumber} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
@@ -39,17 +39,17 @@ function App() {
   const {employeeIsAdmin, setEmployeeIsAdmin} = useContext(EmployeeInfoContext);
   const {employeeNumber, setEmployeeNumber} = useContext(EmployeeInfoContext);
   const {employeeSupervisorInfo, setEmployeeSupervisorInfo} = useContext(SupervisorInfoContext);
-  // const {supervisorName, setSupervisorName} = useContext(SupervisorInfoContext);
-  // const {supervisorNumber, setSupervisorNumber} = useContext(SupervisorInfoContext);
   
   useEffect(() => {
     const fetchEmployeeInfo = async () => {
       try {
+      //Gets employee information from the user id
       let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
           headers: {
           Authorization: "Bearer " + token,
           },
       });
+      //Gets employee supervisor information
         let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
           headers: {
           Authorization: "Bearer " + token,
@@ -58,19 +58,15 @@ function App() {
       );
       console.log("Home Page Loaded",response.data);
       console.log("Supervisor Info Loaded",response2.data);
+      setEmployeeUserId(response.data.user.id); 
       setEmployeeInfo(response.data);
       setEmployeeSupervisorNumber(response.data.supervisor_number);
-      setEmployeeId(response.data.id);
       setEmployeeName(response.data.employee_first_name); 
-      setEmployeeNumber(response.data.employee_number);
+      setEmployeeId(response.data.id);
       setEmployeeIsSupervisor(response.data.isSupervisor);
       setEmployeeIsAdmin(response.data.isAdmin);
-      // setUserName(response.data.user_name);
-      // setEmployeeUserId(response.data.user.id); 
-      // setLastName(response.data.employee_last_name);
+      setEmployeeNumber(response.data.employee_number);
       setEmployeeSupervisorInfo(response2.data);
-      // setSupervisorName(response2.data.employee_first_name);
-      // setSupervisorNumber(response2.data.employee_number);
       } catch (error) {
         console.log(error.message);
       }    

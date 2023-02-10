@@ -40,7 +40,6 @@ const EmployeeProfilePage = () => {
             <p>Supervisor ID: {employeeInfo.supervisor_number}</p> 
             {/* <p>Admin: {admin}</p>  */}
             </div>) : (<div>No Data Exists For This Employee</div>) }
-
         </div>
         </div> 
      );

@@ -7,6 +7,7 @@ import { EmployeeInfoContext } from "./EmployeeInfoContext";
 
 export const EmployeeInfoProvider = ({children}) => {
     // const [user, token] = useAuth ()
+    const [employeeUserId, setEmployeeUserId] = useState()
     const [employeeInfo, setEmployeeInfo] = useState()
     const [employeeName, setEmployeeName] = useState()
     const [employeeId, setEmployeeId] = useState()
@@ -16,6 +17,8 @@ export const EmployeeInfoProvider = ({children}) => {
     const [employeeIsAdmin, setEmployeeIsAdmin] = useState()
 
     let value = {
+        employeeUserId,
+        setEmployeeUserId,
         employeeInfo,
         setEmployeeInfo,
         employeeName,

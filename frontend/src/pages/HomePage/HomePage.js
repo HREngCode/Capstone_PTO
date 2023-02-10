@@ -23,11 +23,6 @@ const HomePage = () => {
   const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
   const {employeeIsAdmin} = useContext(EmployeeInfoContext);
   const [ptoRequests, setPtoRequests] = useState([]);
-  const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
-  // const [employeeUserId, setEmployeeUserId] = useState();
-  // const [userName, setUserName] = useState();
-  // const [firstName, setFirstName] = useState();
-  // const [lastName, setLastName] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {

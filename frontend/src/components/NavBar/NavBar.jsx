@@ -1,7 +1,12 @@
+//General Imports
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+
+//Context Imports
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+
+// CSS Imports
 import "./NavBar.css";
 
 const Navbar = () => {

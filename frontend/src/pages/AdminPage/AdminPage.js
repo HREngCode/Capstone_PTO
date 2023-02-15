@@ -17,6 +17,7 @@ const AdminPage = () => {
     const [user, token] = useAuth ()
     const {employeeIsAdmin, setEmployeeIsAdmin} = useContext(EmployeeInfoContext);
     const [employees, setEmployees] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -45,7 +46,8 @@ const AdminPage = () => {
                     employees.map((employee) => (
                     <p key={employee.id}>
                     {employee.employee_first_name} {employee.employee_number}
-                    </p>
+                    <button onClick={() => navigate("/employeeprofile")}>Edit</button>
+                    </p>    
                     ))}
                     <div>
                         <DemoApp />

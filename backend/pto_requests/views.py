@@ -119,5 +119,14 @@ def get_request_by_employee_number(request, id):
     serializer = PtoRequestSerializer(pto_requests, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_request_by_supervisor_number(request, id):
+    pto_requests = request.query_params.get(id)
+    pto_requests = PtoRequest.objects.all()
+    pto_requests = pto_requests.filter(employee__supervisor_number=id)
+    serializer = PtoRequestSerializer(pto_requests, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 

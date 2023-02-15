@@ -1,22 +1,22 @@
 //General Imports
 import React, { useEffect, useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
 import DemoApp from "../../components/FullCalendar/DemoApp";
-import DisplayEmployeeBySuper from "../../components/DisplayEmployeeBySuper/DisplayEmployeeBySuper";
+import DisplayRequests from "../../components/DisplayRequests/DisplayRequests";
 
 //Context Imports
 import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
 import { SupervisorInfoContext } from "../../context/SupervisorInfoContext";
-import { RequestInfoContext } from "../../context/RequestInfoContext";
+
 
 
 const SupervisorPage = (props) => {
     
-    const [ptoRequests, setPtoRequests] = useState(RequestInfoContext);
     const [user, token] = useAuth ()
     const {employeeIsSupervisor, setEmployeeIsSupervisor} = useContext(EmployeeInfoContext);
     const [employees, setEmployees] = useState([]);
@@ -26,56 +26,44 @@ const SupervisorPage = (props) => {
     const {supervisorInfo, setSupervisorInfo} = useContext(SupervisorInfoContext);
     const {supervisorName, setSupervisorName} = useContext(SupervisorInfoContext);
     const {supervisorNumber, setSupervisorNumber} = useContext(SupervisorInfoContext);
+    const [ptoRequests, setPtoRequests] = useState([]);
 
     useEffect(() => { 
-        const fetchEmployeesBySupervisor = async () => {
+        const fetchRequestBySupervisor = async () => {
             try {
             //calls current employee number. If it's a supervisor, the value returned will be the employees that 
             //report to this number
-            let response = await axios.get(`http://127.0.0.1:8000/api/employees/supervisor/${employeeSupervisorNumber}/`, { 
+            let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/supervisor/${employeeNumber}/`, { 
                 headers: {
                 Authorization: "Bearer " + token,
                 },
             });
-            // let response2 = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee_number/${response.data.}/`, {
-            //     headers: {
-            //     Authorization: "Bearer " + token,
-            //     },
-            // });
-            setEmployees(response.data);
-            // setPtoRequests(response2.data) 
-            console.log(response.data)
-            // console.log(response2.data)
+            setPtoRequests(response.data);
+            console.log(ptoRequests)
             } catch (error) {
             console.log(error.response);
             }    
-        };
-        fetchEmployeesBySupervisor() ;
+        }; 
+        fetchRequestBySupervisor() ;
 
 
-    }, [token, user, employeeNumber, props]); 
+    }, [token, user, employeeNumber]); 
 
     return ( 
         <div><Navbar />
             <div>
-                <div>{employeeIsSupervisor? 
-                    (<div>
+                <div>
                         <h1>Supervisor Page!</h1>
-                        {employees &&
-                        employees.map((employee, index) => (
-                        <DisplayEmployeeBySuper key={index} employee={employee} />
+                        {ptoRequests &&
+                        ptoRequests.map((ptoRequest) => (
+                        <li key={ptoRequest.id}>
+                            <Link to={`/timeoffrequest/${ptoRequest.id}`} >{ptoRequest.id}</Link> 
+                        </li>
                     ))}
                         <div>
                             <DemoApp />
                         </div>
-                    </div>) : (<div>You Do Not Have Supervisor Access</div>) }
                 </div>
-            {/* <div>
-                {ptoRequests &&
-                ptoRequests.map((ptoRequest, index) => (
-                <DisplayRequests key={index} request={ptoRequest} />
-                ))}
-            </div> */}
             {/* <div className='newEntry'>
                 <label>Employee Number: </label>
                 <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>

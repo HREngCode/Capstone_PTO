@@ -1,5 +1,6 @@
 //General Imports
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ const EmployeeProfilePage = () => {
     // setting up hooks a good place to start
     const [user, token] = useAuth ()
     const [employeeInfo, setEmployeeInfo] = useState();
+    const navigate = useNavigate();
 
     
     useEffect(() => {
@@ -41,6 +43,14 @@ const EmployeeProfilePage = () => {
             {/* <p>Admin: {admin}</p>  */}
             </div>) : (<div>No Data Exists For This Employee</div>) }
         </div>
+            <div>
+                <button onClick={function handleClick() {
+                alert('You saved me!');
+                }}>Save</button>
+            </div>
+            <div>
+                <button onClick={() => navigate("/admin")}>Cancel</button>
+            </div>
         </div> 
      );
 }

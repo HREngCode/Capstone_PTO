@@ -45,16 +45,16 @@ function App() {
       try {
       //Gets employee information from the user id
       let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
-          headers: {
-          Authorization: "Bearer " + token,
-          },
+        headers: {
+        Authorization: "Bearer " + token,
+        },
       });
       //Gets employee supervisor information
-        let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
-          headers: {
-          Authorization: "Bearer " + token,
-          }, 
-          }
+      let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+        headers: {
+        Authorization: "Bearer " + token,
+        }, 
+        }
       );
       console.log("Home Page Loaded",response.data);
       console.log("Supervisor Info Loaded",response2.data);
@@ -72,7 +72,7 @@ function App() {
       }    
     };
     fetchEmployeeInfo();
-  }, [token, user]);
+  }, []);
 
   return (
     <div>
@@ -90,8 +90,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage />} />
-        <Route path="/employeeprofile" element={<EmployeeProfilePage />} />
-        <Route path="/timeoffrequest" element={<TimeOffRequestDataPage />} />
+        {/*Employee Profile & Time Off Reqwuest Page using a Param */}
+        <Route path="/employeeprofile/:employeeId" element={<EmployeeProfilePage />} />
+        <Route path="/timeoffrequest/:ptoRequestId" element={<TimeOffRequestDataPage />} />
         <Route path="/supervisor" element={<SupervisorPage />} />
         <Route path="/admin" element={<AdminPage />} />
       </Routes>

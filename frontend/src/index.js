@@ -1,11 +1,15 @@
+//General Imports
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router } from "react-router-dom";
+
+//Context Imports
 import { EmployeeProvider } from "./context/EmployeeContext";
 import { EmployeeInfoProvider } from "./context/EmployeeInfoProvider";
 import { SupervisorInfoProvider} from "./context/SupervisorInfoProvider";
+import { RequestInfoProvider } from "./context/RequestInfoProvider";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +18,9 @@ ReactDOM.render(
         <EmployeeProvider>
           <SupervisorInfoProvider>
             <EmployeeInfoProvider>
-              <App />
+              <RequestInfoProvider>
+                <App />
+              </RequestInfoProvider>
             </EmployeeInfoProvider>
           </SupervisorInfoProvider>
         </EmployeeProvider>

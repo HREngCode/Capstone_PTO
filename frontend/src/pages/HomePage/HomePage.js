@@ -18,12 +18,12 @@ const HomePage = () => {
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
+  const navigate = useNavigate();
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
   const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
   const {employeeIsAdmin} = useContext(EmployeeInfoContext);
   const [ptoRequests, setPtoRequests] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -38,10 +38,14 @@ const HomePage = () => {
       } catch (error) {
         console.log(error.response);
       }    
-    };
+    }; console.log("Home Page Requests", ptoRequests)
     fetchPtoRequestByEmployee();
 
   }, [token, employeeId]);//optional array to make sure this only runs once
+
+  const handleClick = (ptoRequest) => {
+    navigate(``)
+  }
 
   return (
     <div><Navbar />

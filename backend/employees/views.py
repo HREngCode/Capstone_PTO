@@ -83,7 +83,7 @@ def employee_create(request):
 
 # Get, Update, or Delete Employee Detail
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([IsAuthenticated]) 
+@permission_classes([AllowAny]) 
 def employee_detail(request, pk):
     employee = Employee.objects.get(pk=pk)
     if request.method == 'GET':

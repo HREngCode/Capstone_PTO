@@ -1,58 +1,58 @@
 //General Imports
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+//Hooks Import
+import useAuth from "../../hooks/useAuth";
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
 
 const EmployeeProfilePage = () => {
-    // setting up hooks a good place to start
-    const [user, token] = useAuth ()
-    const [employeeInfo, setEmployeeInfo] = useState();
+    const [user, token] = useAuth ();
+    const [employee, setEmployee] = useState();
+    const [employeeName, setEmployeeName] = useState();
+    const {employeeId} = useParams();
     const navigate = useNavigate();
 
-    
     useEffect(() => {
-        fetchEmployeeInfo();
-        //set up console.log in side of function or useEffect
-        console.log("EE Profile Page", employeeInfo)  
-    }, []);  
- 
-    
-    async function fetchEmployeeInfo(){
-        const response = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/1001/`, {
-            headers: {
-            Authorization: "Bearer " + token,
-            },
+        const fetchEmployee = async () => {
+            try {
+                let response = await axios.get(
+                    `http://127.0.0.1:8000/api/employees/${employeeId}/`
+                )
+                setEmployee(response.data);
+                    console.log(employee)
+            } catch (error) {
+                console.log(error)
+            }
         }
-        )
-        setEmployeeInfo(response.data);    
-    };
-    
-    return (
-        <div><Navbar />
-        <div>{employeeInfo? 
-            (<div>
-            <h1>This is the Employee Profile Page for  {employeeInfo.employee_first_name} !</h1>
-            <p>Id: {employeeInfo.id}</p>
-            <p>First Name: {employeeInfo.employee_first_name}</p>
-            <p>Employee Number: {employeeInfo.employee_number}</p>
-            <p>Supervisor ID: {employeeInfo.supervisor_number}</p> 
-            {/* <p>Admin: {admin}</p>  */}
-            </div>) : (<div>No Data Exists For This Employee</div>) }
+        fetchEmployee()
+    }, [])
+
+    const handleUpdate = async(e) => {
+        e.preventDefault();
+        let data = {
+            employee_last_name: "James"
+        }
+        const response2 = await axios.put("http://127.0.0.1:8000/api/employees/29/", data);
+        console.log("response", response2)
+
+    }
+   
+
+  return (
+    <div>
+        <Navbar />
+        <h1>This is the Employee Profile Page</h1>
+        <div>
+            <button onClick={handleUpdate}>Update</button>
         </div>
-            <div>
-                <button onClick={function handleClick() {
-                alert('You saved me!');
-                }}>Save</button>
-            </div>
-            <div>
-                <button onClick={() => navigate("/admin")}>Cancel</button>
-            </div>
-        </div> 
-     );
-}
+    </div>
+
+
+  ); 
+};
  
 export default EmployeeProfilePage;

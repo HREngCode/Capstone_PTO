@@ -1,6 +1,6 @@
 //General Imports
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 //Hooks Import
@@ -31,8 +31,9 @@ const TimeOffRequestDataPage = () => {
             fetchRequest()
 
         }, [])
+        
     return (
-        <div>
+        <div><Navbar />
            <h1>Request Details {ptoRequestId}</h1> 
         </div>
     

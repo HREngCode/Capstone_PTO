@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
@@ -37,6 +37,10 @@ const AdminPage = () => {
     
     }, [token]);//optional array to make sure this only runs once    
 
+    const handleClick = (employee) => {
+        navigate(`/employeeprofile/${employee.id}/`);
+      }
+
     return ( 
         <div><Navbar />
             <div>{employeeIsAdmin? 
@@ -44,10 +48,11 @@ const AdminPage = () => {
                     <h1>Admin Page!</h1>
                     {employees &&
                     employees.map((employee) => (
-                    <p key={employee.id}>
-                    {employee.employee_first_name} {employee.employee_number}
-                    <button onClick={() => navigate("/employeeprofile")}>Edit</button>
-                    </p>    
+                    <li key={employee.id}>
+                        {employee.employee_first_name}
+                        <button onClick={() => handleClick(employee)}>Edit</button>
+                    {/* <Link to={`/employeeprofile/${employee.id}`} >{employee.employee_first_name} {employee.employee_number}</Link>  */}
+                    </li>    
                     ))}
                     <div>
                         <DemoApp />

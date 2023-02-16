@@ -30,7 +30,7 @@ const RegisterEePage = () => {
     isSupervisor: supervisor,
     isAdmin: admin,
   };
-  console.log(defaultValues)
+
 
   const handleChange = () => {
     setActive(current => !current);

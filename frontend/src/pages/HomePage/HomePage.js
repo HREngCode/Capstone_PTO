@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link } from 'react-router-dom';
 
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
@@ -19,11 +19,11 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const navigate = useNavigate();
+  const [ptoRequests, setPtoRequests] = useState('');
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
   const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
   const {employeeIsAdmin} = useContext(EmployeeInfoContext);
-  const [ptoRequests, setPtoRequests] = useState([]);
 
   useEffect(() => {
 
@@ -35,16 +35,17 @@ const HomePage = () => {
           },
         });
         setPtoRequests(response.data);
+        console.log(response.data)
       } catch (error) {
         console.log(error.response);
       }    
-    }; console.log("Home Page Requests", ptoRequests)
+    }; 
     fetchPtoRequestByEmployee();
 
   }, [token, employeeId]);//optional array to make sure this only runs once
 
   const handleClick = (ptoRequest) => {
-    navigate(``)
+    navigate(`/timeoffrequest/${ptoRequest.id}`);
   }
 
   return (
@@ -54,8 +55,12 @@ const HomePage = () => {
         <div>
           {/* Javascript Map Function can generate multiple components from an array of data */}
           {ptoRequests &&
-          ptoRequests.map((ptoRequest, index) => (
-          <DisplayRequests key={index} request={ptoRequest} />
+          ptoRequests.map((ptoRequest) => (
+            <p key={ptoRequest.id}>
+              {ptoRequest.id}
+              <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+            {/* <Link to={`/timeoffrequest/${ptoRequest.id}`} >{ptoRequest.id}</Link> */}
+            </p>
           ))}
         </div>
         <div>
@@ -63,7 +68,6 @@ const HomePage = () => {
         </div>
       </div>
     </div>
-
   );
 };
 

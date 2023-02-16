@@ -46,9 +46,6 @@ const NewTimeOffRequestPage = () => {
             )
             console.log("First call", response)
             console.log("Second call", response2)
-            
-            
-            
             setEmployeeId(response.data.id); 
             setEmployeeNumber(response.data.employee_number);             
             setEmployeeName(response.data.employee_first_name); 

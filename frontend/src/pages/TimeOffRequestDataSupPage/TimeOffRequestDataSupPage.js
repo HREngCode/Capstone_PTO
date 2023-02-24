@@ -117,8 +117,7 @@ const UpdatedTimeOffRequestPage = (props) => {
                     <label> Approved: </label>
                     <input type="boolean" value={approved} onChange={(event) => setApproved(event.target.value)}/>
                     </div> */}
-                    <div>{props.employeeData.isSupervisor?
-                        (<div >
+                    <div>
                             <div className='admin-buttons-center' >
                                 <div>
                                 <button type='submit'>Update</button>
@@ -129,8 +128,7 @@ const UpdatedTimeOffRequestPage = (props) => {
                                 <div> 
                                 <button onClick={handleDelete}>Delete</button>
                                 </div>
-                            </div>                      
-                        </div>) : (<div className='update-request'><button type='submit'>Update</button></div>) }
+                            </div>           
                     </div>
                 </form>
             </div>

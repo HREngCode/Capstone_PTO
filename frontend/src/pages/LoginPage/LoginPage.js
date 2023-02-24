@@ -12,8 +12,8 @@ import useCustomForm from "../../hooks/useCustomForm";
 import "./LoginPage.css";
 
 //Components Imports
-import Header from "../../components/Header/Header";
-import Navbar from "../../components/NavBar/NavBar";
+// import Header from "../../components/Header/Header";
+// import Navbar from "../../components/NavBar/NavBar";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
@@ -31,14 +31,13 @@ const LoginPage = () => {
   }, [reset, isServerError]);
 
   return (
-    <div><Header />
-      <div><Navbar />
-      <div className="body">
-        <div className="container">
-          <h1>Login</h1>
+    <div>
+      <div>
+        <div className="grid-container">
+          <div className="title"></div><h1><b>Login</b></h1>
           <form className="form" onSubmit={handleSubmit}>
-            <label>
-              Username:{" "}
+            <label><b>
+              Username:</b>{" "}
               <input
                 type="text"
                 name="username"
@@ -46,8 +45,8 @@ const LoginPage = () => {
                 onChange={handleInputChange}
               />
             </label>
-            <label>
-              Password:{" "}
+            <label><b>
+              Password:</b>{" "}
               <input
                 type="text"
                 name="password"
@@ -64,8 +63,6 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-    </div>
-    
   );
 };
 

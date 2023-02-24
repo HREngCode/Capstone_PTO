@@ -46,7 +46,8 @@ b { /* used for event dates/times */
 
 .demo-app-main {
   flex-grow: 1;
-  padding: 3em;
+  width: 100%;
+  padding: 0;
 }
 
 .fc { /* the calendar root */

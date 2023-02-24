@@ -101,3 +101,15 @@ def employee_detail(request, pk):
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+@api_view(['PATCH'])
+@permission_classes([AllowAny])
+def employee_update_pto_balance(request, pk):
+    if request.method == 'PATCH':
+        employee = Employee.objects.get(pk=pk)
+        serializer = EmployeeSerializer(employee, data=request.data, partial=True)
+        if serializer.is_valid():
+            employee = serializer.save()
+            return Response(serializer.data)
+        return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+    

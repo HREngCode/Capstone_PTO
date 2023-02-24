@@ -13,31 +13,64 @@ html {
   font-family: "Poppins", sans-serif;
 }
 
-p {
-  font-size: 20px;
+p { 
+  font-size: 16px;
+}
+
+.admin-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-buttons-center {
+  display: flex;
+  justify-content: center;
 }
 
 button {
-  background-color: transparent;
-  border: 2px solid steelblue;
-  color: steelblue;
-  font-size: 1rem;
-  font-family: inherit;
-  max-width: 100px;
-  padding: 0.5rem 0.5rem;
+  display: inline-block;
+  padding: 7px 17px;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #2d332e;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 9px #999;
 }
 
 button:hover {
   cursor: pointer;
   color: white;
-  background-color: steelblue;
+  background-color: rgb(107, 110, 113);
 }
 
-.container {
-  margin: 0 auto;
-  max-width: 600px;
-  overflow: auto;
-  text-align: center;
+.flex-container {
+  float: right;
+  display: flex;
+  margin-top: 90px;
+  margin-right: 10px;
+  flex-wrap: wrap;
+  width: 250px;
+}
+
+.container-flex-admin {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.flex-grid {
+  display: grid;
 }
 
 .form {
@@ -54,5 +87,44 @@ button:hover {
   height: 25px;
   margin: 5px;
   padding: 3px 7px;
-  font-size: 17px;
+  font-size: 16px;
+}
+
+.title-homepage {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.requests-homepage{
+  display: grid;
+}
+
+.request-table{
+  display: grid;
+  justify-content: space-around;
+  margin: 50px;
+}
+
+.submit-new-request{
+  display: grid;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.sup-update-request{
+  display: flex;
+    justify-items: center;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+.update-request{
+  display: grid;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.calendar{
+  width: 75%;
+  float: left;
 }

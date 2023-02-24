@@ -14,7 +14,7 @@ const SupervisorValid = () => {
         <a onClick={() => navigate("/supervisor")}></a>
     }
     else{
-        // <Alert>You Do Not Have Access To This Screen</Alert>
+        <Alert>You Do Not Have Access To This Screen</Alert>;
         <a onClick={() => navigate("/home")}></a>
     }
     return ( 

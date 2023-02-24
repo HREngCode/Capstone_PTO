@@ -89,6 +89,18 @@ def pto_request_detail(request, pk):
 #     serializer = PtoRequestSerializer(pto_requests, many=True)
 #     return Response(serializer.data)
 
+@api_view(['PATCH'])
+@permission_classes([AllowAny])
+def pto_request_approve(request, pk):
+    if request.method == 'PATCH':
+        pto_request = PtoRequest.objects.get(pk=pk)
+        serializer = PtoRequestSerializer(pto_request, data=request.data, partial=True)
+        if serializer.is_valid():
+            pto_request = serializer.save()
+            return Response(serializer.data)
+        return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -122,7 +134,6 @@ def get_request_by_employee_number(request, id):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_request_by_supervisor_number(request, id):
-    pto_requests = request.query_params.get(id)
     pto_requests = PtoRequest.objects.all()
     pto_requests = pto_requests.filter(employee__supervisor_number=id)
     serializer = PtoRequestSerializer(pto_requests, many=True)

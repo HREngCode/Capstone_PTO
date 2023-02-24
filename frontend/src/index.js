@@ -17,11 +17,9 @@ ReactDOM.render(
       <AuthProvider>
         <EmployeeProvider>
           <SupervisorInfoProvider>
-            <EmployeeInfoProvider>
               <RequestInfoProvider>
                 <App />
               </RequestInfoProvider>
-            </EmployeeInfoProvider>
           </SupervisorInfoProvider>
         </EmployeeProvider>
       </AuthProvider>

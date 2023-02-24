@@ -6,16 +6,10 @@ import {useNavigate, Link} from 'react-router-dom';
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
-import DemoApp from "../../components/FullCalendar/DemoApp";
 
-//Context Imports
-import { EmployeeInfoContext } from "../../context/EmployeeInfoContext";
-
-
-const AdminPage = () => {
+const AdminPage = (props) => {
 
     const [user, token] = useAuth ()
-    const {employeeIsAdmin, setEmployeeIsAdmin} = useContext(EmployeeInfoContext);
     const [employees, setEmployees] = useState([]);
     const navigate = useNavigate();
 
@@ -35,7 +29,7 @@ const AdminPage = () => {
         };
         fetchAllEmployees();
     
-    }, [token]);//optional array to make sure this only runs once    
+    }, [token, user, props.employeeData.id]);//optional array to make sure this only runs once    
 
     const handleClick = (employee) => {
         navigate(`/employeeprofile/${employee.id}/`);
@@ -43,21 +37,21 @@ const AdminPage = () => {
 
     return ( 
         <div><Navbar />
-            <div>{employeeIsAdmin? 
-                (<div>
+            <div>{props.employeeData.isAdmin? 
+                (<div className="title-homepage"> 
                     <h1>Admin Page!</h1>
+                    <div className="container-flex-admin">
                     {employees &&
                     employees.map((employee) => (
-                    <li key={employee.id}>
-                        {employee.employee_first_name}
+                    <p key={employee.id}>
+                       <p><b>Employee Number:</b>{employee.employee_number}</p> 
+                        <p><b>Employee Name:</b>{employee.employee_first_name + " " + employee.employee_last_name}</p>
                         <button onClick={() => handleClick(employee)}>Edit</button>
                     {/* <Link to={`/employeeprofile/${employee.id}`} >{employee.employee_first_name} {employee.employee_number}</Link>  */}
-                    </li>    
+                    </p>    
                     ))}
-                    <div>
-                        <DemoApp />
-                    </div>
-                </div>) : (<div>You Do Not Have Admin Access</div>) }
+                    </div>  
+                </div>) : (<div><h3><b>You Do Not Have Admin Access</b></h3></div>) }
             </div>
         </div>
      );

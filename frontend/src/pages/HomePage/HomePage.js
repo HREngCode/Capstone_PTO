@@ -1,48 +1,51 @@
 // General Imports
 import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import "../../App.css";
 import axios from "axios";
 import {useNavigate, Link } from 'react-router-dom';
 
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
-import DisplayRequests from "../../components/DisplayRequests/DisplayRequests";
-import DemoApp from "../../components/FullCalendar/DemoApp";
+import FullCal from "../../components/FullCalendar/FullCal";
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
 
-
-const HomePage = () => {
+const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   const navigate = useNavigate();
-  const [ptoRequests, setPtoRequests] = useState('');
-  const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
-  const {employeeName, setEmployeeName} = useContext(EmployeeInfoContext);
-  const {employeeIsSupervisor} = useContext(EmployeeInfoContext);
-  const {employeeIsAdmin} = useContext(EmployeeInfoContext);
+  const [ptoRequests, setPtoRequests] = useState([]);
+
 
   useEffect(() => {
 
-    const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
+    if(props.employeeData.id)
+    {
+          const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
       try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
+        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${props.employeeData.id}/`, {
           headers: {
             Authorization: "Bearer " + token,
           },
         });
         setPtoRequests(response.data);
-        console.log(response.data)
+        console.log(props)
       } catch (error) {
         console.log(error.response);
       }    
     }; 
     fetchPtoRequestByEmployee();
+    }
 
-  }, [token, employeeId]);//optional array to make sure this only runs once
+
+
+  }, [props.employeeData.id]);//optional array to make sure this only runs once
+
+  
 
   const handleClick = (ptoRequest) => {
     navigate(`/timeoffrequest/${ptoRequest.id}`);
@@ -50,21 +53,26 @@ const HomePage = () => {
 
   return (
     <div><Navbar />
-      <div className="container">
-        <h1>Home Page for {employeeName}!</h1>
+      <div className="title-homepage">
+        <h1>Home Page for {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}!</h1>
         <div>
-          {/* Javascript Map Function can generate multiple components from an array of data */}
-          {ptoRequests &&
-          ptoRequests.map((ptoRequest) => (
-            <p key={ptoRequest.id}>
-              {ptoRequest.id}
-              <button onClick={() => handleClick(ptoRequest)}>Detail</button>
-            {/* <Link to={`/timeoffrequest/${ptoRequest.id}`} >{ptoRequest.id}</Link> */}
-            </p>
-          ))}
-        </div>
-        <div>
-            <DemoApp />
+          <div className="calendar">
+                <FullCal ptoRequests= {ptoRequests} />
+          </div>
+            <div className="flex-container">
+              {/* Javascript Map Function can generate multiple components from an array of data */}
+              {ptoRequests &&
+              ptoRequests.map((ptoRequest) => (
+                <p key={ptoRequest.id}>
+                  <p><b>Request Number:</b>{" " + ptoRequest.id}</p>
+                  <p><b>Date Requested:</b>{" " + ptoRequest.date_requested}</p>
+                  <p><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</p>
+                  <p><b>Approved:</b> {" " + ptoRequest.approved}</p>
+                  <div></div>
+                  <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+                </p>
+                ))}
+            </div>
         </div>
       </div>
     </div>

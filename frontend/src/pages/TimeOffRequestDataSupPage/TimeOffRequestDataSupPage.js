@@ -78,6 +78,21 @@ const UpdatedTimeOffRequestPage = (props) => {
         updateTimeOffRequest(changeTimeOffRequest)
     } 
 
+    const ptoApprove = {
+        approved: true,
+    };
+    
+    const handleApprovalToggle = async () => {
+       await axios.patch(`http://127.0.0.1:8000/api/pto_requests/approval/${ptoRequestId}/`, ptoApprove)
+       alert(`You have approved the request for ${ptoRequest.id} `)
+       navigate("/supervisor")
+      };
+
+    const handleDelete = async () => {
+        await axios.delete(`http://127.0.0.1:8000/api/pto_requests/${ptoRequestId}/`)
+        navigate("/supervisor")
+       };
+
     return ( 
         <div><Navbar />
             <div className='request-table'>
@@ -102,7 +117,20 @@ const UpdatedTimeOffRequestPage = (props) => {
                     <label> Approved: </label>
                     <input type="boolean" value={approved} onChange={(event) => setApproved(event.target.value)}/>
                     </div> */}
-                    <div className='update-request'><button type='submit'>Update</button>
+                    <div>{props.employeeData.isSupervisor?
+                        (<div >
+                            <div className='admin-buttons-center' >
+                                <div>
+                                <button type='submit'>Update</button>
+                                </div>
+                                <div>
+                                <button onClick={handleApprovalToggle}>Approve</button>
+                                </div>
+                                <div> 
+                                <button onClick={handleDelete}>Delete</button>
+                                </div>
+                            </div>                      
+                        </div>) : (<div className='update-request'><button type='submit'>Update</button></div>) }
                     </div>
                 </form>
             </div>

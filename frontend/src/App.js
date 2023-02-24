@@ -11,6 +11,7 @@ import axios from "axios";
 import SupervisorPage from "./pages/SupervisorPage/SupervisorPage";
 import NewTimeOffRequestPage from "./pages/NewTimeOffRequestPage/NewTimeOffRequestPage";
 import TimeOffRequestDataPage from "./pages/TimeOffRequestDataPage/TimeOffRequestDataPage";
+import TimeOffRequestDataSupPage from "./pages/TimeOffRequestDataSupPage/TimeOffRequestDataSupPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import EmployeeProfilePage from "./pages/EmployeeProfilePage/EmployeeProfilePage";
@@ -80,6 +81,7 @@ function App() {
           {/*Employee Profile & Time Off Request Page using a Param */}
           <Route path="/employeeprofile/:employeeId" element={<EmployeeProfilePage employeeData={employeeData}/>} />
           <Route path="/timeoffrequest/:ptoRequestId" element={<TimeOffRequestDataPage employeeData={employeeData}/>} />
+          <Route path="/timeoffrequestsup/:ptoRequestId" element={<TimeOffRequestDataSupPage employeeData={employeeData}/>} />
           <Route path="/supervisor" element={<SupervisorPage employeeData={employeeData}/>} />
           <Route path="/admin" element={<AdminPage employeeData={employeeData}/>} />
         </Routes>

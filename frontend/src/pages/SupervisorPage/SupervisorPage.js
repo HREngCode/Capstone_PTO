@@ -40,7 +40,7 @@ const SupervisorPage = (props) => {
     }, [token, user, props.employeeData.employee_number]); 
 
     const handleClick = (ptoRequest) => {
-        navigate(`/timeoffrequest/${ptoRequest.id}`);
+        navigate(`/timeoffrequestsup/${ptoRequest.id}`);
       }
 
     const ptoApprove = {
@@ -66,7 +66,7 @@ const SupervisorPage = (props) => {
                             <p><b>Request ID:</b> {ptoRequest.id} </p>
                             <p><b>Requester:</b>  {ptoRequest.employee.employee_first_name} {ptoRequest.employee.employee_last_name}</p>
                             <p><b>Date Requested:</b>   {ptoRequest.date_requested}</p>                
-                            <p><b>Hours Requested:</b>   {ptoRequest.hours_requested}</p>                
+                            <p><b>Hours Requested:</b>   {ptoRequest.hours_requested}</p>
                             <button onClick={() => handleClick(ptoRequest)}>Detail</button> 
                             <button onClick={() => handleApprovalToggle(ptoRequest)}>Approve</button>
                         </p>

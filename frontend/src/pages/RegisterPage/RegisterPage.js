@@ -27,12 +27,15 @@ const RegisterPage = () => {
   
   
   return (
-    <div className="container">
+    <div className="title-homepage"><h2><b>USER REGISTRATION</b></h2>
+    <div className="submit-new-request">
 
       {/*handleSubmit is called from the hook up above*/}
       <form className="form" onSubmit={handleSubmit}> 
-        <label>
-          Username:{" "}
+        <label><b>
+          Username:
+        </b>
+          {" "}
           <input
             type="text"
             name="username"
@@ -41,7 +44,10 @@ const RegisterPage = () => {
           />
         </label>
         <label>
-          Password:{" "}
+          <b>
+           Password: 
+          </b>
+          {" "}
           <input
             type="text"
             name="password"
@@ -50,7 +56,10 @@ const RegisterPage = () => {
           />
         </label>
         <label>
-          Email:{" "}
+          <b>
+            Email:
+          </b>
+          {" "}
           <input
             type="text"
             name="email"
@@ -59,7 +68,10 @@ const RegisterPage = () => {
           />
         </label>
         <label>
-          First Name:{" "}
+          <b>
+           First Name: 
+          </b>
+          {" "}
           <input
             type="text"
             name="firstName"
@@ -68,7 +80,10 @@ const RegisterPage = () => {
           />
         </label>
         <label>
-          Last Name:{" "}
+          <b>
+            Last Name:
+          </b>
+          {" "}
           <input
             type="text"
             name="lastName"
@@ -77,11 +92,12 @@ const RegisterPage = () => {
           />
         </label>
         <p style={{ fontSize: "12px" }}>
-          NOTE: Make this an uncommon password with characters, numbers, and
-          special characters!
+          <i>NOTE: Make this an uncommon password with characters, numbers, and
+          special characters!</i>
         </p>
         <button>Register!</button>
       </form>
+    </div>
     </div>
   );
 };

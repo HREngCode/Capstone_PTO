@@ -42,10 +42,14 @@ const RegisterEePage = () => {
   );
 
   return (
-    <div className="container">
+    <div className="title-homepage"><h2><b>EMPLOYEE REGISTRATION</b></h2>
+    <div className="submit-new-request">
       <form className="form" onSubmit={handleSubmit}>
       <label>
-          User Id:{" "}
+        <b>
+          User Id:
+        </b>
+          {" "}
           <input
             type="number"
             name="user_id"
@@ -54,7 +58,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Employee Number:{" "}
+        <b>
+          Employee Number:
+          </b>
+          {" "}
           <input
             type="number"
             name="employee_number"
@@ -63,7 +70,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          First Name:{" "}
+        <b>
+          First Name:
+          </b>
+          {" "}
           <input
             type="text"
             name="employee_first_name"
@@ -72,7 +82,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Last Name:{" "}
+        <b>
+          Last Name:
+          </b>
+          {" "}
           <input
             type="text"
             name="employee_last_name"
@@ -81,7 +94,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Department:{" "}
+        <b>
+          Department:
+          </b>
+          {" "}
           <input
             type="text"
             name="department"
@@ -90,7 +106,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Supervisor Number:{" "}
+        <b>
+          Supervisor Number:
+          </b>
+          {" "}
           <input
             type="number"
             name="supervisor_number"
@@ -99,7 +118,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Hire Date:{" "}
+        <b>
+          Hire Date:
+          </b>
+          {" "}
           <input
             type="date"
             name="hire_date"
@@ -108,7 +130,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          PTO Balance:{" "}
+        <b>
+          PTO Balance:
+          </b>
+          {" "}
           <input
           //Changed to type Number
           type="number"
@@ -118,7 +143,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Active:{" "}
+        <b>
+          Active:
+          </b>
+          {" "}
           <input
             type="checkbox"
             name="active"
@@ -128,7 +156,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Supervisor:{" "}
+        <b>
+          Supervisor:
+          </b>
+          {" "}
           <input
             type="checkbox"
             name="isSupervisor"
@@ -138,7 +169,10 @@ const RegisterEePage = () => {
           />
         </label>
         <label>
-          Admin:{" "}
+        <b>
+          Admin:
+          </b>
+          {" "}
           <input
             type="checkbox"
             name="isAdmin"
@@ -153,6 +187,7 @@ const RegisterEePage = () => {
         </p>
         <button>Register!</button>
       </form>
+    </div>
     </div>
   ); 
 }; 

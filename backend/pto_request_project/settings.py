@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'employees',
     'supervisors',
     'pto_requests',
+    'comments',
 ]
 
 

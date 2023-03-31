@@ -11,5 +11,4 @@ class EmployeeSerializer(serializers.ModelSerializer):
         'user', 'user_id', 'active', 'isSupervisor', 'isAdmin']
         depth = 1
 
-    # supervisor_id = serializers.IntegerField(write_only=True)
     user_id = serializers.IntegerField(write_only=True)

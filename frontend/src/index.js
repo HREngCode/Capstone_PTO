@@ -16,11 +16,13 @@ ReactDOM.render(
     <Router>
       <AuthProvider>
         <EmployeeProvider>
-          <SupervisorInfoProvider>
-              <RequestInfoProvider>
-                <App />
-              </RequestInfoProvider>
-          </SupervisorInfoProvider>
+          <EmployeeInfoProvider>
+            <SupervisorInfoProvider>
+                <RequestInfoProvider>
+                  <App />
+                </RequestInfoProvider>
+            </SupervisorInfoProvider>
+          </EmployeeInfoProvider>
         </EmployeeProvider>
       </AuthProvider>
     </Router>

@@ -5,20 +5,11 @@ import { useState } from "react";
 import { SupervisorInfoContext } from "./SupervisorInfoContext";
 
 export const SupervisorInfoProvider = ({children}) => {
-    const [supervisorInfo, setSupervisorInfo] = useState()
-    const [employeeSupervisorInfo, setEmployeeSupervisorInfo] = useState()
-    const [supervisorName, setSupervisorName] = useState()
-    const [supervisorNumber, setSupervisorNumber] = useState()
+    const [supervisor, setSupervisor] = useState()
 
     let value = {
-        supervisorInfo,
-        setSupervisorInfo,
-        employeeSupervisorInfo, 
-        setEmployeeSupervisorInfo,
-        supervisorName,
-        setSupervisorName,
-        supervisorNumber,
-        setSupervisorNumber,
+        supervisor,
+        setSupervisor,
     }
     //always return jsx
     return(

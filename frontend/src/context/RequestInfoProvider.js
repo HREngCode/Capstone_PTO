@@ -6,10 +6,13 @@ import { RequestInfoContext } from "./RequestInfoContext";
 
 export const RequestInfoProvider = ({children}) => {
     // const [user, token] = useAuth ()
+    const [ptoRequest, setPtoRequest] = useState()
     const [ptoRequests, setPtoRequests] = useState([])
     const [ptoRequestId, setPtoRequestId] = useState( )
 
     let value = {
+        ptoRequest, 
+        setPtoRequest,
         ptoRequests,
         setPtoRequests,
         ptoRequestId,

@@ -44,8 +44,8 @@ const AdminPage = (props) => {
                     {employees &&
                     employees.map((employee) => (
                     <p key={employee.id}>
-                       <p><b>Employee Number:</b>{employee.employee_number}</p> 
-                        <p><b>Employee Name:</b>{employee.employee_first_name + " " + employee.employee_last_name}</p>
+                       <p2><b>Employee Number:</b>{employee.employee_number}</p2> 
+                        <p3><b>Employee Name:</b>{employee.employee_first_name + " " + employee.employee_last_name}</p3>
                         <button onClick={() => handleClick(employee)}>Edit</button>
                     {/* <Link to={`/employeeprofile/${employee.id}`} >{employee.employee_first_name} {employee.employee_number}</Link>  */}
                     </p>    

@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'employees',
-    'supervisors',
     'pto_requests',
     'comments',
 ]

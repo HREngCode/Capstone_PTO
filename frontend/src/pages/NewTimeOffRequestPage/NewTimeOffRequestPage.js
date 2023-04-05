@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom"
 import Navbar from "../../components/NavBar/NavBar";
 // import FullCal from '../../components/FullCalendar/FullCal';
 import AddRequest from '../../components/AddRequest/AddRequest';
-import AddComment from '../../components/AddComment/AddComment';
+// import AddComment from '../../components/AddComment/AddComment';
 
 // Context Imports
 
@@ -65,11 +65,11 @@ const NewTimeOffRequestPage = (props) => {
     return ( 
         <div><Navbar />
             <div>
-                <AddRequest />
+                <AddRequest newTimOffRequest/>
             </div>
-            <div>
+            {/* <div>
                 <AddComment />
-            </div>
+            </div> */}
         </div>
     );
 }

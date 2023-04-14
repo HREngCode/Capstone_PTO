@@ -11,7 +11,7 @@ export const EmployeeInfoProvider = ({children}) => {
     const [employee, setEmployee] = useState()
     // const [employeeName, setEmployeeName] = useState()
     // const [employeeLastName, setEmployeeLastName] = useState()
-    // const [employeeId, setEmployeeId] = useState()
+    const [employeeId, setEmployeeId] = useState()
     // const [employeeSupervisorNumber, setEmployeeSupervisorNumber] = useState()
     // const [employeeNumber, setEmployeeNumber] = useState()
     // const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
@@ -26,8 +26,8 @@ export const EmployeeInfoProvider = ({children}) => {
     //     // setEmployeeName,
     //     // employeeLastName,
     //     // setEmployeeLastName,
-    //     employeeId,
-    //     setEmployeeId,
+        employeeId,
+        setEmployeeId,
     //     employeeSupervisorNumber,
     //     setEmployeeSupervisorNumber,
     //     employeeNumber, 

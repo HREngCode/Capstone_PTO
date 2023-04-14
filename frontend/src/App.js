@@ -33,7 +33,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 function App() {
   const [user, token] = useAuth();
   const [employeeData, setEmployeeData] = useState('');
-  const {employee, setEmployee} = useContext(EmployeeInfoContext);
+  // const {employee, setEmployee} = useContext(EmployeeInfoContext);
+  // const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const {supervisor, setSupervisor} = useContext(SupervisorInfoContext);
   const [employeeSupervisor, setEmployeeSupervisor] = useState('');
   const [ptoRequestData, setPtoRequestData] = useState('');
@@ -55,10 +56,10 @@ function App() {
         }
       );
       setEmployeeData(response.data);
-      setEmployee(response.data);
+      // setEmployee(response.data);
+      // setEmployeeId(response.data.id);
       setEmployeeSupervisor(response2.data);
       setSupervisor(response2.data);
-      console.log(response.data)
       } catch (error) {
         console.log(error.message);
       }    
@@ -97,7 +98,7 @@ function App() {
           <Route path="/registerEe" element={<RegisterEePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage />} />
+          <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage employeeData={employeeData}/>} />
           {/*Employee Profile & Time Off Request Page using a Param */}
           <Route path="/employeeprofile/:employeeId" element={<EmployeeProfilePage employeeData={employeeData}/>} />
           <Route path="/timeoffrequest/:ptoRequestId" element={<TimeOffRequestDataPage employeeData={employeeData}/>} />

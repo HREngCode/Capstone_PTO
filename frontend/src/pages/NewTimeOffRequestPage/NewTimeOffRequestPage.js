@@ -16,15 +16,16 @@ const NewTimeOffRequestPage = (props) => {
     // setting up hooks a good place to start
     const [user, token] = useAuth ()
     const navigate = useNavigate ()
-    const [approved, setApproved] = useState("False")
-    // const {employee, setEmployee} = useContext(EmployeeInfoContext);
+    const [approved, setApproved] = useState(false)
+    const {employee, setEmployee} = useContext(EmployeeInfoContext);
+    const {employeeId} = useContext(EmployeeInfoContext);
+    const [comment, setComment] = useState('')
     const [requestId, setRequestId] = useState(null)
-
-    const [formValues, setFormValues] = useState({
-        employee_id: props.employeeData.id,
+    const [formValues, setFormValues] = useState(
+        {
         date_requested: '',
         hours_requested: '',
-        approved: approved,    
+        approved: approved, 
     });
 
     const handleRequestSubmit = (event) => {
@@ -37,11 +38,12 @@ const NewTimeOffRequestPage = (props) => {
         })
         .then(response => {
         setRequestId(response.data.id);
+        navigate("/")
         // await handleUpdateBalance(updatedPtoBalance);  
         const commentValues = {
-            employee: props.employeeData.id,
+            employee: employeeId,
             pto_request: response.data.id,
-            text: '', 
+            text: comment, 
         };
         console.log(commentValues)
         return axios.post('http://127.0.0.1:8000/api/comments/changes/', commentValues);
@@ -58,7 +60,10 @@ const NewTimeOffRequestPage = (props) => {
     };
 
     const handleChange = (event) => {
-        setFormValues({
+        console.log(employeeId)
+        setFormValues(
+            {
+            employee_id: employeeId,
             ...formValues,
             [event.target.name]: event.target.value,
         });
@@ -66,7 +71,7 @@ const NewTimeOffRequestPage = (props) => {
 
     return ( 
         <div><Navbar />
-        <div>{props.employeeData? 
+        <div>{employeeId? 
             (<div className='request-table'>
                 <form onSubmit={handleRequestSubmit}>
                 <div className='newEntry'>
@@ -107,7 +112,7 @@ const NewTimeOffRequestPage = (props) => {
                 </div>
                 <div className='newEntry'>
                 <label><b>Comments: </b></label>
-                <input type="text" name="text" value={formValues.text} onChange={handleChange}/>
+                <input type="text" name="text" value={comment} onChange={(event) => setComment(event.target.value)}/>
                 </div>
                 <div className='submit-new-request'>
                     <button type='submit'>Submit</button>

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import "../../App.css";
 import axios from "axios";
-import {useNavigate, Link } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
@@ -11,6 +11,7 @@ import FullCal from "../../components/FullCalendar/FullCal";
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
+import { formatDate } from "@fullcalendar/core";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -19,7 +20,7 @@ const HomePage = (props) => {
   const [user, token] = useAuth();
   const navigate = useNavigate();
   const [ptoRequests, setPtoRequests] = useState([]);
-
+  let approveStatus; 
 
   useEffect(() => {
 
@@ -65,10 +66,14 @@ const HomePage = (props) => {
               ptoRequests.map((ptoRequest) => (
                 <p key={ptoRequest.id}>
                   <p><b>Request Number:</b>{" " + ptoRequest.id}</p>
-                  <p><b>Date Requested:</b>{" " + ptoRequest.date_requested}</p>
+                  <p><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</p>
                   <p><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</p>
-                  <p><b>Approved:</b> {" " + ptoRequest.approved}</p>
-                  <div></div>
+                  <div>{ptoRequest.approved?
+                  (<div>
+                    <p><b>Approved:</b> {" Yes"}</p>
+                  </div>) :(<div>                    
+                    <p><b>Approved:</b> {" No"}</p></div>)
+                }</div>
                   <button onClick={() => handleClick(ptoRequest)}>Detail</button>
                 </p>
                 ))}

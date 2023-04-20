@@ -16,7 +16,12 @@ const NewTimeOffRequestPage = (props) => {
     // setting up hooks a good place to start
     const [user, token] = useAuth ()
     const navigate = useNavigate ()
-    const [approved, setApproved] = useState(false)
+    const [approved, setApproved] = useState(false) 
+    let approveStatus; 
+    if (approved === false)
+        {approveStatus = "No"}
+    else
+        {approveStatus = "Yes"};  
     const {employee, setEmployee} = useContext(EmployeeInfoContext);
     const {employeeId} = useContext(EmployeeInfoContext);
     const [comment, setComment] = useState('')
@@ -60,7 +65,6 @@ const NewTimeOffRequestPage = (props) => {
     };
 
     const handleChange = (event) => {
-        console.log(employeeId)
         setFormValues(
             {
             employee_id: employeeId,
@@ -108,7 +112,7 @@ const NewTimeOffRequestPage = (props) => {
                 </div>                        
                 <div className='newEntry'>
                 <label><b> Approved: </b></label>
-                <input type="boolean" name="approved" value={formValues.approved} onChange={handleChange}/>
+                <input type="boolean" name="approved" value={approveStatus} onChange={handleChange}/>
                 </div>
                 <div className='newEntry'>
                 <label><b>Comments: </b></label>

@@ -19,7 +19,8 @@ const UpdatedTimeOffRequestPage = (props) => {
     const [hoursRequested, setHoursRequested] = useState('');
     const [requesterName, setRequesterName] = useState(' ');
     const [ptoBalance, setPtoBalance] = useState('')
-    // const [approved, setApproved] = useState('');
+    const [approved, setApproved] = useState('');
+    let approveStatus;
 
     useEffect(() => {
         const fetchRequest = async () => {
@@ -32,6 +33,7 @@ const UpdatedTimeOffRequestPage = (props) => {
                 setHoursRequested(response.data.hours_requested)
                 setRequesterName(response.data.employee.employee_first_name + " " + response.data.employee.employee_last_name)
                 setPtoBalance(response.data.employee.pto_balance)
+                setApproved(response.data.approved)
                 console.log(ptoRequestId)
                 // setApproved(response.data.approved)
             } catch (error) {
@@ -72,11 +74,15 @@ const UpdatedTimeOffRequestPage = (props) => {
         let changeTimeOffRequest = {
             employee_id: ptoRequest.employee.id,
             date_requested: dateRequested,
-            hours_requested: hoursRequested,
-            // approved: approved,        
+            hours_requested: hoursRequested, 
         };
         updateTimeOffRequest(changeTimeOffRequest)
     } 
+
+    if (approved === false)
+    {approveStatus = "No"}
+    else
+    {approveStatus = "Yes"};  
 
     return ( 
         <div><Navbar />
@@ -97,6 +103,10 @@ const UpdatedTimeOffRequestPage = (props) => {
                     <div className='newEntry'>
                     <label><b>PTO Balance: </b></label>
                     {ptoBalance}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>Approved: </b></label>
+                    {approveStatus}
                     </div>
                     {/* <div className='newEntry'>
                     <label> Approved: </label>

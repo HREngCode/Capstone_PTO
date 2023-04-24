@@ -34,7 +34,7 @@ const HomePage = (props) => {
           },
         });
         setPtoRequests(response.data);
-        console.log(props)
+        // console.log(props)
       } catch (error) {
         console.log(error.response);
       }    

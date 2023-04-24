@@ -111,8 +111,8 @@ const NewTimeOffRequestPage = (props) => {
                 <input type="number" name="hours_requested" value={formValues.hours_requested} onChange={handleChange}/>
                 </div>                        
                 <div className='newEntry'>
-                <label><b> Approved: </b></label>
-                <input type="boolean" name="approved" value={approveStatus} onChange={handleChange}/>
+                <label><b>Approved: </b> </label>
+                {approveStatus}
                 </div>
                 <div className='newEntry'>
                 <label><b>Comments: </b></label>

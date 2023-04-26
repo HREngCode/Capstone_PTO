@@ -75,56 +75,63 @@ const NewTimeOffRequestPage = (props) => {
 
     return ( 
         <div><Navbar />
-        <div>{employeeId? 
-            (<div className='request-table'>
-                <form onSubmit={handleRequestSubmit}>
-                <div className='newEntry'>
-                <label><b>Employee Number: </b></label>
-                {props.employeeData.employee_number}
+            <div className='req-column1'>
+                <div className='request-table'>{employeeId? 
+                (<div>
+                    <h3>New Request</h3>
+                    <form onSubmit={handleRequestSubmit}>
+                        <div className='newEntry'>
+                        <label><b>Date Requested Off: </b></label>
+                        <input type="date" name="date_requested" value={formValues.date_requested} onChange={handleChange}/>
+                        </div>
+                        <div className='newEntry'>
+                        <label><b>Hours Requested: </b></label>
+                        <input type="number" name="hours_requested" value={formValues.hours_requested} onChange={handleChange}/>
+                        </div>                        
+                        {/* <div className='newEntry'>
+                        <label><b>Approved: </b> </label>
+                        {approveStatus}
+                        </div> */}
+                        <div className='newEntry'>
+                        <label><b>Comments: </b></label>
+                        <input type="text" name="text" value={comment} onChange={(event) => setComment(event.target.value)}/>
+                        </div>
+                        <div className='submit-new-request'>
+                            <button type='submit'>Submit</button>
+                            {/* <button onClick={handleCommentSubmit}>Submit Comment</button> */}
+                        </div>
+                    </form>
+                </div>):(<div>NO DATA AVAILABLE</div>)}
+            </div>
+            </div>
+            <div className='req-column2'>
+                <div className='info'>
+                    <div className='newEntry'>
+                    <label><b>Employee Number: </b></label>
+                    {props.employeeData.employee_number}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>Employee Name: </b></label>
+                    {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>Department:</b> </label>
+                    {props.employeeData.department}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>Supervisor Name: </b></label>
+                    {props.employeeData.supervisor_number}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>Hire Date: </b></label>
+                    {props.employeeData.hire_date}
+                    </div>
+                    <div className='newEntry'>
+                    <label><b>PTO Balance:</b> </label>
+                    {props.employeeData.pto_balance}
+                    </div>
                 </div>
-                <div className='newEntry'>
-                <label><b>Employee Name: </b></label>
-                {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}
-                </div>
-                <div className='newEntry'>
-                <label><b>Department:</b> </label>
-                {props.employeeData.department}
-                </div>
-                <div className='newEntry'>
-                <label><b>Hire Date: </b></label>
-                {props.employeeData.hire_date}
-                </div>
-                <div className='newEntry'>
-                <label><b>PTO Balance:</b> </label>
-                {props.employeeData.pto_balance}
-                </div>
-                <div className='newEntry'>
-                <label><b>Supervisor Name:</b></label>
-                {props.employeeData.supervisor_number}
-                </div>
-                <div className='newEntry'>
-                <label><b>Date Requested Off: </b></label>
-                <input type="date" name="date_requested" value={formValues.date_requested} onChange={handleChange}/>
-                </div>
-                <div className='newEntry'>
-                <label><b>Hours Requested: </b></label>
-                <input type="number" name="hours_requested" value={formValues.hours_requested} onChange={handleChange}/>
-                </div>                        
-                <div className='newEntry'>
-                <label><b>Approved: </b> </label>
-                {approveStatus}
-                </div>
-                <div className='newEntry'>
-                <label><b>Comments: </b></label>
-                <input type="text" name="text" value={comment} onChange={(event) => setComment(event.target.value)}/>
-                </div>
-                <div className='submit-new-request'>
-                    <button type='submit'>Submit</button>
-                    {/* <button onClick={handleCommentSubmit}>Submit Comment</button> */}
-                </div>
-                </form>
-            </div>):(<div>NO DATA AVAILABLE</div>)}
-        </div>
+            </div>
         </div>
     );
 }

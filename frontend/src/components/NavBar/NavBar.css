@@ -2,7 +2,8 @@
 .navbar {
   overflow: hidden;
   background-color: #333;
-  font-family: Arial;
+  font-family: Impact;
+  margin: auto;
 }
 
 /* Links inside the navbar */
@@ -27,15 +28,16 @@
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+  padding-top: 9px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
+  /* font-family: inherit; Important for vertical align on mobile phones */
+  /* margin: 0; Important for vertical align on mobile phones */
 }
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: rgb(129, 126, 126);
 }
 
 /* Dropdown content (hidden by default) */

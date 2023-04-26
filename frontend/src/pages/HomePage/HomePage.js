@@ -54,30 +54,37 @@ const HomePage = (props) => {
 
   return (
     <div><Navbar />
-      <div className="title-homepage">
-        <h1>Home Page for {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}!</h1>
-        <div>
-          <div className="calendar">
-                <FullCal ptoRequests= {ptoRequests} />
-          </div>
-            <div className="flex-container">
-              {/* Javascript Map Function can generate multiple components from an array of data */}
-              {ptoRequests &&
-              ptoRequests.map((ptoRequest) => (
-                <p key={ptoRequest.id}>
-                  <p><b>Request Number:</b>{" " + ptoRequest.id}</p>
-                  <p><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</p>
-                  <p><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</p>
-                  <div>{ptoRequest.approved?
-                  (<div>
-                    <p><b>Approved:</b> {" Yes"}</p>
-                  </div>) :(<div>                    
-                    <p><b>Approved:</b> {" No"}</p></div>)
-                }</div>
-                  <button onClick={() => handleClick(ptoRequest)}>Detail</button>
-                </p>
-                ))}
+      <div className="body">
+        <div className="column1">
+          <div className="title-homepage">
+            <h1>Home Page for {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}!</h1>
+            <div>
+              <div className="calendar">
+                    <FullCal ptoRequests= {ptoRequests} />
+              </div>
             </div>
+          </div>
+        </div>
+        <div className="column2">
+          <div className="act_req_title"><b><h3>Active Requests</h3></b></div>
+          {/* Javascript Map Function can generate multiple components from an array of data */}
+            <div className="active_requests"> 
+            {ptoRequests &&
+            ptoRequests.map((ptoRequest) => (
+              <div key={ptoRequest.id}>
+                {/* <ul><b>Request Number:</b>{" " + ptoRequest.id}</ul> */}
+                <ul><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</ul>
+                <ul><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</ul>
+                <div>{ptoRequest.approved?
+                (<div>
+                  <ul><b>Approved:</b> {" Yes"}</ul>
+                </div>) :(<div>                    
+                  <ul><b>Approved:</b> {" No"}</ul></div>)
+              }</div>
+                <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+              </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>

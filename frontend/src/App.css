@@ -5,7 +5,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  /* box-sizing: inherit; */
 }
 
 html {
@@ -15,6 +15,24 @@ html {
 
 p { 
   font-size: 16px;
+}
+
+.act_req_title {
+  text-align: center;
+}
+
+.active_requests {
+  display: block;
+  border: 2px solid black;
+  background-color: grey;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: fit-content;
+  height: 400px;
+  overflow-y: scroll;
+  box-shadow: 0 9px #d7ddd8;
 }
 
 .admin-buttons {
@@ -38,11 +56,11 @@ button {
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #fff;
-  background-color: #2d332e;
+  color: #000000;
+  background-color: #969b97;
   border: none;
   border-radius: 12px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 9px #2d332e;
 }
 
 button:hover {
@@ -51,58 +69,109 @@ button:hover {
   background-color: rgb(107, 110, 113);
 }
 
-.flex-container {
-  float: right;
-  display: flex;
-  margin-top: 90px;
-  margin-right: 10px;
-  flex-wrap: wrap;
-  width: 250px;
+.calendar{
+  background-color: grey;
+} 
+
+.column1 {
+  box-sizing: border-box;
+  float: left;
+  width: 75.00%;
+  padding: 25px;
 }
 
-.container-flex-admin {
+.column2 {
+  box-sizing: border-box;
+  width: 25.00%;
+  float: right;
+  padding-top: 100px;
+}
+
+/* .container-flex-admin {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px;
   flex-direction: row;
   padding: 10px;
-}
+} */
 
-.flex-grid {
-  display: grid;
-}
-
-.form {
-  align-items: center;
+/* .flex-container {
+  float: right;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 1rem;
+  margin-top: 90px;
+  margin-right: 10px;
+  flex-wrap: wrap;
+  width: 250px;
+} */
+
+/* .flex-grid {
+  display: grid;
+} */
+
+.info {
+  box-sizing: border-box;
+  background-color: grey;
+  border: 5px;
+  border-color: #000000;
+  border-radius: 20px;
+  float: left;
+  margin: 50px;
+  padding: 10px;
 }
 
-.form input {
+/* .request-table form input {
   display: block;
-  width: 100%;
   height: 25px;
   margin: 5px;
   padding: 3px 7px;
   font-size: 16px;
-}
+} */
 
-.title-homepage {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.requests-homepage{
+/* .requests-homepage{
   display: grid;
+} */
+
+/* .request-table{
+  background-color: grey;
+  width: fit-content;
+  margin: 50px;
+  padding: 20px;
+} */
+
+.req-column1 {
+  box-sizing: border-box;
+  float: left;
+  width: 50.00%;
+  padding: 10px;
+}
+
+.req-column1 h3 {
+  text-align: center;
+}
+
+.req-column2 {
+  box-sizing: border-box;
+  width: 50.00%;
+  float: right;
 }
 
 .request-table{
+  background-color: grey;
+  border: 5px;
+  border-color: #000000;
+  border-radius: 20px;
   display: grid;
-  justify-content: space-around;
-  margin: 50px;
+  justify-content: center;
+  float: center;
+  margin: 40px;
+  padding: 10px;
+}
+
+.request-table form {
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
 }
 
 .submit-new-request{
@@ -111,20 +180,21 @@ button:hover {
   margin-top: 20px;
 }
 
-.sup-update-request{
+/* .sup-update-request{
   display: flex;
     justify-items: center;
     margin-top: 20px;
     justify-content: space-evenly;
+} */
+
+.title-homepage {
+  text-align: center;
+  margin-top: 20px;
+  font-family: "Franklin Gothic Medium", Times, serif;
 }
 
-.update-request{
+/*.update-request{
   display: grid;
   justify-items: center;
   margin-top: 20px;
-}
-
-.calendar{
-  width: 75%;
-  float: left;
-}
+} */

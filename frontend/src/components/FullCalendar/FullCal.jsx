@@ -18,8 +18,6 @@ const FullCal = (props)=> {
   const navigate = useNavigate();
   const [weekendsVisible, setWeekendsVisible] = useState(true)
   const [currentEvents, setCurrentEvents] = useState([])
-  const [elId, setElId] = useState('')
-  const [eventId, setEventId] = useState('')
   // const [numberEvents, setNumberEvents] = useState(0)
 
   useEffect(() => {

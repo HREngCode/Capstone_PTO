@@ -1,18 +1,23 @@
 /* header container */
 .header {
-    height: 60px;
-    overflow: hidden;
-    background-color: rgb(149, 103, 28);
-    font-family: Arial;
-  }
-
-.header_image{
-    width: 110px;
-    height: 55px;
-    border-radius: 10px;
-    align-items: left;
+  display: grid;
+  height: 100px;
+  overflow: hidden;
+  background-color: rgb(158, 163, 177);
 }
 
-.header-title{
+.header img{
+  display: inline;
+  float: left;
+  width: 140px;
+  height: 70px;
+  border-radius: 10px;
+  padding: 13px;
+}
+
+.header h2{
   text-align: center;
+  /* display: inline; */
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  padding: 35px;
 }

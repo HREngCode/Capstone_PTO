@@ -87,6 +87,21 @@ button:hover {
   padding-top: 100px;
 }
 
+.comments {
+  display: block;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: grey;
+  padding-left: 20px;
+  padding-right: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: fit-content;
+  height: 225px;
+  overflow-y: scroll;
+  box-shadow: 0 9px #d7ddd8;
+}
+
 /* .container-flex-admin {
   display: flex;
   flex-wrap: wrap;
@@ -156,6 +171,37 @@ button:hover {
   float: right;
 }
 
+.req-data-column1 {
+  box-sizing: border-box;
+  float: left;
+  width: fit-content;
+  padding: 25px;
+  margin-left: 200px;
+}
+
+.req-data-column1 h3{
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+.req-data-column2 {
+  box-sizing: border-box;
+  float: right;
+  width: fit-content;
+  padding: 25px;
+  /* box-sizing: border-box;
+  width: fit-content;
+  float: left;
+  padding-top: 25px; */
+  margin-right: 200px;
+  margin-top: 10px;
+}
+
+.req-data-column2 .comments{
+  float:left;
+  margin: 0px;
+}
+
 .request-table{
   background-color: grey;
   border: 5px;
@@ -180,6 +226,20 @@ button:hover {
   margin-top: 20px;
 }
 
+.sup-column1 {
+  box-sizing: border-box;
+  float: left;
+  width: 75.00%;
+  padding: 25px;
+}
+
+.sup-column2 {
+  box-sizing: border-box;
+  width: 25.00%;
+  float: right;
+  padding-top: 100px;
+}
+
 /* .sup-update-request{
   display: flex;
     justify-items: center;
@@ -193,8 +253,7 @@ button:hover {
   font-family: "Franklin Gothic Medium", Times, serif;
 }
 
-/*.update-request{
+.update-request{
   display: grid;
   justify-items: center;
-  margin-top: 20px;
-} */
+}

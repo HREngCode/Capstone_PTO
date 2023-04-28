@@ -11,7 +11,7 @@ from .serializers import PtoRequestSerializer
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_all_pto_requests(request):
         ptorequests = PtoRequest.objects.all()
         serializer = PtoRequestSerializer(ptorequests, many=True)
@@ -19,7 +19,7 @@ def get_all_pto_requests(request):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_request_by_supervisor(request):
     supervisor_param = request.query_params.get('supervisor')
     sort_param = request.query_params.get('sort')
@@ -33,7 +33,7 @@ def get_request_by_supervisor(request):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_request_by_employee_number(request):
     employee_param = request.query_params.get('employee')
     sort_param = request.query_params.get('sort')
@@ -57,7 +57,7 @@ def pto_request_create(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-@permission_classes([AllowAny]) 
+@permission_classes([IsAuthenticated]) 
 def pto_request_detail(request, pk):
     pto_request = PtoRequest.objects.get(pk=pk)
     if request.method == 'GET':
@@ -103,7 +103,7 @@ def pto_request_approve(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_request_by_employee_id(request, id):
     pto_requests = request.query_params.get(id)
     pto_requests = PtoRequest.objects.all()
@@ -123,7 +123,7 @@ def get_request_by_id(request, id):
 
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_request_by_employee_number(request, id):
     pto_requests = request.query_params.get(id)
     pto_requests = PtoRequest.objects.all()

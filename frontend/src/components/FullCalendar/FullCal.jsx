@@ -21,7 +21,6 @@ const FullCal = (props)=> {
   // const [numberEvents, setNumberEvents] = useState(0)
 
   useEffect(() => {
-    console.log("I Only run once (When the component gets mounted)") 
     handleEvents()
   },[props.ptoRequests]);
 

@@ -25,7 +25,7 @@ import Footer from "./components/Footer/Footer";
 
 // Context Imports
 import { EmployeeInfoContext } from "./context/EmployeeInfoContext";
-import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
+// import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -34,10 +34,10 @@ function App() {
   const [user, token] = useAuth();
   const [employeeData, setEmployeeData] = useState('');
   const {employee, setEmployee} = useContext(EmployeeInfoContext);
-  const [employeeId, setEmployeeId] = useState(null);
-  const {supervisor, setSupervisor} = useContext(SupervisorInfoContext);
-  const [employeeSupervisor, setEmployeeSupervisor] = useState('');
-  const [ptoRequestData, setPtoRequestData] = useState('');
+  const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
+  // const {supervisor, setSupervisor} = useContext(SupervisorInfoContext);
+  // const [employeeSupervisor, setEmployeeSupervisor] = useState('');
+  // const [ptoRequestData, setPtoRequestData] = useState('');
   
   useEffect(() => {
     const fetchEmployeeInfo = async () => {
@@ -48,45 +48,44 @@ function App() {
         Authorization: "Bearer " + token,
         },
       });
+      console.log(response.data)
       //Gets employee supervisor information
-      let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
-        headers: {
-        Authorization: "Bearer " + token,
-        }, 
-        }
-      );
+      // let response2 = await axios.get(`http://127.0.0.1:8000/api/employees/employee_number/${response.data.supervisor_number}/`, {
+      //   headers: {
+      //   Authorization: "Bearer " + token,
+      //   }, 
+      //   }
+      // );
+      console.log("Home Page Loaded",response.data);
+      // console.log("Supervisor Info Loaded",response2.data);
       setEmployeeData(response.data);
       setEmployee(response.data);
       setEmployeeId(response.data.id);
       // setEmployeeSupervisor(response2.data);
       // setSupervisor(response2.data);
-      // localStorage.setItem('employeeId', employeeId);
-      // Use sessionStorage for data that should be cleared on tab close
-      sessionStorage.setItem('employeeId', employeeId); 
       } catch (error) {
         console.log(error.message);
       }    
     };
     fetchEmployeeInfo();
 
-    const fetchPtoRequestInfo = async () => {
-      try {
-      let response = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
-        headers: {
-        Authorization: "Bearer " + token,
-        },
-      });
-      setPtoRequestData(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }    
-    };
-    fetchPtoRequestInfo();
+    // const fetchPtoRequestInfo = async () => {
+    //   try {
+    //   let response3 = await axios.get(`http://127.0.0.1:8000/api/employees/user/${user.id}/`, {
+    //     headers: {
+    //     Authorization: "Bearer " + token,
+    //     },
+    //   });
+    //   setPtoRequestData(response3.data);
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }    
+    // };
+    // fetchPtoRequestInfo();
 
-  }, [token, user, employeeData.id]);
+  }, [user, employeeId, token]);
 
   return (
-    <EmployeeInfoContext.Provider value={{employeeId}}>
       <div>
         <Header />
           <Routes>
@@ -112,7 +111,6 @@ function App() {
           </Routes>
         <Footer />
       </div>
-    </EmployeeInfoContext.Provider>
   ); 
 }
 

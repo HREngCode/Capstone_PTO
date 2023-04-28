@@ -14,6 +14,7 @@ const RegisterEePage = () => {
   const [ admin, setAdmin ] = useState(false)
   const { registerEmployee } = useContext(EmployeeContext);
   const { user } = useContext(AuthContext);
+  const { regUserId } = useContext(AuthContext);
 
   const defaultValues = {
     //Changed value to User

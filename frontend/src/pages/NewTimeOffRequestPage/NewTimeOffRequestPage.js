@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom"
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
+import { formatDate } from "@fullcalendar/core";
 
 // Context Imports
 import { EmployeeInfoContext } from '../../context/EmployeeInfoContext';
@@ -124,7 +125,7 @@ const NewTimeOffRequestPage = (props) => {
                     </div>
                     <div className='newEntry'>
                     <label><b>Hire Date: </b></label>
-                    {props.employeeData.hire_date}
+                    {formatDate(props.employeeData.hire_date)}
                     </div>
                     <div className='newEntry'>
                     <label><b>PTO Balance:</b> </label>

@@ -7,6 +7,7 @@ import axios from "axios";
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
 import FullCal from "../../components/FullCalendar/FullCal";
+import { formatDate } from "@fullcalendar/core";
 
 //Context Imports
 
@@ -56,25 +57,33 @@ const SupervisorPage = (props) => {
         <div><Navbar />
             <div>
                 <div>{props.employeeData.isSupervisor?
-                (<div> 
-                    <div className="title-homepage">
-                        <h1>Supervisor Page for {" " + props.employeeData.department}!</h1></div>
-                        <div className="flex-container">
-                        {ptoRequests &&
-                        ptoRequests.map((ptoRequest) => (
-                        <p key={ptoRequest.id}>
-                            <p><b>Request ID:</b> {ptoRequest.id} </p>
-                            <p><b>Requester:</b>  {ptoRequest.employee.employee_first_name} {ptoRequest.employee.employee_last_name}</p>
-                            <p><b>Date Requested:</b>   {ptoRequest.date_requested}</p>                
-                            <p><b>Hours Requested:</b>   {ptoRequest.hours_requested}</p>
-                            <button onClick={() => handleClick(ptoRequest)}>Detail</button> 
-                            <button onClick={() => handleApprovalToggle(ptoRequest)}>Approve</button>
-                        </p>
-                        ))}
+                (<div>
+                    <div>
+                        <div className="sup-column1">
+                            <div className="title-homepage">
+                                <h1>Supervisor Page for {" " + props.employeeData.department}!</h1></div>
+                            <div>
+                                <div className="calendar">
+                                <FullCal ptoRequests= {ptoRequests} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="calendar">
-                            <FullCal ptoRequests= {ptoRequests} />
-                        </div>
+                        <div className="sup-column2"></div>    
+                        <div className="act_req_title"><b><h3>Active Requests</h3></b></div>
+                            <div className="active_requests"> 
+                                {ptoRequests &&
+                                ptoRequests.map((ptoRequest) => (
+                                <p key={ptoRequest.id}>
+                                    {/* <p><b>Request ID:</b> {ptoRequest.id} </p> */}
+                                    <p><b>Requester:</b>  {ptoRequest.employee.employee_first_name} {ptoRequest.employee.employee_last_name}</p>
+                                    <p><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</p>                
+                                    <p><b>Hours Requested:</b>{" " + ptoRequest.hours_requested}</p>
+                                    <button onClick={() => handleClick(ptoRequest)}>Detail</button> 
+                                    <button onClick={() => handleApprovalToggle(ptoRequest)}>Approve</button>
+                                </p>
+                                ))}
+                            </div>
+                    </div>  
                         </div>) : (<div><h3><b>You Do Not Have Supervisor Access</b></h3></div>) }
                 </div>
             </div>

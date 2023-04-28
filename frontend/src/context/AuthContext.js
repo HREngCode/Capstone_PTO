@@ -4,6 +4,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 
 
+
 const AuthContext = createContext();
 
 export default AuthContext;
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
   const userToken = JSON.parse(localStorage.getItem("token"));
   const decodedUser = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
+  const [regUserId, setRegUserId] = useState();
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         console.log("Successful registration! Log in to access token");
         setIsServerError(false);
+        setRegUserId(response.id)
         console.log(isServerError)
         navigate("/registerEe");
       } else {

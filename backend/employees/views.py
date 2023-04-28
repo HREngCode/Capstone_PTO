@@ -12,7 +12,7 @@ from .serializers import EmployeeSerializer
 
 # Get all employees
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def employee_list(request):
         employees = Employee.objects.all()
         serializer = EmployeeSerializer(employees, many=True)
@@ -21,7 +21,7 @@ def employee_list(request):
 
 # Get name by user id
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_name_by_user_id(request, user):
     employees = request.query_params.get(user)
     employees = Employee.objects.all()
@@ -33,7 +33,7 @@ def get_name_by_user_id(request, user):
 
 # Get name by employee number
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_name_by_employee_number(request, user):
     employees = request.query_params.get(user)
     employees = Employee.objects.all()
@@ -45,7 +45,7 @@ def get_name_by_employee_number(request, user):
 
 # Get by supervisor number
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_name_by_supervisor_number(request, id):
     employees = request.query_params.get(id)
     employees = Employee.objects.all()

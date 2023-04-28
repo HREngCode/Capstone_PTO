@@ -16,6 +16,7 @@ export const EmployeeInfoProvider = ({children}) => {
     // const [employeeNumber, setEmployeeNumber] = useState()
     // const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
     // const [employeeIsAdmin, setEmployeeIsAdmin] = useState()
+    const [regUserId, setRegUserId] = useState()
 
     let value = {
     //     employeeUserId,
@@ -36,7 +37,8 @@ export const EmployeeInfoProvider = ({children}) => {
     //     setEmployeeIsSupervisor,
     //     employeeIsAdmin,
     //     setEmployeeIsAdmin, 
-        // fetchEmployeeInfo,
+        regUserId,
+        setRegUserId,
     }
 
 //     //always return jsx

@@ -7,7 +7,7 @@ import {useNavigate } from 'react-router-dom';
 
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
-import FullCal from "../../components/FullCalendar/FullCal";
+import FullCal from "../../components/FullCalendar/FullCal"
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
@@ -20,31 +20,33 @@ const HomePage = (props) => {
   const [user, token] = useAuth();
   const navigate = useNavigate();
   const [ptoRequests, setPtoRequests] = useState([]);
-  let approveStatus; 
+  const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
+  const [empty, setEmpty] = useState();
+
+  console.log(employeeId)
 
   useEffect(() => {
-
-    if(props.employeeData.id)
-    {
-          const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
+      const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
       try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${props.employeeData.id}/`, {
+        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
           headers: {
             Authorization: "Bearer " + token,
           },
-        });
-        setPtoRequests(response.data);
-        // console.log(props)
-      } catch (error) {
-        console.log(error.response);
-      }    
-    }; 
-    fetchPtoRequestByEmployee();
-    }
-
-
-
-  }, [props.employeeData.id]);//optional array to make sure this only runs once
+          });
+          if (response.data == "null" || response.data == ""){
+            setEmpty(true)
+          }
+          else {
+            setEmpty(false)
+            setPtoRequests(response.data);
+            console.log(ptoRequests);
+          }
+          } catch (error) {
+            console.log(error.response);
+          }    
+      }; 
+      fetchPtoRequestByEmployee(); 
+  }, [employeeId, user, token]);
 
   
 
@@ -67,25 +69,26 @@ const HomePage = (props) => {
         </div>
         <div className="column2">
           <div className="act_req_title"><b><h3>Active Requests</h3></b></div>
-          {/* Javascript Map Function can generate multiple components from an array of data */}
-            <div className="active_requests"> 
+          {empty?
+        (<div>NO DATA AVAILABLE</div>):(<div>
+          <div className="active_requests"> 
             {ptoRequests &&
             ptoRequests.map((ptoRequest) => (
-              <div key={ptoRequest.id}>
-                {/* <ul><b>Request Number:</b>{" " + ptoRequest.id}</ul> */}
-                <ul><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</ul>
-                <ul><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</ul>
-                <div>{ptoRequest.approved?
-                (<div>
-                  <ul><b>Approved:</b> {" Yes"}</ul>
-                </div>) :(<div>                    
-                  <ul><b>Approved:</b> {" No"}</ul></div>)
-              }</div>
-                <button onClick={() => handleClick(ptoRequest)}>Detail</button>
-              </div>
-              ))}
+            <div key={ptoRequest.id}>
+              <ul><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</ul>
+              <ul><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</ul>
+              <div>{ptoRequest.approved?
+              (<div>
+                <ul><b>Approved:</b> {" Yes"}</ul>
+              </div>) :(<div>                    
+                <ul><b>Approved:</b> {" No"}</ul></div>)
+            }</div>
+              <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+            </div>
+            ))}
           </div>
-        </div>
+          </div>)}
+          </div>
       </div>
     </div>
   );

@@ -176,7 +176,7 @@ button:hover {
   float: left;
   width: fit-content;
   padding: 25px;
-  margin-left: 200px;
+  margin-left: 100px;
 }
 
 .req-data-column1 h3{
@@ -193,7 +193,8 @@ button:hover {
   width: fit-content;
   float: left;
   padding-top: 25px; */
-  margin-right: 200px;
+  text-overflow: wrap;
+  margin-right: 75px;
   margin-top: 10px;
 }
 

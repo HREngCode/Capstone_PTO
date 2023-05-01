@@ -9,6 +9,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 
+//Context Imports
+
 //Utility Imports
 import { createEventId } from './event-utils'
 import { Calendar } from '@fullcalendar/core';
@@ -49,9 +51,13 @@ const FullCal = (props)=> {
   const handleEventClick = (eventInfo) => {
     // Access the custom event ID from the event object
     const eventId = eventInfo.event.extendedProps.requestid;
-    navigate(`/timeoffrequest/${eventId}`);
+    if(props.employee.isSupervisor == true){
+      navigate(`/timeoffrequestsup/${eventId}`);
+      }
+    else{
+      navigate(`/timeoffrequest/${eventId}`);
+      };
     // Do something with the event ID
-    console.log('Event ID:', eventId);
   };
 
   function handleEvents(){

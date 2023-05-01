@@ -16,6 +16,7 @@ const TimeOffRequestDataPage = (props) => {
     const navigate = useNavigate ();
     const [ptoRequest, setPtoRequest] = useState({});
     const [comments, setComments] = useState([]);
+    const [addComment, setAddComment] = useState('');
     const [dateRequested, setDateRequested] = useState('');
     const [hoursRequested, setHoursRequested] = useState('');
     const [requesterName, setRequesterName] = useState(' ');
@@ -43,27 +44,53 @@ const TimeOffRequestDataPage = (props) => {
             }
         }
         fetchRequest()
-
-        const fetchComments = async () => {
-            try {
-                let response2 = await axios.get(
-                    `http://127.0.0.1:8000/api/comments/request/${ptoRequestId}/`
-                )
-                if (response2.data == "null" || response2.data == ""){
-                    setEmpty(true)
-                }
-                else {
-                setEmpty(false)
-                setComments(response2.data)
-                console.log(comments)
-                }
-                // setApproved(response.data.approved)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        fetchComments()
     }, [token, user, comments, props, ptoRequestId]);  
+
+    useEffect(() => {
+        fetchComments();
+    }, []); 
+
+    const fetchComments = async () => {
+        try {
+            let response2 = await axios.get(
+                `http://127.0.0.1:8000/api/comments/request/${ptoRequestId}/`
+            )
+            if (response2.data == "null" || response2.data == ""){
+                setEmpty(true)
+            }
+            else {
+            setEmpty(false)
+            setComments(response2.data)
+            console.log(comments)
+            }
+            // setApproved(response.data.approved)
+        } catch (error) {
+            console.log(error)
+        }
+    };
+    
+    const addNewComment = async (newComment) => {
+        try 
+        {
+        await axios.post('http://127.0.0.1:8000/api/comments/changes/', newComment);
+        fetchComments();
+        }
+        catch (error) 
+        {
+            console.log(error.message)
+        }
+    };
+
+    const handleAddComment = (event) => {
+        event.preventDefault();
+        let newComment = {
+            employee: props.employeeData.id,
+            pto_request: ptoRequest.id,
+            text: addComment,
+        };
+        addNewComment(newComment);
+        setAddComment(""); 
+    }
 
     const updateTimeOffRequest = async (changeTimeOffRequest) => {
         try 
@@ -155,6 +182,10 @@ const TimeOffRequestDataPage = (props) => {
                         </div>
                         ))}
                     </div>)}
+                    </div>
+                    <div>
+                    <button onClick={handleAddComment}>Add Comment</button>
+                    <input type="text" name="text" value={addComment} onChange={(event) => setAddComment(event.target.value)}/> 
                     </div>
             </div>
         </div>

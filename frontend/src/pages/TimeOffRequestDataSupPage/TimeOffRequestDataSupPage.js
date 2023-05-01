@@ -9,13 +9,14 @@ import Navbar from "../../components/NavBar/NavBar";
 //Hooks Imports
 import useAuth from '../../hooks/useAuth';
 
-const UpdatedTimeOffRequestPage = (props) => {
+const TimeOffRequestDataSupPage = (props) => {
     // setting up hooks a good place to start
     const {ptoRequestId} = useParams();
     const [user, token] = useAuth ();
     const navigate = useNavigate ();
     const [ptoRequest, setPtoRequest] = useState({});
     const [comments, setComments] = useState([]);
+    const [addComment, setAddComment] = useState('');
     const [dateRequested, setDateRequested] = useState('');
     const [hoursRequested, setHoursRequested] = useState('');
     const [requesterName, setRequesterName] = useState(' ');
@@ -43,27 +44,53 @@ const UpdatedTimeOffRequestPage = (props) => {
             }
         }
         fetchRequest()
+    }, [token, user, props]); 
 
-        const fetchComments = async () => {
-            try {
-                let response2 = await axios.get(
-                    `http://127.0.0.1:8000/api/comments/request/${ptoRequestId}/`
-                )
-                if (response2.data == "null" || response2.data == ""){
-                    setEmpty(true)
-                }
-                else {
-                setEmpty(false)
-                setComments(response2.data)
-                console.log(comments)
-                }
-                // setApproved(response.data.approved)
-            } catch (error) {
-                console.log(error)
+    useEffect(() => {
+        fetchComments();
+    }, []); 
+
+    const fetchComments = async () => {
+        try {
+            let response2 = await axios.get(
+                `http://127.0.0.1:8000/api/comments/request/${ptoRequestId}/`
+            )
+            if (response2.data == "null" || response2.data == ""){
+                setEmpty(true)
             }
+            else {
+            setEmpty(false)
+            setComments(response2.data)
+            console.log(comments)
+            }
+            // setApproved(response.data.approved)
+        } catch (error) {
+            console.log(error)
         }
-        fetchComments()
-    }, [token, user, props, ptoRequestId]);  
+    };
+    
+    const addNewComment = async (newComment) => {
+        try 
+        {
+        await axios.post('http://127.0.0.1:8000/api/comments/changes/', newComment);
+        fetchComments();
+        }
+        catch (error) 
+        {
+            console.log(error.message)
+        }
+    };
+
+    const handleAddComment = (event) => {
+        event.preventDefault();
+        let newComment = {
+            employee: props.employeeData.id,
+            pto_request: ptoRequest.id,
+            text: addComment,
+        };
+        addNewComment(newComment);
+        setAddComment(""); 
+    }
 
     const updateTimeOffRequest = async (changeTimeOffRequest) => {
         try 
@@ -89,7 +116,7 @@ const UpdatedTimeOffRequestPage = (props) => {
         {
             console.log(error.message)
         }
-    }    
+    } 
 
     function handleSubmit(event){
         event.preventDefault();
@@ -105,6 +132,11 @@ const UpdatedTimeOffRequestPage = (props) => {
     const ptoApprove = {
         approved: true,
     };
+
+    if (approved === false)
+    {approveStatus = "No"}
+    else
+    {approveStatus = "Yes"};  
     
     const handleApprovalToggle = async () => {
        await axios.patch(`http://127.0.0.1:8000/api/pto_requests/approval/${ptoRequestId}/`, ptoApprove)
@@ -116,11 +148,6 @@ const UpdatedTimeOffRequestPage = (props) => {
         await axios.delete(`http://127.0.0.1:8000/api/pto_requests/${ptoRequestId}/`)
         navigate("/supervisor")
        };
-
-    if (approved === false)
-    {approveStatus = "No"}
-    else
-    {approveStatus = "Yes"};  
 
     return ( 
         <div><Navbar />
@@ -183,8 +210,12 @@ const UpdatedTimeOffRequestPage = (props) => {
                         ))}
                     </div>)}
                 </div>
+                    <div>
+                    <button onClick={handleAddComment}>Add Comment</button>
+                    <input type="text" name="text" value={addComment} onChange={(event) => setAddComment(event.target.value)}/> 
+                    </div>
             </div>
         </div>
     );
 }
-export default UpdatedTimeOffRequestPage;
+export default TimeOffRequestDataSupPage;

@@ -20,6 +20,7 @@ const HomePage = (props) => {
   const [user, token] = useAuth();
   const navigate = useNavigate();
   const [ptoRequests, setPtoRequests] = useState([]);
+  const [employee, setEmployee] = useState({});
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
   const [empty, setEmpty] = useState();
 
@@ -33,6 +34,7 @@ const HomePage = (props) => {
             Authorization: "Bearer " + token,
           },
           });
+          setEmployee(props.employeeData);
           if (response.data == "null" || response.data == ""){
             setEmpty(true)
           }
@@ -62,7 +64,7 @@ const HomePage = (props) => {
             <h1>Home Page for {props.employeeData.employee_first_name + " " + props.employeeData.employee_last_name}!</h1>
             <div>
               <div className="calendar">
-                    <FullCal ptoRequests= {ptoRequests} />
+                    <FullCal ptoRequests= {ptoRequests} employee={employee} />
               </div>
             </div>
           </div>

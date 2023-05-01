@@ -17,6 +17,9 @@ const SupervisorPage = (props) => {
     const navigate = useNavigate();
     const [approval, setApproval] = useState(false);
     const [ptoRequests, setPtoRequests] = useState([]);
+    const [employee, setEmployee] = useState({});
+    // setEmployee(props.employeeData)
+    // console.log(employee);
 
     useEffect(() => { 
 
@@ -30,14 +33,15 @@ const SupervisorPage = (props) => {
                 Authorization: "Bearer " + token,
                 },
             });
+            setEmployee(props.employeeData);
             setPtoRequests(response.data);
             setApproval(response.data.approved);
             } catch (error) {
             console.log(error.response);
             }    
         }; 
-        fetchRequestBySupervisor() ;
-
+        fetchRequestBySupervisor();
+        
     }, [token, user, props.employeeData.employee_number]); 
 
     const handleClick = (ptoRequest) => {
@@ -64,7 +68,7 @@ const SupervisorPage = (props) => {
                                 <h1>Supervisor Page for {" " + props.employeeData.department}!</h1></div>
                             <div>
                                 <div className="calendar">
-                                <FullCal ptoRequests= {ptoRequests} />
+                                <FullCal ptoRequests= {ptoRequests} employee={employee} />
                                 </div>
                             </div>
                         </div>

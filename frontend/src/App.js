@@ -8,16 +8,16 @@ import useAuth from "./hooks/useAuth";
 import axios from "axios";
 
 // Pages Imports
-// import SupervisorPage from "./pages/SupervisorPage/SupervisorPage";
-// import NewTimeOffRequestPage from "./pages/NewTimeOffRequestPage/NewTimeOffRequestPage";
-// import TimeOffRequestDataPage from "./pages/TimeOffRequestDataPage/TimeOffRequestDataPage";
-// import TimeOffRequestDataSupPage from "./pages/TimeOffRequestDataSupPage/TimeOffRequestDataSupPage";
+import SupervisorPage from "./pages/SupervisorPage/SupervisorPage";
+import NewTimeOffRequestPage from "./pages/NewTimeOffRequestPage/NewTimeOffRequestPage";
+import TimeOffRequestDataPage from "./pages/TimeOffRequestDataPage/TimeOffRequestDataPage";
+import TimeOffRequestDataSupPage from "./pages/TimeOffRequestDataSupPage/TimeOffRequestDataSupPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-// import EmployeeProfilePage from "./pages/EmployeeProfilePage/EmployeeProfilePage";
+import EmployeeProfilePage from "./pages/EmployeeProfilePage/EmployeeProfilePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import RegisterEePage from "./pages/RegisterEePage/RegisterEePage";
-// import AdminPage from "./pages/AdminPage/AdminPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 // Component Imports
 import Header from "./components/Header/Header";
@@ -25,7 +25,6 @@ import Footer from "./components/Footer/Footer";
 
 // Context Imports
 import { EmployeeInfoContext } from "./context/EmployeeInfoContext";
-// import { SupervisorInfoContext } from "./context/SupervisorInfoContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
@@ -35,9 +34,6 @@ function App() {
   const [employeeData, setEmployeeData] = useState('');
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
-  // const {supervisor, setSupervisor} = useContext(SupervisorInfoContext);
-  // const [employeeSupervisor, setEmployeeSupervisor] = useState('');
-  // const [ptoRequestData, setPtoRequestData] = useState('');
   
   useEffect(() => {
     if(user)
@@ -51,14 +47,14 @@ function App() {
         },
       });
       console.log(response.data.id)
-      console.log(user.id)
+      // console.log(user.id)
       console.log("Home Page Loaded",response.data);
       setEmployeeData(response.data);
       setEmployeeInfo(response.data);
       setEmployeeId(response.data.id);
       } catch (error) {
         console.log(error.message);
-      }    
+      }   
     };
     fetchEmployeeInfo();
     }
@@ -78,7 +74,7 @@ function App() {
     // };
     // fetchPtoRequestInfo();
 
-  }, [employeeId, user, token]);
+  }, [user, token]);
 
   return (
       <div>
@@ -96,13 +92,13 @@ function App() {
                 </PrivateRoute>
               }
             />
-            {/* <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage employeeData={employeeData}/>} /> */}
+            <Route path="/newtimeoffrequest" element={<NewTimeOffRequestPage employeeData={employeeData}/>} />
             {/*Employee Profile & Time Off Request Page using a Param */}
-            {/* <Route path="/employeeprofile/:employeeId" element={<EmployeeProfilePage employeeData={employeeData}/>} />
+            <Route path="/employeeprofile/:employeeId" element={<EmployeeProfilePage employeeData={employeeData}/>} />
             <Route path="/timeoffrequest/:ptoRequestId" element={<TimeOffRequestDataPage employeeData={employeeData}/>} />
             <Route path="/timeoffrequestsup/:ptoRequestId" element={<TimeOffRequestDataSupPage employeeData={employeeData}/>} />
             <Route path="/supervisor" element={<SupervisorPage employeeData={employeeData}/>} />
-            <Route path="/admin" element={<AdminPage employeeData={employeeData}/>} /> */}
+            <Route path="/admin" element={<AdminPage employeeData={employeeData}/>} />
           </Routes>
         <Footer />
       </div>

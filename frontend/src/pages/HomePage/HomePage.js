@@ -23,31 +23,27 @@ const HomePage = () => {
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
 
-  console.log(employeeId)
+  const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
+    if(employeeId){
+    try {
+      let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+        });
+        setPtoRequests(response.data);
+        } 
+        catch (error) 
+        {
+          console.log(error.response);
+        } 
+        setEmployeeId('')    
+    };
+  } 
 
   useEffect(() => {
-
-    console.log(employeeId)
-    const fetchPtoRequestByEmployee = async () => {//add async before parenthensis ahead of the arrow function
-      if(employee)
-      {
-      console.log(employeeId)
-      try {
-        let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/employee/${employeeId}/`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-          });
-          setPtoRequests(response.data)
-          console.log(employeeInfo.id)
-          console.log(response.data)
-          } catch (error) {
-            console.log(error.response);
-          }    
-      }; 
-    fetchPtoRequestByEmployee(); 
-    }
-  }, [employeeId, user, token]);
+    fetchPtoRequestByEmployee();
+  }, [employeeId, token]);
 
 
   const handleClick = (ptoRequest) => {
@@ -62,7 +58,7 @@ const HomePage = () => {
             <h1>Home Page for {employeeInfo.employee_first_name + " " + employeeInfo.employee_last_name}!</h1>
             <div>
               <div className="calendar">
-                    <FullCal ptoRequests= {ptoRequests} />
+                    <FullCal ptoRequests={ptoRequests} employeeInfo={employeeInfo}/>
               </div>
             </div>
           </div>

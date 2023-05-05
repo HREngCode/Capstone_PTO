@@ -51,7 +51,7 @@ const FullCal = (props)=> {
   const handleEventClick = (eventInfo) => {
     // Access the custom event ID from the event object
     const eventId = eventInfo.event.extendedProps.requestid;
-    if(props.employee.isSupervisor == true){
+    if(props.employeeInfo.isSupervisor == true){
       navigate(`/timeoffrequestsup/${eventId}`);
       }
     else{

@@ -8,7 +8,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 //Context Imports
 import { EmployeeProvider } from "./context/EmployeeContext";
 import { EmployeeInfoProvider } from "./context/EmployeeInfoProvider";
-import { SupervisorInfoProvider} from "./context/SupervisorInfoProvider";
 import { RequestInfoProvider } from "./context/RequestInfoProvider";
 
 ReactDOM.render(
@@ -17,11 +16,9 @@ ReactDOM.render(
       <AuthProvider>
         <EmployeeProvider>
           <EmployeeInfoProvider>
-            <SupervisorInfoProvider>
-                <RequestInfoProvider>
-                    <App />
-                </RequestInfoProvider>
-            </SupervisorInfoProvider>
+            <RequestInfoProvider>
+                <App />
+            </RequestInfoProvider>
           </EmployeeInfoProvider>
         </EmployeeProvider>
       </AuthProvider>

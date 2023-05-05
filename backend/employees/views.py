@@ -21,7 +21,7 @@ def employee_list(request):
 
 # Get name by user id
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_name_by_user_id(request, user):
     employees = request.query_params.get(user)
     employees = Employee.objects.all()

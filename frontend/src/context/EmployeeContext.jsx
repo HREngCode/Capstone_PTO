@@ -27,10 +27,6 @@ function setEmployeeObject(employee) {
 }
 
 export const EmployeeProvider = ({ children }) => {
-  const BASE_URL = "http://127.0.0.1:8000/api/employees";
-  // const userToken = JSON.parse(localStorage.getItem("token"));
-  // const decodedUser = userToken ? jwtDecode(userToken) : null;
-  // const [token, setToken] = useState(userToken);
   const [employee, setEmployee] = useState(setEmployeeObject);
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +47,7 @@ export const EmployeeProvider = ({ children }) => {
         isAdmin: registerData.isAdmin
       };
 
-      let response = await axios.post(`${BASE_URL}/changes/`, finalData);
+      let response = await axios.post(`http://127.0.0.1:8000/api/employees/changes/`, finalData);
       // , {
       //   headers: {
       //     // Authorization: "Bearer " + token,
@@ -71,12 +67,15 @@ export const EmployeeProvider = ({ children }) => {
     }
   };
 
-  const getEmployeeInfo = async (registerData) => {
-    
-  }
+  const logoutEmployee = () => {
+    if (employee) {
+      setEmployee(null);
+    }
+  };
 
   const contextData = {
     employee,
+    logoutEmployee,
     registerEmployee,
     isServerError,
   };

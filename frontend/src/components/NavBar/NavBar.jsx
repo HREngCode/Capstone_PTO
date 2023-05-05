@@ -1,17 +1,25 @@
 //General Imports
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Context Imports
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
+import EmployeeContext from "../../context/EmployeeContext";
 
 // CSS Imports
 import "./NavBar.css";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
+  const { logoutEmployee, employee } = useContext(EmployeeContext);
   const navigate = useNavigate();
+
+  const logoutAll = () => {
+      logoutUser();
+      logoutEmployee();
+  };
+
   return (
     <div className="navbar">
     <a href="/">Home</a>
@@ -28,7 +36,7 @@ const Navbar = () => {
     </div>
       <div>
         {user ? (
-          <a onClick={logoutUser}>Logout</a>
+          <a onClick={logoutAll}>Logout</a>
         ) : (
           <a onClick={() => navigate("/login")}>Login</a>
         )}

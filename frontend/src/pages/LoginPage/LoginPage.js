@@ -12,8 +12,6 @@ import useCustomForm from "../../hooks/useCustomForm";
 import "./LoginPage.css";
 
 //Components Imports
-// import Header from "../../components/Header/Header";
-// import Navbar from "../../components/NavBar/NavBar";
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);

@@ -8,7 +8,7 @@ import { EmployeeInfoContext } from "./EmployeeInfoContext";
 export const EmployeeInfoProvider = ({children}) => {
     // const [user, token] = useAuth ()
     // const [employeeUserId, setEmployeeUserId] = useState()
-    const [employee, setEmployee] = useState()
+    const [employeeInfo, setEmployeeInfo] = useState({})
     // const [employeeName, setEmployeeName] = useState()
     // const [employeeLastName, setEmployeeLastName] = useState()
     const [employeeId, setEmployeeId] = useState()
@@ -16,13 +16,12 @@ export const EmployeeInfoProvider = ({children}) => {
     // const [employeeNumber, setEmployeeNumber] = useState()
     // const [employeeIsSupervisor, setEmployeeIsSupervisor] = useState()
     // const [employeeIsAdmin, setEmployeeIsAdmin] = useState()
-    const [regUserId, setRegUserId] = useState()
 
     let value = {
     //     employeeUserId,
     //     setEmployeeUserId,
-        employee,
-        setEmployee,
+        employeeInfo,
+        setEmployeeInfo,
     //     // employeeName,
     //     // setEmployeeName,
     //     // employeeLastName,
@@ -37,8 +36,6 @@ export const EmployeeInfoProvider = ({children}) => {
     //     setEmployeeIsSupervisor,
     //     employeeIsAdmin,
     //     setEmployeeIsAdmin, 
-        regUserId,
-        setRegUserId,
     }
 
 //     //always return jsx

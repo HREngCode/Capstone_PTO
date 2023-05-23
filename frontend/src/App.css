@@ -5,7 +5,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  /* box-sizing: inherit; */
+  box-sizing: border-box;
 }
 
 html {
@@ -35,6 +35,10 @@ p {
   box-shadow: 0 9px #d7ddd8;
 }
 
+.active_requests ul {
+  color: black;
+}
+
 .admin-buttons {
   display: flex;
   justify-content: center;
@@ -46,7 +50,7 @@ p {
 }
 
 button {
-  display: inline-block;
+  /* display: inline-block; */
   padding: 7px 17px;
   font-size: 16px;
   margin-top: 5px;
@@ -59,7 +63,7 @@ button {
   color: #000000;
   background-color: #969b97;
   border: none;
-  border-radius: 12px;
+  border-radius: 20px;
   box-shadow: 0 9px #2d332e;
 }
 
@@ -102,27 +106,27 @@ button:hover {
   box-shadow: 0 9px #d7ddd8;
 }
 
-/* .container-flex-admin {
+.container-flex-admin {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px;
   flex-direction: row;
   padding: 10px;
-} */
+}
 
-/* .flex-container {
+.flex-container {
   float: right;
   display: flex;
   margin-top: 90px;
   margin-right: 10px;
   flex-wrap: wrap;
   width: 250px;
-} */
+}
 
-/* .flex-grid {
+.flex-grid {
   display: grid;
-} */
+}
 
 .info {
   box-sizing: border-box;
@@ -131,7 +135,8 @@ button:hover {
   border-color: #000000;
   border-radius: 20px;
   float: left;
-  margin: 50px;
+
+  margin: 5px;
   padding: 10px;
 }
 
@@ -158,7 +163,6 @@ button:hover {
   box-sizing: border-box;
   float: left;
   width: 50.00%;
-  padding: 10px;
 }
 
 .req-column1 h3 {
@@ -203,6 +207,10 @@ button:hover {
   margin: 0px;
 }
 
+.request-container{
+  display: flex;
+}
+
 .request-table{
   background-color: grey;
   border: 5px;
@@ -211,8 +219,8 @@ button:hover {
   display: grid;
   justify-content: center;
   float: center;
-  margin: 40px;
-  padding: 10px;
+  margin: 5px;
+  padding: 15px;
 }
 
 .request-table form {
@@ -250,7 +258,8 @@ button:hover {
 
 .title-homepage {
   text-align: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  background-color: blue;
   font-family: "Franklin Gothic Medium", Times, serif;
 }
 

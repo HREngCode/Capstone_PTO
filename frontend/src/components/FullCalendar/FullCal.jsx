@@ -1,6 +1,7 @@
 //General Imports
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+import "./index.css";
 
 //Component Imports
 // import { formatDate } from '@fullcalendar/core'
@@ -76,17 +77,6 @@ const FullCal = (props)=> {
   
   return (
     <div className='demo-app'>
-      <div className='demo-app-sidebar-section'>
-        <label>
-          <input
-            type='checkbox'
-            checked={weekendsVisible}
-            onChange={handleWeekendsToggle}
-          >
-          </input>
-          Show Weekends
-        </label>
-      </div>
       <div className='demo-app-main'>
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -113,6 +103,17 @@ const FullCal = (props)=> {
           eventRemove={function(){}}
           */
         />
+      </div>
+            <div className='demo-app-sidebar-section'>
+        <label>
+          <input
+            type='checkbox'
+            checked={weekendsVisible}
+            onChange={handleWeekendsToggle}
+          >
+          </input>
+          Show Weekends
+        </label>
       </div>
     </div>
   )

@@ -6,12 +6,15 @@ import {useNavigate, Link} from 'react-router-dom';
 
 //Component Imports
 import Navbar from "../../components/NavBar/NavBar";
+import EditUser from "../../components/EditUser/EditUser";
 
 const AdminPage = (props) => {
 
     const [user, token] = useAuth ()
     const [employees, setEmployees] = useState([]);
     const navigate = useNavigate();
+
+    console.log("Line 17 " + props)
 
     useEffect(() => {
 
@@ -29,11 +32,13 @@ const AdminPage = (props) => {
         };
         fetchAllEmployees();
     
-    }, [token, user, props.employeeData.id]);//optional array to make sure this only runs once    
+    }, [token, user]);//optional array to make sure this only runs once    
 
-    const handleClick = (employee) => {
-        navigate(`/employeeprofile/${employee.id}/`);
-      }
+    console.log(props)
+
+    // const handleClick = (employee) => {
+    //     navigate(`/employeeprofile/${employee.id}/`);
+    //   }
 
     return ( 
         <div><Navbar />
@@ -43,12 +48,14 @@ const AdminPage = (props) => {
                     <div className="container-flex-admin">
                     {employees &&
                     employees.map((employee) => (
-                    <p key={employee.id}>
-                       <p2><b>Employee Number:</b>{employee.employee_number}</p2> 
-                        <p3><b>Employee Name:</b>{employee.employee_first_name + " " + employee.employee_last_name}</p3>
-                        <button onClick={() => handleClick(employee)}>Edit</button>
+                    <div key={employee.id}>
+                       <div><b>Employee Number:</b>{employee.employee_number}</div> 
+                        <div><b>Employee Name:</b>{employee.employee_first_name + " " + employee.employee_last_name}</div>
+                        <div>
+                           <EditUser employee={employee}/>    
+                        </div>                                                 
                     {/* <Link to={`/employeeprofile/${employee.id}`} >{employee.employee_first_name} {employee.employee_number}</Link>  */}
-                    </p>    
+                    </div>    
                     ))}
                     </div>  
                 </div>) : (<div><h3><b>You Do Not Have Admin Access</b></h3></div>) }

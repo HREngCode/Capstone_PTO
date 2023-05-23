@@ -46,9 +46,7 @@ function App() {
         Authorization: "Bearer " + token,
         },
       });
-      console.log(response.data.id)
       // console.log(user.id)
-      console.log("Home Page Loaded",response.data);
       setEmployeeData(response.data);
       setEmployeeInfo(response.data);
       setEmployeeId(response.data.id);
@@ -87,7 +85,7 @@ function App() {
               path="/"
               element={
                 <PrivateRoute>
-                  <HomePage/>
+                  <HomePage employeeData={employeeData}/>
                   {/* {employee ? <HomePage /> : <Route path="/registerEe" element={<RegisterEePage />} /> } */}
                 </PrivateRoute>
               }

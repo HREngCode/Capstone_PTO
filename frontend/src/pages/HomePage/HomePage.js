@@ -8,12 +8,13 @@ import {useNavigate } from 'react-router-dom';
 // Component Imports
 import Navbar from "../../components/NavBar/NavBar";
 import FullCal from "../../components/FullCalendar/FullCal"
+import NewRequest from "../../components/NewRequest/NewRequest"
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
 import { formatDate } from "@fullcalendar/core";
 
-const HomePage = () => {
+const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
@@ -43,44 +44,55 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchPtoRequestByEmployee();
-  }, [employeeId, token]);
+  }, [user, employee, token]);
 
+  let ptoRequestsExist
+  if (ptoRequests.length > 0){
+    ptoRequestsExist = true
+  }
+  else {
+    ptoRequestsExist = false
+  }
 
   const handleClick = (ptoRequest) => {
     navigate(`/timeoffrequest/${ptoRequest.id}`);
   };
 
   return (
-    <div><Navbar />
+    <div><Navbar employeeinfo={{employeeInfo}}/>
       <div className="body">
         <div className="column1">
           <div className="title-homepage">
             <h1>Home Page for {employeeInfo.employee_first_name + " " + employeeInfo.employee_last_name}!</h1>
             <div>
               <div className="calendar">
-                    <FullCal ptoRequests={ptoRequests} employeeInfo={employeeInfo}/>
+                <FullCal ptoRequests={ptoRequests} employeeInfo={employeeInfo}/>
               </div>
             </div>
           </div>
         </div>
-        <div className="column2">
+        <div className="column2"> 
           <div className="act_req_title"><b><h3>Active Requests</h3></b></div>
-          <div className="active_requests"> 
-            {ptoRequests &&
-            ptoRequests.map((ptoRequest) => (
-            <div key={ptoRequest.id}>
-              <ul><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</ul>
-              <ul><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</ul>
-              <div>{ptoRequest.approved?
-              (<div>
-                <ul><b>Approved:</b> {" Yes"}</ul>
-              </div>) :(<div>                    
-                <ul><b>Approved:</b> {" No"}</ul></div>)
-            }</div>
-              <button onClick={() => handleClick(ptoRequest)}>Detail</button>
-            </div>
-            ))}
+              <div className="active_requests"> 
+              <div>{ptoRequestsExist?
+                (<div>
+                {ptoRequests &&
+                ptoRequests.map((ptoRequest) => (
+                <div key={ptoRequest.id}>
+                  <ul><b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}</ul>
+                  <ul><b>Hours Requested:</b> {" " + ptoRequest.hours_requested}</ul>
+                  <div>{ptoRequest.approved?
+                  (<div>
+                    <ul><b>Approved:</b> {" Yes"}</ul>
+                  </div>) :(<div>                    
+                    <ul><b>Approved:</b> {" No"}</ul></div>)
+              }</div>
+                <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+              </div>
+              ))}
+              </div>):(<div>NO DATA AVAILABLE</div>)}
           </div>
+            </div>
           </div>
       </div>
     </div>

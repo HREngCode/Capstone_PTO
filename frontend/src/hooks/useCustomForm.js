@@ -16,7 +16,6 @@ const useCustomForm = (initialValues = {}, onSubmit) => {
     setFormValues({ ...formData, [event.target.name]: event.target.value });
     }
   };
-  console.log(formData);
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -1,8 +1,7 @@
 /* header container */
 .header {
   display: grid;
-  height: 100px;
-  overflow: hidden;
+  height: 50px;
   background-color: rgb(158, 163, 177);
 }
 
@@ -17,7 +16,8 @@
 
 .header h2{
   text-align: center;
+  align-items: center;
   /* display: inline; */
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding: 35px;
+  padding: 5px;
 }

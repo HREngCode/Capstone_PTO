@@ -12,7 +12,8 @@ import interactionPlugin from '@fullcalendar/interaction'
 
 //Context Imports
 
-//Utility Imports
+// Utility Imports
+import { formatDate } from "@fullcalendar/core";
 import { createEventId } from './event-utils'
 import { Calendar } from '@fullcalendar/core';
 
@@ -26,6 +27,14 @@ const FullCal = (props)=> {
   useEffect(() => {
     handleEvents()
   },[props.ptoRequests]);
+
+  let ptoRequestsExist
+  if (props.ptoRequests.length > 0){
+    ptoRequestsExist = true
+  }
+  else {
+    ptoRequestsExist = false
+  }
 
   const handleWeekendsToggle = () => {
     setWeekendsVisible(!weekendsVisible)
@@ -74,6 +83,10 @@ const FullCal = (props)=> {
     )
     setCurrentEvents(events)
   }
+
+  const handleClick = (ptoRequest) => {
+    navigate(`/timeoffrequest/${ptoRequest.id}`);
+  };
   
   return (
     <div className='demo-app'>
@@ -104,7 +117,7 @@ const FullCal = (props)=> {
           */
         />
       </div>
-            <div className='demo-app-sidebar-section'>
+        <div className='demo-app-sidebar-section'>
         <label>
           <input
             type='checkbox'
@@ -114,6 +127,28 @@ const FullCal = (props)=> {
           </input>
           Show Weekends
         </label>
+        <div className='requests'>
+        <div>Active Requests</div>
+          {ptoRequestsExist?
+                (<div>
+                {props.ptoRequests &&
+                props.ptoRequests.map((ptoRequest) => (
+                <div className='request-detail' key={ptoRequest.id}>
+                  <b>Date Requested:</b>{" " + formatDate(ptoRequest.date_requested)}
+                  <div>
+                  <b>Hours Requested:</b> {" " + ptoRequest.hours_requested}
+                  </div>
+                  <div>{ptoRequest.approved?
+                  (<div>
+                    <b>Approved:</b> {" Yes"}
+                  </div>) :(<div>                    
+                    <b>Approved:</b> {" No"}</div>)
+              }</div>
+                <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+              </div>
+              ))}
+              </div>):(<div>NO DATA AVAILABLE</div>)}
+          </div>
       </div>
     </div>
   )

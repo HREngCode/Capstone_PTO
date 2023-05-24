@@ -12,6 +12,8 @@ import NewRequest from "../../components/NewRequest/NewRequest"
 
 // Context Imports
 import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
+
+// Utility Imports
 import { formatDate } from "@fullcalendar/core";
 
 const HomePage = (props) => {
@@ -41,9 +43,10 @@ const HomePage = (props) => {
         setEmployeeId('')    
     };
   } 
+  fetchPtoRequestByEmployee();
 
   useEffect(() => {
-    fetchPtoRequestByEmployee();
+    
   }, [user, employee, token]);
 
   let ptoRequestsExist
@@ -54,24 +57,26 @@ const HomePage = (props) => {
     ptoRequestsExist = false
   }
 
-  const handleClick = (ptoRequest) => {
-    navigate(`/timeoffrequest/${ptoRequest.id}`);
-  };
+  // const handleClick = (ptoRequest) => {
+  //   navigate(`/timeoffrequest/${ptoRequest.id}`);
+  // };
+
+  // console.log(ptoRequests)
 
   return (
     <div><Navbar employeeinfo={{employeeInfo}}/>
-      <div className="body">
-        <div className="column1">
+      <div >
+        {/* <div className="column1"> */}
           <div className="title-homepage">
-            <h1>Home Page for {employeeInfo.employee_first_name + " " + employeeInfo.employee_last_name}!</h1>
+            <h1>Welcome {employeeInfo.employee_first_name + " " + employeeInfo.employee_last_name} To Your HomePage!</h1>
             <div>
               <div className="calendar">
                 <FullCal ptoRequests={ptoRequests} employeeInfo={employeeInfo}/>
               </div>
             </div>
           </div>
-        </div>
-        <div className="column2"> 
+        {/* </div> */}
+        {/* <div className="column2"> 
           <div className="act_req_title"><b><h3>Active Requests</h3></b></div>
               <div className="active_requests"> 
               <div>{ptoRequestsExist?
@@ -93,7 +98,7 @@ const HomePage = (props) => {
               </div>):(<div>NO DATA AVAILABLE</div>)}
           </div>
             </div>
-          </div>
+          </div> */}
       </div>
     </div>
   );

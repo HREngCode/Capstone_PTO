@@ -30,14 +30,14 @@ b { /* used for event dates/times */
 .demo-app {
   display: flex;
   min-height: 100%;
-  color: black;
+  /* color: black; */
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
 
-/* .demo-app-sidebar-section {
+.demo-app-sidebar-section {
   padding: 2em;
-} */
+}
 
 .demo-app-main {
   flex-grow: 1;
@@ -54,7 +54,7 @@ b { /* used for event dates/times */
 .requests {
   display: block;
   border: 2px solid black;
-  background-color: rgb(180, 176, 176);
+  background-color: rgb(11, 11, 11);
   padding-left: 20px;
   padding-right: 10px;
   padding-top: 5px;

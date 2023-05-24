@@ -7,7 +7,7 @@ const Header = () => {
     return (
         <div className="header">
             <header>                
-                    <h2>Time Off Request</h2>
+                    <h2>GIMME A BREAK</h2>
             </header>
         </div>
     );

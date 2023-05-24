@@ -13,6 +13,9 @@ import Modal from 'react-bootstrap/Modal';
 //Hooks Imports
 import useAuth from '../../hooks/useAuth';
 
+//Utility Imports
+import "../../App.css"
+
 function NewRequest(props) {
     const [show, setShow] = useState(false);
 
@@ -82,8 +85,6 @@ function NewRequest(props) {
       });
       };
 
-    console.log(props)
-
     return (
 
       <>
@@ -95,10 +96,10 @@ function NewRequest(props) {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Time Off Request</Modal.Title>
+        <Modal.Header className='modal-header' closeButton>
+          <Modal.Title className='w-100 text-center'>New Request</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='modal-body'>
         <div className='request-container'>
             <div className='req-column1'>
             <div className='request-table'>
@@ -138,7 +139,7 @@ function NewRequest(props) {
                     {props.employeeinfo.employeeInfo.employee_first_name + " " + props.employeeinfo.employeeInfo.employee_last_name}
                     </div>
                     <div className='newEntry'>
-                    <label><b>Department:</b> </label>
+                    <label><b>Dept:</b> </label>
                     {props.employeeinfo.employeeInfo.department}
                     </div>
                     <div className='newEntry'>

@@ -8,7 +8,7 @@ import AuthContext from "../../context/AuthContext";
 //Hooks Imports
 import useCustomForm from "../../hooks/useCustomForm";
 
-//Pages Imports
+//Utility Imports
 import "./LoginPage.css";
 
 //Components Imports

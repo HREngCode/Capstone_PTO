@@ -10,6 +10,7 @@ import FullCal from "../../components/FullCalendar/FullCal";
 import { formatDate } from "@fullcalendar/core";
 
 //Context Imports
+import {EmployeeInfoContext} from "../../context/EmployeeInfoContext";
 
 const SupervisorPage = (props) => {
     
@@ -18,6 +19,7 @@ const SupervisorPage = (props) => {
     const [approval, setApproval] = useState(false);
     const [ptoRequests, setPtoRequests] = useState([]);
     const [employee, setEmployee] = useState({});
+    const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
     // setEmployee(props.employeeData)
     // console.log(employee);
 
@@ -28,12 +30,12 @@ const SupervisorPage = (props) => {
             //calls current employee number. If it's a supervisor, the value returned will be the employees that 
             //report to this number
            
-            let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/supervisor/${props.employeeData.employee_number}/`, { 
+            let response = await axios.get(`http://127.0.0.1:8000/api/pto_requests/supervisor/${employeeInfo.employee_number}/`, { 
                 headers: {
                 Authorization: "Bearer " + token,
                 },
             });
-            setEmployee(props.employeeData);
+            setEmployee(employeeInfo);
             setPtoRequests(response.data);
             setApproval(response.data.approved);
             } catch (error) {
@@ -42,7 +44,7 @@ const SupervisorPage = (props) => {
         }; 
         fetchRequestBySupervisor();
         
-    }, [token, user, props.employeeData.employee_number]); 
+    }, [token, user, employeeInfo]); 
 
     const handleClick = (ptoRequest) => {
         navigate(`/timeoffrequestsup/${ptoRequest.id}`);
@@ -60,21 +62,21 @@ const SupervisorPage = (props) => {
     return ( 
         <div><Navbar />
             <div>
-                <div>{props.employeeData.isSupervisor?
+                <div>{employeeInfo.isSupervisor?
                 (<div>
                         {/* <div className="sup-column1"> */}
                             <div className="title-homepage">
                                 <h1>{" " + props.employeeData.department} Department Page!</h1>
                             <div>
                                 <div className="calendar">
-                                <FullCal ptoRequests= {ptoRequests} employee={employee} />
+                                <FullCal ptoRequests={ptoRequests} employeeInfo={employeeInfo} />
                                 </div>
                             </div>
                             </div>
                         {/* </div> */}
                         {/* <div className="sup-column2"></div>     */}
                         {/* <div className="act_req_title"><b><h3>Active Requests</h3></b></div> */}
-                            {/* <div className="active_requests"> 
+                            <div className="active_requests"> 
                                 {ptoRequests &&
                                 ptoRequests.map((ptoRequest) => (
                                 <p key={ptoRequest.id}>
@@ -86,7 +88,7 @@ const SupervisorPage = (props) => {
                                     <button onClick={() => handleApprovalToggle(ptoRequest)}>Approve</button>
                                 </p>
                                 ))}
-                            </div> */}
+                            </div>
                         </div>) : (<div><h3><b>You Do Not Have Supervisor Access</b></h3></div>) }
                 </div>
             </div>

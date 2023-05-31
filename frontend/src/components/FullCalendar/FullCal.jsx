@@ -1,6 +1,7 @@
 //General Imports
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import "./index.css";
 
 //Component Imports
@@ -9,19 +10,26 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import RequestDetailUser from '../RequestDetailUser/RequestDetailUser';
+import RequestDetailSup from '../RequestDetailSup/RequestDetailSup';
+import EventModal from '../EventModal/EventModal';
 
 //Context Imports
+
 
 // Utility Imports
 import { formatDate } from "@fullcalendar/core";
 import { createEventId } from './event-utils'
 import { Calendar } from '@fullcalendar/core';
+import TestModal from '../TestModal/TestModal';
 
 const FullCal = (props)=> {
 
   const navigate = useNavigate();
   const [weekendsVisible, setWeekendsVisible] = useState(true)
   const [currentEvents, setCurrentEvents] = useState([])
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   // const [numberEvents, setNumberEvents] = useState(0)
 
   useEffect(() => {
@@ -58,17 +66,32 @@ const FullCal = (props)=> {
   //   }
   // }
 
-  const handleEventClick = (eventInfo) => {
+  const ptoApprove = {
+    approved: true,
+  };
+
+  const handleApprovalToggle = async (ptoRequest) => {
+    await axios.patch(`http://127.0.0.1:8000/api/pto_requests/approval/${ptoRequest.id}/`, ptoApprove)
+    alert(`You have approved the request for ${ptoRequest.id} `)
+   };
+
+  const handleEventClick = ({event}) => {
     // Access the custom event ID from the event object
-    const eventId = eventInfo.event.extendedProps.requestid;
-    if(props.employeeInfo.isSupervisor == true){
-      navigate(`/timeoffrequestsup/${eventId}`);
-      }
-    else{
-      navigate(`/timeoffrequest/${eventId}`);
-      };
+    // const eventId = eventInfo.event.extendedProps.requestid;
+    setSelectedEvent(event);
+    // setModalOpen(true)
+    // if(props.employeeInfo.isSupervisor == true){
+    //   navigate(`/timeoffrequestsup/${eventId}`);
+    //   }
+    // else{
+    //   navigate(`/timeoffrequest/${eventId}`);
+    //   };
     // Do something with the event ID
   };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  }
 
   function handleEvents(){
     let events = props.ptoRequests.map(function (event){
@@ -84,9 +107,18 @@ const FullCal = (props)=> {
     setCurrentEvents(events)
   }
 
-  const handleClick = (ptoRequest) => {
-    navigate(`/timeoffrequest/${ptoRequest.id}`);
+  const handleClick = () => {
+    // console.log(ptoRequest.id)
+    // if(props.employeeInfo.isSupervisor == true){
+    //   navigate(`/timeoffrequestsup/${ptoRequest.id}`);
+    //   }
+    // else{
+      <RequestDetailUser/>
+      // navigate(`/timeoffrequest/${ptoRequest.id}`);
+      // };
   };
+
+  
   
   return (
     <div className='demo-app'>
@@ -117,6 +149,7 @@ const FullCal = (props)=> {
           */
         />
       </div>
+      {/* <RequestDetailUser event={selectedEvent} /> */}
         <div className='demo-app-sidebar-section'>
         <label>
           <input
@@ -144,7 +177,16 @@ const FullCal = (props)=> {
                   </div>) :(<div>                    
                     <b>Approved:</b> {" No"}</div>)
               }</div>
-                <button onClick={() => handleClick(ptoRequest)}>Detail</button>
+              <div>
+                {props.employeeInfo.isSupervisor?
+                (<div>
+                  <RequestDetailSup ptoRequest={ptoRequest}/> 
+                  <button onClick={() => handleApprovalToggle(ptoRequest)}>Approve</button>
+                </div>):
+                (<div>
+                  <RequestDetailUser ptoRequest={ptoRequest}/>
+                </div>)}
+                </div>
               </div>
               ))}
               </div>):(<div>NO DATA AVAILABLE</div>)}

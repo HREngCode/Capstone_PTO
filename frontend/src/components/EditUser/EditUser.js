@@ -30,6 +30,9 @@ function EditUser(props) {
     const [active, setActive] = useState(props.employee.active);
     const [isSupervisor, setIsSupervisor] = useState(props.employee.isSupervisor);
     const [isAdmin, setIsAdmin] = useState(props.employee.isAdmin);
+    let userActive;
+    let superActive;
+    let adminActive;
   
       const updateEmployeeInfo = async (changeEmployeeInfo) => {
           try 
@@ -65,6 +68,21 @@ function EditUser(props) {
           };
           updateEmployeeInfo(changeEmployeeInfo)
       } 
+
+      if (active === false)
+      {userActive = "No"}
+      else
+      {userActive = "Yes"}; 
+
+      if (isSupervisor === false)
+      {superActive = "No"}
+      else
+      {superActive = "Yes"}; 
+
+      if (isAdmin === false)
+      {adminActive = "No"}
+      else
+      {adminActive = "Yes"}; 
   
       const makeActive = {
           active: true,
@@ -141,15 +159,15 @@ function EditUser(props) {
                     </div>
                     <div className='newEntry'>
                     <label><b>Active: </b> </label>
-                    <input type="boolean" value={active} onChange={(event) => setActive(event.target.value)}/>
+                    <input type="boolean" value={userActive} onChange={(event) => setActive(event.target.value)}/>
                     </div>
                     <div className='newEntry'>
                     <label><b>Supervisor: </b> </label>
-                    <input type="boolean" value={isSupervisor} onChange={(event) => setIsSupervisor(event.target.value)}/>
+                    <input type="boolean" value={superActive} onChange={(event) => setIsSupervisor(event.target.value)}/>
                     </div>
                     <div className='newEntry'>
                     <label><b>Admin:</b></label>
-                    <input type="boolean" value={isAdmin} onChange={(event) => setIsAdmin(event.target.value)}/>
+                    <input type="boolean" value={adminActive} onChange={(event) => setIsAdmin(event.target.value)}/>
                     </div>
                     <div>{isAdmin?
                     (<div className='admin-buttons'>

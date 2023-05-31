@@ -37,7 +37,6 @@ const TimeOffRequestDataPage = (props) => {
                 setRequesterName(response.data.employee.employee_first_name + " " + response.data.employee.employee_last_name)
                 setPtoBalance(response.data.employee.pto_balance)
                 setApproved(response.data.approved)
-                console.log(ptoRequestId)
                 // setApproved(response.data.approved)
             } catch (error) {
                 console.log(error)
@@ -55,13 +54,12 @@ const TimeOffRequestDataPage = (props) => {
             let response2 = await axios.get(
                 `http://127.0.0.1:8000/api/comments/request/${ptoRequestId}/`
             )
-            if (response2.data == "null" || response2.data == ""){
+            if (response2.data === "null" || response2.data === ""){
                 setEmpty(true)
             }
             else {
             setEmpty(false)
             setComments(response2.data)
-            console.log(comments)
             }
             // setApproved(response.data.approved)
         } catch (error) {

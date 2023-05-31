@@ -103,7 +103,6 @@ function NewRequest(props) {
         <div className='request-container'>
             <div className='req-column1'>
             <div className='request-table'>
-                <h3>Request Detail</h3>
                 <form onSubmit={handleRequestSubmit}>
                     <div className='newEntry'>
                     <label><b>Date Requested Off: </b></label>
@@ -126,7 +125,7 @@ function NewRequest(props) {
                         {/* <button onClick={handleCommentSubmit}>Submit Comment</button> */}
                     </div>
                 </form>
-        </div>
+            </div>
         </div>
             <div className='req-column2'>
                 <div className='info'>

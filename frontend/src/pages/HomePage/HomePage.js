@@ -43,11 +43,12 @@ const HomePage = (props) => {
         setEmployeeId('')    
     };
   } 
-  fetchPtoRequestByEmployee();
 
   useEffect(() => {
+
+    fetchPtoRequestByEmployee();
     
-  }, [user, employee, token]);
+  }, [user, employeeId, token]);
 
   let ptoRequestsExist
   if (ptoRequests.length > 0){

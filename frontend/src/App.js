@@ -25,15 +25,34 @@ import Footer from "./components/Footer/Footer";
 
 // Context Imports
 import { EmployeeInfoContext } from "./context/EmployeeInfoContext";
+import AuthContext from "./context/AuthContext";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   const [user, token] = useAuth();
+  const { logoutUser } = useContext(AuthContext);
   const [employeeData, setEmployeeData] = useState('');
   const {employeeInfo, setEmployeeInfo} = useContext(EmployeeInfoContext);
   const {employeeId, setEmployeeId} = useContext(EmployeeInfoContext);
+
+  
+  //Event Listener To LogOut Employee when closing 
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // Perform logout action here (e.g., API call, clearing session, etc.)
+      // Replace the following line with your actual logout logic
+      logoutUser();
+      console.log('Logging out...');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
   
   useEffect(() => {
     if(user)

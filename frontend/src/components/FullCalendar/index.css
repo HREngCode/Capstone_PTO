@@ -54,7 +54,7 @@ b { /* used for event dates/times */
 .requests {
   display: block;
   border: 2px solid black;
-  background-color: rgb(11, 11, 11);
+  background-color: rgb(187, 181, 181);
   padding-left: 20px;
   padding-right: 10px;
   padding-top: 5px;
@@ -70,6 +70,7 @@ b { /* used for event dates/times */
 .request-detail {
   border: 2px solid;
   /* box-sizing: border-box; */
+  color:black;
   list-style: none;
   margin: 30px 0px;
   /* display: flex;

@@ -35,7 +35,11 @@ const RequestDetailSup = (props) => {
     let approveStatus;
 
     useEffect(() => {
-        setRequesterName(props.ptoRequest.employee.employee_first_name);
+        setDateRequested(props.ptoRequest.date_requested)
+        setHoursRequested(props.ptoRequest.hours_requested)
+        setRequesterName(props.ptoRequest.employee.employee_first_name + " " + props.ptoRequest.employee.employee_last_name)
+        setPtoBalance(props.ptoRequest.employee.pto_balance)
+        setApproved(props.ptoRequest.approved)
         fetchComments();
     }, [token, user]);  
 
@@ -158,19 +162,19 @@ const RequestDetailSup = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className='newEntry'>
                     <label><b>Employee Name: </b></label>
-                    {props.ptoRequest.employee.employee_first_name}
+                    {requesterName}
                     </div>
                     <div className='newEntry'>
                     <label><b>Date Requested Off: </b></label>
-                    <input type="date" value={props.ptoRequest.date_requested} onChange={(event) => setDateRequested(event.target.value)}/>
+                    <input type="date" value={dateRequested} onChange={(event) => setDateRequested(event.target.value)}/>
                     </div>
                     <div className='newEntry'>
                     <label><b>Hours Requested: </b></label>
-                    <input type="number" value={props.ptoRequest.hours_requested} onChange={(event) => setHoursRequested(event.target.value)}/>
+                    <input type="number" value={hoursRequested} onChange={(event) => setHoursRequested(event.target.value)}/>
                     </div>
                     <div className='newEntry'>
                     <label><b>PTO Balance: </b></label>
-                    {props.ptoRequest.employee.pto_balance}
+                    {ptoBalance}
                     </div>
                     <div className='newEntry'>
                     <label><b>Approved: </b></label>

@@ -10,6 +10,9 @@ import Modal from 'react-bootstrap/Modal';
 //Hooks Imports
 import useAuth from '../../hooks/useAuth';
 
+//Utility Imports
+import "../../App.css"
+
 function EditUser(props) {
   const [show, setShow] = useState(false);
 
@@ -129,43 +132,43 @@ function EditUser(props) {
                     <label>Employee Id: </label>
                     <input type="number" value={employeeId} onChange={(event) => setEmployeeId(event.target.value)}/>
                     </div> */}
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Employee Number: </b> </label>
                     <input value={employeeNumber} onChange={(event) => setEmployeeNumber(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Employee First Name: </b> </label>
                     <input value={employeeName} onChange={(event) => setEmployeeName(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Employee Last Name: </b> </label>
                     <input value={employeeLastName} onChange={(event) => setEmployeeLastName(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Department:</b> </label>
                     <input value={department} onChange={(event) => setDepartment(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Supervisor Number: </b> </label>
                     <input value={supervisorNumber} onChange={(event) => setSupervisorNumber(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Hire Date: </b> </label>
                     <input type="date" value={hireDate} onChange={(event) => setHireDate(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>PTO Balance: </b> </label>
                     <input type="number" value={ptoBalance} onChange={(event) => setPtoBalance(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Active: </b> </label>
                     <input type="boolean" value={userActive} onChange={(event) => setActive(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Supervisor: </b> </label>
                     <input type="boolean" value={superActive} onChange={(event) => setIsSupervisor(event.target.value)}/>
                     </div>
-                    <div className='newEntry'>
+                    <div className='input-row'>
                     <label><b>Admin:</b></label>
                     <input type="boolean" value={adminActive} onChange={(event) => setIsAdmin(event.target.value)}/>
                     </div>
